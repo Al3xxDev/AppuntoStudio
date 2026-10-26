@@ -1,0 +1,62 @@
+---
+import type { Review } from '../data/reviews';
+
+interface Props {
+  review: Review;
+  index: number;
+}
+
+const { review, index } = Astro.props;
+---
+
+<article class="bg-[#F1EFE9]/60 border border-[#E2DBD0] p-6 sm:p-8 flex flex-col justify-between hover:border-[#8A8D76]/50 transition-colors duration-300">
+  <div>
+    <!-- Top Bar: Index & Star Rating -->
+    <div class="flex items-center justify-between pb-4 mb-4 border-b border-[#E2DBD0]">
+      <span class="font-mono text-xs text-[#8A8D76]">
+        [ {(index + 1).toString().padStart(2, '0')} / TESTIMONIANZA ]
+      </span>
+
+      <!-- 5 Stars with accessible label -->
+      <div class="flex items-center gap-1" role="img" aria-label="Valutazione: 5 stelle su 5">
+        {Array.from({ length: 5 }).map(() => (
+          <svg class="w-3.5 h-3.5 fill-[#292925] text-[#292925]" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          </svg>
+        ))}
+      </div>
+    </div>
+
+    <!-- Review Quote Text (verbatim) -->
+    <blockquote class="text-[#292925] text-sm sm:text-base leading-relaxed font-light italic">
+      «{review.text}»
+    </blockquote>
+  </div>
+
+  <!-- Author and Houzz Link -->
+  <div class="pt-6 mt-6 border-t border-[#E2DBD0] flex items-center justify-between gap-4">
+    <div>
+      <cite class="not-italic font-medium text-sm text-[#292925] block">
+        {review.author}
+      </cite>
+      {review.context && (
+        <span class="text-xs text-[#77756E] block font-light">
+          {review.context}
+        </span>
+      )}
+    </div>
+
+    <a
+      href={review.profileUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-wider text-[#77756E] hover:text-[#292925] transition-colors py-1 px-2 border border-[#E2DBD0] hover:border-[#292925]"
+      aria-label={`Visualizza profilo verificato di ${review.author} su Houzz`}
+    >
+      <span>Houzz</span>
+      <svg class="w-3 h-3 text-[#8A8D76]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+      </svg>
+    </a>
+  </div>
+</article>

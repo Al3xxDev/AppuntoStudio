@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { PROJECTS } from '../../data/projects';
+---
+
+<BaseLayout
+  title="Progetti — Appuntostudio Architettura Roma"
+  description="Esplora i progetti realizzati da Appuntostudio: ristrutturazioni residenziali di pregio a Roma e architettura su misura."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24 sm:pt-20 sm:pb-32">
+    <!-- Breadcrumb & Index Header -->
+    <div class="flex items-center gap-2 font-mono text-xs text-[#77756E] pb-6 mb-8 border-b border-[#E2DBD0]">
+      <a href="/" class="hover:text-[#292925] transition-colors">Home</a>
+      <span>/</span>
+      <span class="text-[#8A8D76]">[02 / PROGETTI]</span>
+    </div>
+
+    <!-- Editorial Header -->
+    <div class="max-w-3xl mb-16 sm:mb-24">
+      <h1 class="text-4xl sm:text-6xl font-light tracking-tight text-[#292925] leading-tight">
+        Opere, ristrutturazioni e architettura d’interni.
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-[#77756E] font-light leading-relaxed">
+        Una selezione di interventi in cui il rigore geometrico incontra la sensibilità materica. Ogni progetto risponde a un programma specifico, valorizzando la luce naturale e l’identità autentica del luogo.
+      </p>
+    </div>
+
+    <!-- Architectural Project Grid -->
+    <div class="space-y-20 sm:space-y-32">
+      {PROJECTS.map((project, idx) => {
+        const isReversed = idx % 2 === 1;
+        return (
+          <article class="group border-t border-[#E2DBD0] pt-8 sm:pt-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              <!-- Text Info -->
+              <div class={`lg:col-span-5 space-y-6 ${isReversed ? 'lg:order-2' : 'lg:order-1'}`}>
+                <div class="flex items-center gap-3 font-mono text-xs text-[#77756E]">
+                  <span class="text-[#8A8D76]">[{project.index}]</span>
+                  <span class="uppercase tracking-widest">{project.category}</span>
+                  {project.year && (
+                    <>
+                      <span>•</span>
+                      <span>{project.year}</span>
+                    </>
+                  )}
+                  <span>•</span>
+                  <span>{project.location}</span>
+                </div>
+
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-[#292925] group-hover:text-[#8A8D76] transition-colors">
+                  <a href={`/progetti/${project.slug}`}>
+                    {project.title}
+                  </a>
+                </h2>
+
+                <p class="text-base text-[#77756E] font-light leading-relaxed">
+                  {project.editorialExcerpt}
+                </p>
+
+                <!-- Specs summary -->
+                <div class="py-4 border-y border-[#E2DBD0]/60 space-y-1.5 font-mono text-xs text-[#77756E]">
+                  {project.specs.slice(0, 2).map(spec => (
+                    <div class="flex justify-between gap-4">
+                      <span class="text-[#8A8D76] uppercase tracking-wider">{spec.label}:</span>
+                      <span class="text-[#292925] text-right font-sans text-xs">{spec.value}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div class="pt-2">
+                  <a
+                    href={`/progetti/${project.slug}`}
+                    class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] font-medium text-[#292925] group-hover:translate-x-1 transition-transform pb-1 border-b border-[#292925]"
+                  >
+                    <span>Vedi la scheda e la galleria ({project.gallery.length} foto)</span>
+                    <svg class="w-3.5 h-3.5 text-[#8A8D76]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Project Image -->
+              <div class={`lg:col-span-7 overflow-hidden aspect-[16/10] bg-[#F1EFE9] border border-[#E2DBD0] ${isReversed ? 'lg:order-1' : 'lg:order-2'}`}>
+                <a href={`/progetti/${project.slug}`} class="block w-full h-full relative" aria-label={`Apri scheda ${project.title}`}>
+                  <picture>
+                    <source srcset={project.coverImage.webp} type="image/webp" />
+                    <img
+                      src={project.coverImage.src}
+                      alt={project.coverImage.alt}
+                      width={project.coverImage.width}
+                      height={project.coverImage.height}
+                      loading={idx === 0 ? 'eager' : 'lazy'}
+                      decoding={idx === 0 ? 'sync' : 'async'}
+                      class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
+                  </picture>
+                  <div class="absolute inset-0 bg-[#292925]/0 group-hover:bg-[#292925]/5 transition-colors duration-300" aria-hidden="true"></div>
+                </a>
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</BaseLayout>

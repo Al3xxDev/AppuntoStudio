@@ -1,0 +1,228 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Lightbox from '../../components/Lightbox.astro';
+import { PROJECTS, getAdjacentProjects } from '../../data/projects';
+import type { Project } from '../../data/projects';
+
+export function getStaticPaths() {
+  return PROJECTS.map((project) => ({
+    params: { slug: project.slug },
+    props: { project }
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { prev, next } = getAdjacentProjects(project.slug);
+---
+
+<BaseLayout
+  title={`${project.title} — ${project.category} | Appuntostudio Roma`}
+  description={`${project.title}: ${project.subtitle}. Progetto a cura di Appuntostudio, architettura e interni a Roma.`}
+  image={project.coverImage.webp}
+  type="article"
+>
+  <article class="pt-8 pb-24 sm:pt-16 sm:pb-32">
+    <!-- Breadcrumb & Project Index Header -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+      <nav class="flex items-center gap-2 font-mono text-xs text-[#77756E] pb-6 border-b border-[#E2DBD0]" aria-label="Percorso di navigazione">
+        <a href="/" class="hover:text-[#292925] transition-colors">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="/progetti" class="hover:text-[#292925] transition-colors">Progetti</a>
+        <span aria-hidden="true">/</span>
+        <span class="text-[#8A8D76]" aria-current="page">{project.title}</span>
+      </nav>
+    </div>
+
+    <!-- 1. Project Title & Overview Header -->
+    <header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+        <div class="lg:col-span-8 space-y-4">
+          <div class="flex items-center gap-3 font-mono text-xs text-[#8A8D76]">
+            <span>[{project.index}]</span>
+            <span class="uppercase tracking-widest text-[#77756E]">{project.category}</span>
+            {project.year && (
+              <>
+                <span class="text-[#E2DBD0]">•</span>
+                <span class="text-[#77756E]">{project.year}</span>
+              </>
+            )}
+            <span class="text-[#E2DBD0]">•</span>
+            <span class="text-[#77756E]">{project.location}</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight text-[#292925] leading-[1.08]">
+            {project.title}
+          </h1>
+
+          <p class="text-xl sm:text-2xl text-[#77756E] font-light leading-relaxed max-w-2xl pt-2">
+            {project.subtitle}
+          </p>
+        </div>
+
+        <!-- Metadata sidebar badge -->
+        <div class="lg:col-span-4 bg-[#F1EFE9] border border-[#E2DBD0] p-6 space-y-3 font-mono text-xs">
+          <div class="text-[#8A8D76] uppercase tracking-widest text-[10px] pb-2 border-b border-[#E2DBD0]">
+            [ SCHEDA TECNICA ]
+          </div>
+          {project.specs.map(spec => (
+            <div class="flex justify-between gap-4 py-1 border-b border-[#E2DBD0]/60 last:border-b-0">
+              <span class="text-[#77756E]">{spec.label}:</span>
+              <span class="text-[#292925] text-right font-sans font-medium">{spec.value}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. Hero Cover Image (Full visual impact) -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-24">
+      <div class="relative overflow-hidden bg-[#F1EFE9] border border-[#E2DBD0] aspect-[16/9] sm:aspect-[21/9]">
+        <picture>
+          <source srcset={project.coverImage.webp} type="image/webp" />
+          <img
+            src={project.coverImage.src}
+            alt={project.coverImage.alt}
+            width={project.coverImage.width}
+            height={project.coverImage.height}
+            loading="eager"
+            fetchpriority="high"
+            decoding="sync"
+            class="w-full h-full object-cover object-center"
+          />
+        </picture>
+        <div class="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 bg-[#292925]/80 backdrop-blur-sm text-[#F8F7F4] px-4 py-2 text-xs font-mono">
+          {project.title} — Vista principale
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Project Narrative Description -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 sm:mb-28">
+      <div class="border-t border-[#E2DBD0] pt-10 sm:pt-14">
+        <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-4">
+          [ IL PROGETTO ]
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-light tracking-tight text-[#292925] mb-8">
+          Relazione e scelte architettoniche
+        </h2>
+        <div class="space-y-6 text-base sm:text-lg text-[#383833] font-light leading-relaxed">
+          {project.description.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Photo Gallery with Interactive Lightbox -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 sm:mb-32">
+      <div class="flex items-baseline justify-between pb-6 mb-10 border-b border-[#E2DBD0]">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-1">
+            [ GALLERIA FOTOGRAFICA ]
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-light tracking-tight text-[#292925]">
+            Dettagli e ambienti ({project.gallery.length} scatti)
+          </h2>
+        </div>
+        <span class="font-mono text-xs text-[#77756E] hidden sm:block">
+          Fai clic per ingrandire
+        </span>
+      </div>
+
+      <!-- Architectural Gallery Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {project.gallery.map((img) => (
+          <div class="relative group overflow-hidden bg-[#F1EFE9] border border-[#E2DBD0] flex flex-col justify-between">
+            <button
+              type="button"
+              data-lightbox-trigger
+              data-src={img.webp}
+              data-alt={img.alt}
+              data-caption={img.caption || img.alt}
+              class="w-full text-left flex flex-col flex-grow justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
+              aria-label={`Ingrandisci fotografia: ${img.alt}`}
+            >
+              <div class="aspect-[4/3] w-full overflow-hidden bg-[#E2DBD0]">
+                <picture>
+                  <source srcset={img.webp} type="image/webp" />
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    width={img.width}
+                    height={img.height}
+                    loading="eager"
+                    decoding="async"
+                    class={`w-full h-full ${img.src.toLowerCase().includes('pianta') ? 'object-contain p-2 bg-white' : 'object-cover'} object-center group-hover:scale-105 transition-transform duration-500 ease-out`}
+                  />
+                </picture>
+              </div>
+
+              <div class="p-4 bg-[#F8F7F4] border-t border-[#E2DBD0] flex items-center justify-between w-full">
+                <p class="text-xs text-[#77756E] font-light truncate max-w-[80%]">
+                  {img.caption || img.alt}
+                </p>
+                <span class="font-mono text-[10px] text-[#8A8D76] uppercase tracking-wider ml-2 shrink-0">
+                  + Ingrandisci
+                </span>
+              </div>
+            </button>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 5. Adjacent Projects Navigation -->
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-[#E2DBD0] pt-12 pb-8" aria-label="Navigazione tra progetti">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <!-- Prev Project -->
+        <a
+          href={`/progetti/${prev.slug}`}
+          class="group p-6 border border-[#E2DBD0] bg-[#F1EFE9]/40 hover:bg-[#F1EFE9] transition-colors"
+        >
+          <span class="font-mono text-xs text-[#8A8D76] block mb-2">
+            ← PROGETTO PRECEDENTE [{prev.index}]
+          </span>
+          <span class="text-xl sm:text-2xl font-light text-[#292925] group-hover:text-[#8A8D76] transition-colors block">
+            {prev.title}
+          </span>
+          <span class="text-xs text-[#77756E] mt-1 block">
+            {prev.subtitle}
+          </span>
+        </a>
+
+        <!-- Next Project -->
+        <a
+          href={`/progetti/${next.slug}`}
+          class="group p-6 border border-[#E2DBD0] bg-[#F1EFE9]/40 hover:bg-[#F1EFE9] transition-colors text-left sm:text-right"
+        >
+          <span class="font-mono text-xs text-[#8A8D76] block mb-2">
+            PROGETTO SUCCESSIVO [{next.index}] →
+          </span>
+          <span class="text-xl sm:text-2xl font-light text-[#292925] group-hover:text-[#8A8D76] transition-colors block">
+            {next.title}
+          </span>
+          <span class="text-xs text-[#77756E] mt-1 block">
+            {next.subtitle}
+          </span>
+        </a>
+      </div>
+
+      <div class="text-center mt-10">
+        <a
+          href="/progetti"
+          class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-[#77756E] hover:text-[#292925] transition-colors"
+        >
+          <span>Torna a tutti i progetti</span>
+          <span aria-hidden="true">↑</span>
+        </a>
+      </div>
+    </nav>
+  </article>
+
+  <!-- Mount Lightbox Modal -->
+  <Lightbox />
+</BaseLayout>

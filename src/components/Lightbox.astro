@@ -1,0 +1,178 @@
+---
+---
+
+<div
+  id="lightbox-modal"
+  class="fixed inset-0 z-50 bg-[#292925]/95 backdrop-blur-md hidden flex-col justify-between p-4 sm:p-8"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Ingrandimento fotografia"
+  tabindex="-1"
+>
+  <!-- Top Bar: Image counter and Close Button -->
+  <div class="flex items-center justify-between text-[#F8F7F4] w-full max-w-6xl mx-auto z-10">
+    <div class="font-mono text-xs tracking-widest text-[#D7CDBE]">
+      <span id="lightbox-counter">[ 01 / 08 ]</span>
+    </div>
+
+    <button
+      id="lightbox-close-btn"
+      type="button"
+      class="p-2 sm:px-4 sm:py-2 text-xs font-mono uppercase tracking-[0.2em] text-[#F8F7F4] border border-[#77756E] hover:border-[#F8F7F4] hover:bg-[#F8F7F4]/10 transition-colors flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F8F7F4]"
+      aria-label="Chiudi visualizzatore"
+    >
+      <span>Chiudi</span>
+      <span class="text-xs" aria-hidden="true">✕</span>
+    </button>
+  </div>
+
+  <!-- Center: Main Image with Next/Prev Controls -->
+  <div class="relative flex-grow flex items-center justify-center my-4 overflow-hidden w-full max-w-6xl mx-auto">
+    <!-- Prev button -->
+    <button
+      id="lightbox-prev-btn"
+      type="button"
+      class="absolute left-2 sm:left-4 z-20 p-3 sm:p-4 text-[#F8F7F4] bg-[#292925]/70 hover:bg-[#292925] border border-[#77756E] transition-all hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F8F7F4]"
+      aria-label="Immagine precedente"
+    >
+      <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+      </svg>
+    </button>
+
+    <!-- Main Image Element -->
+    <div class="max-h-[75vh] max-w-[90vw] flex items-center justify-center">
+      <img
+        id="lightbox-img"
+        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'/%3E"
+        alt=""
+        class="max-h-[75vh] max-w-full object-contain select-none shadow-2xl transition-opacity duration-200"
+      />
+    </div>
+
+    <!-- Next button -->
+    <button
+      id="lightbox-next-btn"
+      type="button"
+      class="absolute right-2 sm:right-4 z-20 p-3 sm:p-4 text-[#F8F7F4] bg-[#292925]/70 hover:bg-[#292925] border border-[#77756E] transition-all hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F8F7F4]"
+      aria-label="Immagine successiva"
+    >
+      <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Bottom: Caption -->
+  <div class="w-full max-w-4xl mx-auto text-center text-[#D7CDBE] text-sm font-light z-10 px-4">
+    <p id="lightbox-caption" class="italic"></p>
+  </div>
+</div>
+
+<script>
+  function setupLightbox() {
+    const modal = document.getElementById('lightbox-modal');
+    const imgEl = document.getElementById('lightbox-img') as HTMLImageElement;
+    const captionEl = document.getElementById('lightbox-caption');
+    const counterEl = document.getElementById('lightbox-counter');
+    const closeBtn = document.getElementById('lightbox-close-btn');
+    const prevBtn = document.getElementById('lightbox-prev-btn');
+    const nextBtn = document.getElementById('lightbox-next-btn');
+
+    if (!modal || !imgEl || !captionEl || !counterEl || !closeBtn || !prevBtn || !nextBtn) return;
+
+    const m = modal;
+    const img = imgEl;
+    const cap = captionEl;
+    const count = counterEl;
+    const close = closeBtn;
+    const prev = prevBtn;
+    const next = nextBtn;
+
+    const galleryButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-lightbox-trigger]'));
+    if (galleryButtons.length === 0) return;
+
+    let currentIndex = 0;
+    let lastActiveElement: HTMLElement | null = null;
+
+    interface LightboxItem {
+      src: string;
+      alt: string;
+      caption: string;
+    }
+
+    const items: LightboxItem[] = galleryButtons.map(btn => ({
+      src: btn.getAttribute('data-src') || '',
+      alt: btn.getAttribute('data-alt') || '',
+      caption: btn.getAttribute('data-caption') || ''
+    }));
+
+    function showImage(index: number) {
+      if (index < 0) index = items.length - 1;
+      if (index >= items.length) index = 0;
+      currentIndex = index;
+
+      const item = items[currentIndex];
+      img.src = item.src;
+      img.alt = item.alt;
+      cap.textContent = item.caption || item.alt;
+      count.textContent = `[ ${(currentIndex + 1).toString().padStart(2, '0')} / ${items.length.toString().padStart(2, '0')} ]`;
+    }
+
+    function openLightbox(index: number, trigger: HTMLElement) {
+      lastActiveElement = trigger;
+      showImage(index);
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      close.focus();
+    }
+
+    function closeLightbox() {
+      m.classList.add('hidden');
+      m.classList.remove('flex');
+      img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'/%3E";
+      document.body.style.overflow = '';
+      if (lastActiveElement) {
+        lastActiveElement.focus();
+      }
+    }
+
+    galleryButtons.forEach((btn, idx) => {
+      btn.addEventListener('click', () => openLightbox(idx, btn));
+    });
+
+    close.addEventListener('click', closeLightbox);
+    prev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showImage(currentIndex - 1);
+    });
+    next.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showImage(currentIndex + 1);
+    });
+
+    // Close on backdrop click
+    m.addEventListener('click', (e) => {
+      if (e.target === m) {
+        closeLightbox();
+      }
+    });
+
+    // Keyboard navigation
+    window.addEventListener('keydown', (e) => {
+      if (m.classList.contains('hidden')) return;
+
+      if (e.key === 'Escape') {
+        closeLightbox();
+      } else if (e.key === 'ArrowLeft') {
+        showImage(currentIndex - 1);
+      } else if (e.key === 'ArrowRight') {
+        showImage(currentIndex + 1);
+      }
+    });
+  }
+
+  setupLightbox();
+  document.addEventListener('astro:after-swap', setupLightbox);
+</script>

@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+---
+
+<BaseLayout
+  title="Contatti — Appuntostudio Architettura Roma"
+  description="Contatta Appuntostudio a Roma: Via Apuania 3, 00162 Roma. Telefono 349 832 8323. Consulenza architettonica e ristrutturazioni."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24 sm:pt-20 sm:pb-36">
+    <!-- Breadcrumb & Index Header -->
+    <div class="flex items-center gap-2 font-mono text-xs text-[#77756E] pb-6 mb-8 border-b border-[#E2DBD0]">
+      <a href="/" class="hover:text-[#292925] transition-colors">Home</a>
+      <span>/</span>
+      <span class="text-[#8A8D76]">[04 / CONTATTI]</span>
+    </div>
+
+    <!-- Editorial Header -->
+    <header class="max-w-3xl mb-16 sm:mb-24">
+      <h1 class="text-4xl sm:text-6xl font-light tracking-tight text-[#292925] leading-tight">
+        Parliamo del tuo spazio e dei tuoi progetti.
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-[#77756E] font-light leading-relaxed">
+        Siamo a tua disposizione per valutare fattibilità, tempi e impostazione progettuale. Privilegiamo un contatto telefonico diretto per comprendere al meglio le tue necessità.
+      </p>
+    </header>
+
+    <!-- Main Contacts Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-[#E2DBD0] pt-16">
+      <!-- Left Column: Primary Contact Card (7 cols) -->
+      <div class="lg:col-span-7 space-y-10">
+        <!-- Direct Phone Dial Card -->
+        <div class="p-8 sm:p-10 bg-[#F1EFE9] border border-[#E2DBD0] space-y-6">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76]">
+              [ CONTATTO DIRETTO ]
+            </span>
+            <span class="font-mono text-xs text-[#77756E]">Disponibile per colloqui</span>
+          </div>
+
+          <div>
+            <h2 class="text-xs uppercase tracking-[0.16em] text-[#77756E] mb-2">
+              Recapito Telefonico
+            </h2>
+            <a
+              href={SITE.phoneHref}
+              class="inline-block text-3xl sm:text-4xl lg:text-5xl font-mono text-[#292925] hover:text-[#8A8D76] transition-colors tracking-tight focus-visible:outline-none focus-visible:underline"
+              aria-label={`Chiama direttamente al telefono lo studio al numero ${SITE.phone}`}
+            >
+              {SITE.phone}
+            </a>
+          </div>
+
+          <p class="text-sm text-[#77756E] font-light leading-relaxed">
+            Per garantire risposte puntuali e accurate, il nostro team riceve e concorda gli appuntamenti in studio tramite contatto telefonico preliminare.
+          </p>
+
+          <div class="pt-4 border-t border-[#E2DBD0]">
+            <a
+              href={SITE.phoneHref}
+              class="inline-flex items-center justify-center px-8 py-4 text-xs uppercase tracking-[0.18em] font-medium text-[#F8F7F4] bg-[#292925] hover:bg-[#383833] transition-colors w-full sm:w-auto"
+            >
+              <svg class="w-4 h-4 mr-2 text-[#D7CDBE]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+              </svg>
+              <span>Chiama Ora (+39 {SITE.phone})</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Location & Directions -->
+        <div class="p-8 sm:p-10 bg-[#F8F7F4] border border-[#E2DBD0] space-y-6">
+          <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block">
+            [ SEDE OPERATIVA ]
+          </span>
+
+          <div class="space-y-1">
+            <h3 class="text-2xl font-light text-[#292925]">
+              {SITE.name}
+            </h3>
+            <p class="text-base text-[#77756E] font-light">
+              {SITE.address.street} — {SITE.address.postalCode} {SITE.address.city} ({SITE.address.province}), {SITE.address.country}
+            </p>
+            <p class="text-xs font-mono text-[#8A8D76] pt-1">
+              Ambito d'intervento: {SITE.serviceArea}
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-[#E2DBD0] flex flex-wrap items-center gap-4">
+            <a
+              href={SITE.socials.maps}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] hover:text-[#8A8D76] transition-colors pb-1 border-b border-[#292925]"
+            >
+              <span>Apri la posizione su Google Maps</span>
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Verification & Channels (5 cols) -->
+      <div class="lg:col-span-5 space-y-8">
+        <!-- Houzz Official Profile -->
+        <div class="p-8 border border-[#E2DBD0] bg-[#F1EFE9]/40 space-y-4">
+          <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block">
+            [ PROFILO PROFESSIONALE ]
+          </span>
+          <h3 class="text-xl font-light text-[#292925]">
+            Houzz Italia
+          </h3>
+          <p class="text-sm text-[#77756E] font-light leading-relaxed">
+            Consulta la pagina ufficiale dello studio, le fotografie dei cantieri e le 23 recensioni certificate della community.
+          </p>
+          <div class="pt-2">
+            <a
+              href={SITE.socials.houzz}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] hover:text-[#8A8D76] transition-colors"
+            >
+              <span>Visita profilo Houzz ({SITE.rating.score}/5)</span>
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Facebook Official Page -->
+        <div class="p-8 border border-[#E2DBD0] bg-[#F1EFE9]/40 space-y-4">
+          <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block">
+            [ COMUNITÀ DIGITALE ]
+          </span>
+          <h3 class="text-xl font-light text-[#292925]">
+            Facebook
+          </h3>
+          <p class="text-sm text-[#77756E] font-light leading-relaxed">
+            Segui gli aggiornamenti, le novità di cantiere e le riflessioni progettuali sulla pagina Facebook di Appuntostudio.
+          </p>
+          <div class="pt-2">
+            <a
+              href={SITE.socials.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] hover:text-[#8A8D76] transition-colors"
+            >
+              <span>Segui la pagina Facebook</span>
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Transparency & Privacy Note -->
+        <div class="p-6 border border-[#E2DBD0] bg-[#F8F7F4] font-mono text-xs text-[#77756E] space-y-2">
+          <span class="text-[#8A8D76] block uppercase tracking-wider">[ TRASPARENZA & PRIVACY ]</span>
+          <p class="leading-relaxed">
+            Questo sito web non raccoglie dati personali tramite moduli non protetti e non utilizza cookie o tracker di profilazione di terze parti.
+          </p>
+          <a href="/privacy" class="text-[#292925] underline inline-block pt-1">Leggi l'informativa completa</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

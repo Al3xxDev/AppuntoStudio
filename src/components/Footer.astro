@@ -1,0 +1,184 @@
+---
+import { SITE, NAV_LINKS } from '../data/site';
+import { PROJECTS } from '../data/projects';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-[#292925] text-[#F8F7F4] pt-16 sm:pt-24 pb-12 border-t border-[#383833]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Top Pre-footer CTA Section -->
+    <div class="pb-16 sm:pb-20 border-b border-[#383833] flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+      <div class="max-w-2xl">
+        <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-3">
+          [ 05 / CONTATTO DIRETTO ]
+        </span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-[#F8F7F4] leading-[1.15]">
+          Il prossimo progetto comincia da un confronto.
+        </h2>
+        <p class="mt-4 text-[#A3A199] text-base sm:text-lg font-light leading-relaxed">
+          Che si tratti di una ristrutturazione a Roma, di una consulenza su un immobile o di un nuovo intervento architettonico, siamo pronti ad ascoltarti.
+        </p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+        <a
+          href="/contatti"
+          class="inline-flex items-center justify-center px-8 py-4 text-xs uppercase tracking-[0.18em] font-medium text-[#292925] bg-[#F8F7F4] hover:bg-[#D7CDBE] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F8F7F4] focus-visible:ring-offset-2 focus-visible:ring-offset-[#292925]"
+        >
+          <span>Parliamo del tuo spazio</span>
+          <svg class="w-3.5 h-3.5 ml-2 text-[#292925]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
+
+        <a
+          href={SITE.phoneHref}
+          class="inline-flex items-center justify-center px-6 py-4 text-xs font-mono tracking-wider text-[#F8F7F4] border border-[#383833] hover:border-[#8A8D76] hover:text-[#D7CDBE] transition-colors"
+          aria-label={`Chiama direttamente al telefono: ${SITE.phone}`}
+        >
+          <svg class="w-4 h-4 mr-2 text-[#8A8D76]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+          </svg>
+          <span>{SITE.phone}</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Main Footer Grid -->
+    <div class="py-16 sm:py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
+      <!-- Col 1: Brand & Contact Info (5 cols) -->
+      <div class="lg:col-span-5 space-y-6">
+        <a href="/" class="inline-flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F8F7F4]">
+          <span class="font-sans text-2xl font-light tracking-[-0.03em] text-[#F8F7F4]">
+            Appunto<span class="font-medium">studio</span>
+          </span>
+          <span class="w-1.5 h-1.5 rounded-full bg-[#8A8D76]" aria-hidden="true"></span>
+        </a>
+
+        <p class="text-[#A3A199] text-sm leading-relaxed max-w-sm font-light">
+          Studio di architettura e architettura degli interni con sede a Roma. Fondato nel 2013 dagli architetti Angelo Paolino, Monica Molinaro e Rosella Cippone.
+        </p>
+
+        <div class="space-y-2 pt-2 text-xs font-mono text-[#D7CDBE]">
+          <div class="flex items-start gap-2">
+            <span class="text-[#8A8D76]">SEDE:</span>
+            <span>{SITE.address.street}, {SITE.address.postalCode} {SITE.address.city} ({SITE.address.province})</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-[#8A8D76]">ZONA:</span>
+            <span>{SITE.serviceArea}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-[#8A8D76]">TEL:</span>
+            <a href={SITE.phoneHref} class="hover:text-white underline underline-offset-4 decoration-[#8A8D76]">
+              {SITE.phone}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Col 2: Navigazione (2 cols) -->
+      <div class="lg:col-span-2 space-y-4">
+        <h3 class="font-mono text-xs uppercase tracking-[0.16em] text-[#8A8D76]">
+          [ Menu ]
+        </h3>
+        <ul class="space-y-2.5 text-sm">
+          {NAV_LINKS.map(link => (
+            <li>
+              <a href={link.href} class="text-[#A3A199] hover:text-[#F8F7F4] transition-colors py-0.5 inline-block focus-visible:outline-none focus-visible:underline">
+                {link.label}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a href="/privacy" class="text-[#A3A199] hover:text-[#F8F7F4] transition-colors py-0.5 inline-block focus-visible:outline-none focus-visible:underline">
+              Privacy Policy
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Col 3: I Progetti (3 cols) -->
+      <div class="lg:col-span-3 space-y-4">
+        <h3 class="font-mono text-xs uppercase tracking-[0.16em] text-[#8A8D76]">
+          [ Progetti ]
+        </h3>
+        <ul class="space-y-2.5 text-sm">
+          {PROJECTS.map(proj => (
+            <li>
+              <a href={`/progetti/${proj.slug}`} class="text-[#A3A199] hover:text-[#F8F7F4] transition-colors py-0.5 inline-block focus-visible:outline-none focus-visible:underline">
+                {proj.title} <span class="font-mono text-[11px] text-[#77756E]">({proj.category === 'Nuova costruzione' ? 'Nuova costr.' : 'Ristrutt.'})</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Col 4: Canali & Valutazioni (2 cols) -->
+      <div class="lg:col-span-2 space-y-4">
+        <h3 class="font-mono text-xs uppercase tracking-[0.16em] text-[#8A8D76]">
+          [ Profili ]
+        </h3>
+        <ul class="space-y-3 text-sm">
+          <li>
+            <a
+              href={SITE.socials.houzz}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex flex-col text-[#A3A199] hover:text-[#F8F7F4] transition-colors"
+            >
+              <span class="inline-flex items-center gap-1.5 font-medium text-white">
+                Houzz Italia
+                <svg class="w-3 h-3 text-[#8A8D76]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                </svg>
+              </span>
+              <span class="font-mono text-[11px] text-[#8A8D76]">4,9 / 5 (23 recensioni)</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href={SITE.socials.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 text-[#A3A199] hover:text-[#F8F7F4] transition-colors"
+            >
+              <span>Facebook</span>
+              <svg class="w-3 h-3 text-[#8A8D76]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a
+              href={SITE.socials.maps}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 text-[#A3A199] hover:text-[#F8F7F4] transition-colors"
+            >
+              <span>Mappa sede</span>
+              <svg class="w-3 h-3 text-[#8A8D76]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright & Legal line -->
+    <div class="pt-8 border-t border-[#383833] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#77756E] font-mono">
+      <div>
+        © {currentYear} {SITE.name}. Tutti i diritti riservati.
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="/privacy" class="hover:text-[#A3A199] transition-colors">Informativa Privacy</a>
+        <span class="text-[#383833]">|</span>
+        <span class="text-[#8A8D76]">Zero tracker di terze parti</span>
+        <span class="text-[#383833]">|</span>
+        <span>Roma, Italia</span>
+      </div>
+    </div>
+  </div>
+</footer>

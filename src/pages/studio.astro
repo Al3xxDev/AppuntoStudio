@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { STUDIO_DATA } from '../data/studio';
+---
+
+<BaseLayout
+  title="Lo Studio — Appuntostudio Architettura Roma"
+  description="Storia, metodo e filosofia progettuale di Appuntostudio: fondato a Roma nel 2013 dagli architetti Angelo Paolino, Monica Molinaro e Rosella Cippone."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24 sm:pt-20 sm:pb-36">
+    <!-- Breadcrumb & Index Header -->
+    <div class="flex items-center gap-2 font-mono text-xs text-[#77756E] pb-6 mb-8 border-b border-[#E2DBD0]">
+      <a href="/" class="hover:text-[#292925] transition-colors">Home</a>
+      <span>/</span>
+      <span class="text-[#8A8D76]">[01 / LO STUDIO]</span>
+    </div>
+
+    <!-- Editorial Intro with Founding Quote -->
+    <header class="max-w-4xl mb-20 sm:mb-28">
+      <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-4">
+        [ IDENTITÀ E VISIONE ]
+      </span>
+      <h1 class="text-4xl sm:text-6xl font-light tracking-tight text-[#292925] leading-tight mb-8">
+        La forma dello spazio costruita intorno a chi lo vive.
+      </h1>
+
+      <!-- Architectural Quote Callout -->
+      <blockquote class="p-8 sm:p-10 bg-[#F1EFE9] border-l-2 border-[#8A8D76] text-xl sm:text-2xl font-light text-[#292925] leading-relaxed italic">
+        «{STUDIO_DATA.quote}»
+      </blockquote>
+    </header>
+
+    <!-- Main Editorial Content: 3 Chapters -->
+    <div class="space-y-20 sm:space-y-28 border-t border-[#E2DBD0] pt-16">
+      <!-- Chapter 1: Origini e Fondazione -->
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div class="lg:col-span-4">
+          <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
+            [ 01 / LE ORIGINI ]
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-light tracking-tight text-[#292925]">
+            Fondazione e identità
+          </h2>
+          <div class="mt-4 font-mono text-xs text-[#77756E] space-y-1">
+            <p>ROMA — ANNO 2013</p>
+            <p>COLLABORAZIONE — 2016</p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-8 space-y-6 text-base sm:text-lg text-[#383833] font-light leading-relaxed">
+          <p>
+            Fondato a Roma nel 2013 dagli architetti <strong>Angelo Paolino</strong>, <strong>Monica Molinaro</strong> e <strong>Rosella Cippone</strong>; nel 2016 l’incontro con il <strong>prof. arch. Alfredo Benedetti</strong>, la cui esperienza spazia dall’architettura all’insegnamento, al design e all’arte in genere, apre le porte a nuove percezioni artistico-architettoniche.
+          </p>
+
+          <div class="p-6 bg-[#F1EFE9]/60 border border-[#E2DBD0] grid grid-cols-1 sm:grid-cols-3 gap-6 font-mono text-xs">
+            {STUDIO_DATA.founders.map(founder => (
+              <div>
+                <span class="text-[#8A8D76] block uppercase tracking-wider">[ SOCIO FONDATORE ]</span>
+                <span class="text-sm font-sans text-[#292925] font-medium block mt-1">{founder.name}</span>
+                <span class="text-[#77756E] block">{founder.role}</span>
+              </div>
+            ))}
+          </div>
+
+          <p class="text-sm text-[#77756E] pt-2">
+            {STUDIO_DATA.collaboration.description}
+          </p>
+        </div>
+      </section>
+
+      <!-- Chapter 2: Struttura Operativa e Competenze -->
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start border-t border-[#E2DBD0] pt-16">
+        <div class="lg:col-span-4">
+          <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
+            [ 02 / METODO E SERVIZIO ]
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-light tracking-tight text-[#292925]">
+            Il processo progettuale integrato
+          </h2>
+        </div>
+
+        <div class="lg:col-span-8 space-y-6 text-base sm:text-lg text-[#383833] font-light leading-relaxed">
+          <p>
+            {STUDIO_DATA.mission}
+          </p>
+          <p>
+            {STUDIO_DATA.scope}
+          </p>
+        </div>
+      </section>
+
+      <!-- Chapter 3: Il Committente come Motore -->
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start border-t border-[#E2DBD0] pt-16">
+        <div class="lg:col-span-4">
+          <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
+            [ 03 / FILOSOFIA DELL'ASCOLTO ]
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-light tracking-tight text-[#292925]">
+            Il committente al centro
+          </h2>
+        </div>
+
+        <div class="lg:col-span-8 space-y-6 text-base sm:text-lg text-[#383833] font-light leading-relaxed">
+          <p>
+            {STUDIO_DATA.philosophy}
+          </p>
+          <div class="p-8 bg-[#F1EFE9] border border-[#E2DBD0] my-4">
+            <h3 class="text-xl font-light text-[#292925] mb-3">
+              Un percorso condiviso in ogni fase
+            </h3>
+            <p class="text-base text-[#77756E] leading-relaxed">
+              {STUDIO_DATA.clientRelationship}
+            </p>
+          </div>
+          <div class="pt-4 flex flex-wrap items-center gap-4">
+            <a
+              href="/progetti"
+              class="inline-flex items-center justify-center px-8 py-4 text-xs uppercase tracking-[0.18em] font-medium text-[#F8F7F4] bg-[#292925] hover:bg-[#383833] transition-colors"
+            >
+              <span>Vedi le realizzazioni</span>
+              <svg class="w-3.5 h-3.5 ml-2.5 text-[#D7CDBE]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+            <a
+              href="/contatti"
+              class="inline-flex items-center justify-center px-8 py-4 text-xs uppercase tracking-[0.18em] font-medium text-[#292925] border border-[#292925] hover:bg-[#F1EFE9] transition-colors"
+            >
+              <span>Parla con noi</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
