@@ -6,6 +6,7 @@ export interface ProjectImage {
   alt: string;
   caption?: string;
   orientation?: 'landscape' | 'portrait' | 'square';
+  isPlan?: boolean;
 }
 
 export interface ProjectSpec {
@@ -122,7 +123,8 @@ export const PROJECTS: Project[] = [
         width: 2560,
         height: 1362,
         alt: 'Planimetria di progetto di Casa Gracchi',
-        caption: 'Planimetria di progetto: distribuzione delle due suite e degli spazi a servizio'
+        caption: 'Planimetria di progetto: distribuzione delle due suite e degli spazi a servizio',
+        isPlan: true
       }
     ]
   },
@@ -187,7 +189,8 @@ export const PROJECTS: Project[] = [
         width: 638,
         height: 960,
         alt: 'Grande vasca circolare incassata nella pedana di legno',
-        caption: 'La vasca circolare incassata nella pedana lignea a vista nella camera padronale'
+        caption: 'La vasca circolare incassata nella pedana lignea a vista nella camera padronale',
+        orientation: 'portrait'
       },
       {
         src: '/images/appartamento-mg-salaPranzo.jpg',
@@ -211,7 +214,8 @@ export const PROJECTS: Project[] = [
         width: 953,
         height: 620,
         alt: 'Planimetria di progetto di Casa MG',
-        caption: 'Planimetria generale: articolazione fluida tra zona sociale e ambito privato'
+        caption: 'Planimetria generale: articolazione fluida tra zona sociale e ambito privato',
+        isPlan: true
       }
     ]
   },
@@ -368,7 +372,8 @@ export const PROJECTS: Project[] = [
         width: 960,
         height: 536,
         alt: 'Planimetria con evidenza della parete curva e del vuoto dinamico',
-        caption: 'Planimetria di progetto: il segno della curva e l’articolazione del vuoto dinamico'
+        caption: 'Planimetria di progetto: il segno della curva e l’articolazione del vuoto dinamico',
+        isPlan: true
       }
     ]
   },
@@ -451,7 +456,8 @@ export const PROJECTS: Project[] = [
         width: 1000,
         height: 1500,
         alt: 'Scala a chiocciola scultorea di raccordo verticale',
-        caption: 'La scala scultorea che collega i livelli dell’organismo architettonico'
+        caption: 'La scala scultorea che collega i livelli dell’organismo architettonico',
+        orientation: 'portrait'
       },
       {
         src: '/images/villa-residenziale-soggiorno.jpg',
@@ -475,7 +481,8 @@ export const PROJECTS: Project[] = [
         width: 1764,
         height: 1264,
         alt: 'Tavola di progetto con piante e sezioni della villa residenziale',
-        caption: 'Tavola architettonica: piante dei tre livelli e sezioni del corpo aggettante'
+        caption: 'Tavola architettonica: piante dei tre livelli e sezioni del corpo aggettante',
+        isPlan: true
       }
     ]
   }

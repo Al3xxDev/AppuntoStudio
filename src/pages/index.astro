@@ -14,7 +14,7 @@ const featuredProjects = PROJECTS;
   description="Studio di architettura e architettura d'interni a Roma. Progettazione residenziale, ristrutturazioni, recupero filologico e spazi su misura."
 >
   <!-- 1. HERO SECTION -->
-  <section class="relative pt-12 pb-20 sm:pt-20 sm:pb-28 lg:pt-24 lg:pb-36 border-b border-[#E2DBD0] overflow-hidden">
+  <section class="relative pt-12 pb-20 sm:pt-20 sm:pb-28 lg:pt-24 lg:pb-36 border-b border-[#E2DBD0]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Top coordinates & index -->
       <div class="flex items-center justify-between font-mono text-xs text-[#77756E] pb-8 mb-8 border-b border-[#E2DBD0]/60">
@@ -71,27 +71,61 @@ const featuredProjects = PROJECTS;
           </div>
         </div>
 
-        <!-- Right: LCP Hero Photography with Asymmetrical framing -->
+        <!-- Right: Architectural Hero Exhibition Plate -->
         <div class="lg:col-span-5 relative">
-          <div class="relative bg-[#F1EFE9] overflow-hidden aspect-[4/5] sm:aspect-[3/4] border border-[#E2DBD0]">
-            <picture>
-              <source srcset="/images/appartamento-mg-soggiorno.webp" type="image/webp" />
-              <img
-                src="/images/appartamento-mg-soggiorno.jpg"
-                alt="Living open space di Casa MG curato da Appuntostudio a Roma"
-                width="1828"
-                height="1174"
-                loading="eager"
-                fetchpriority="high"
-                decoding="sync"
-                class="w-full h-full object-cover object-center"
-              />
-            </picture>
-            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#292925]/80 via-[#292925]/30 to-transparent p-6 text-[#F8F7F4]">
-              <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-[#D7CDBE] block">
-                [ PROGETTO IN EVIDENZA ]
-              </span>
-              <p class="font-sans text-lg font-light">Casa MG — Ristrutturazione post-industriale</p>
+          <div class="relative bg-[#F4F1EA] border border-[#D7CDBE] p-3 sm:p-5 ring-1 ring-[#D7CDBE]/50 group shadow-[0_4px_20px_rgba(41,41,37,0.04)]">
+            <!-- Corner Architectural Registration Crosshairs (+) -->
+            <div class="pointer-events-none select-none" aria-hidden="true">
+              <span class="absolute top-1.5 left-2 font-mono text-[9px] text-[#8A8D76]/70 leading-none">+</span>
+              <span class="absolute top-1.5 right-2 font-mono text-[9px] text-[#8A8D76]/70 leading-none">+</span>
+              <span class="absolute bottom-1.5 left-2 font-mono text-[9px] text-[#8A8D76]/70 leading-none">+</span>
+              <span class="absolute bottom-1.5 right-2 font-mono text-[9px] text-[#8A8D76]/70 leading-none">+</span>
+            </div>
+
+            <!-- Floating Top Architectural Tag -->
+            <div class="absolute -top-3 left-4 z-10 px-2.5 py-0.5 bg-[#292925] text-[#F8F7F4] font-mono text-[9px] uppercase tracking-widest border border-[#292925] shadow-xs select-none">
+              TAVOLA 01 / VISTA HERO
+            </div>
+
+            <!-- Inner Picture Container -->
+            <a
+              href="/progetti/casa-mg"
+              class="block relative bg-[#EAE6DF] border border-[#292925]/10 rounded-[2px] overflow-hidden aspect-[4/5] sm:aspect-[3/4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
+              aria-label="Esplora il progetto Casa MG"
+            >
+              <picture>
+                <source srcset="/images/appartamento-mg-soggiorno.webp" type="image/webp" />
+                <img
+                  src="/images/appartamento-mg-soggiorno.jpg"
+                  alt="Living open space di Casa MG curato da Appuntostudio a Roma"
+                  width="1828"
+                  height="1174"
+                  loading="eager"
+                  fetchpriority="high"
+                  decoding="sync"
+                  class="w-full h-full object-cover object-center group-hover:scale-[1.025] transition-transform duration-700 ease-out"
+                />
+              </picture>
+              <div class="absolute inset-0 bg-[#292925]/0 group-hover:bg-[#292925]/4 transition-colors duration-300" aria-hidden="true" />
+            </a>
+
+            <!-- Integrated Bottom Architectural Plaque -->
+            <div class="mt-3 pt-2.5 border-t border-[#D7CDBE]/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+              <div>
+                <span class="font-mono text-[10px] text-[#8A8D76] uppercase tracking-wider block">
+                  [ PROGETTO IN EVIDENZA ]
+                </span>
+                <p class="font-sans text-sm font-light text-[#292925]">
+                  Casa MG — Salone open space e ferro nero
+                </p>
+              </div>
+              <a
+                href="/progetti/casa-mg"
+                class="font-mono text-[10px] text-[#292925] uppercase tracking-wider shrink-0 self-start sm:self-auto inline-flex items-center gap-1 hover:text-[#8A8D76] transition-colors"
+              >
+                <span>Scheda</span>
+                <span class="text-[#8A8D76]">→</span>
+              </a>
             </div>
           </div>
         </div>
@@ -135,11 +169,11 @@ const featuredProjects = PROJECTS;
     </div>
   </section>
 
-  <!-- 3. FEATURED PROJECTS (EDITORIAL GRID) -->
+  <!-- 3. FEATURED PROJECTS (EDITORIAL ASYMMETRIC GRID) -->
   <section id="progetti-evidenza" class="py-20 sm:py-32 border-b border-[#E2DBD0]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Header -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between pb-12 mb-12 border-b border-[#E2DBD0] gap-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between pb-12 mb-14 border-b border-[#E2DBD0] gap-6">
         <div>
           <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
             [ 02 / SELEZIONE OPERE ]
@@ -153,71 +187,122 @@ const featuredProjects = PROJECTS;
         </p>
       </div>
 
-      <!-- Asymmetric Editorial Grid -->
-      <!-- Project 1 (Full feature banner) -->
-      <div class="mb-16">
-        <article class="group grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#F1EFE9]/40 border border-[#E2DBD0] p-6 sm:p-10">
-          <div class="lg:col-span-7 order-2 lg:order-1 space-y-6">
-            <div class="flex items-center gap-3 font-mono text-xs text-[#77756E]">
-              <span class="text-[#8A8D76]">[{featuredProjects[0].index}]</span>
-              <span class="uppercase tracking-widest">{featuredProjects[0].category}</span>
-              <span>•</span>
-              <span>{featuredProjects[0].location}</span>
-            </div>
-
-            <h3 class="text-3xl sm:text-4xl font-light tracking-tight text-[#292925] group-hover:text-[#8A8D76] transition-colors">
-              <a href={`/progetti/${featuredProjects[0].slug}`}>
-                {featuredProjects[0].title}
-              </a>
-            </h3>
-
-            <p class="text-[#77756E] text-base font-light leading-relaxed">
-              {featuredProjects[0].editorialExcerpt}
-            </p>
-
-            <div class="pt-4 flex items-center justify-between border-t border-[#E2DBD0]">
-              <a
-                href={`/progetti/${featuredProjects[0].slug}`}
-                class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] group-hover:translate-x-1 transition-transform"
-              >
-                <span>Vedi il progetto completo</span>
-                <svg class="w-3.5 h-3.5 text-[#8A8D76]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </a>
-              <span class="font-mono text-xs text-[#8A8D76]">{featuredProjects[0].gallery.length} fotografie</span>
-            </div>
+      <!-- 3.1 Project 1: Casa Gracchi — Protagonist Exhibition Plate -->
+      <div class="mb-20 sm:mb-28">
+        <article class="group relative bg-[#F4F1EA] border border-[#D7CDBE] p-4 sm:p-8 lg:p-10 shadow-[0_2px_12px_rgba(41,41,37,0.03)] hover:border-[#8A8D76] transition-all duration-300">
+          <!-- Corner Registration Marks -->
+          <div class="pointer-events-none select-none" aria-hidden="true">
+            <span class="absolute top-2 left-2.5 font-mono text-[9px] text-[#8A8D76]/70 leading-none">+</span>
+            <span class="absolute top-2 right-2.5 font-mono text-[9px] text-[#8A8D76]/70 leading-none">+</span>
+            <span class="absolute bottom-2 left-2.5 font-mono text-[9px] text-[#8A8D76]/70 leading-none">+</span>
+            <span class="absolute bottom-2 right-2.5 font-mono text-[9px] text-[#8A8D76]/70 leading-none">+</span>
           </div>
 
-          <div class="lg:col-span-5 order-1 lg:order-2 overflow-hidden aspect-[4/3] bg-[#E2DBD0]">
-            <a href={`/progetti/${featuredProjects[0].slug}`} class="block w-full h-full">
-              <picture>
-                <source srcset={featuredProjects[0].coverImage.webp} type="image/webp" />
-                <img
-                  src={featuredProjects[0].coverImage.src}
-                  alt={featuredProjects[0].coverImage.alt}
-                  width={featuredProjects[0].coverImage.width}
-                  height={featuredProjects[0].coverImage.height}
-                  loading="eager"
-                  decoding="async"
-                  class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              </picture>
-            </a>
+          <!-- Floating Architectural Tag -->
+          <div class="absolute -top-3.5 left-6 px-3 py-1 bg-[#292925] text-[#F8F7F4] font-mono text-[10px] uppercase tracking-widest border border-[#292925] shadow-xs select-none">
+            TAVOLA 01 / OPERA PROTAGONISTA
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <!-- Narrative Column -->
+            <div class="lg:col-span-5 order-2 lg:order-1 space-y-6">
+              <div class="flex items-center gap-3 font-mono text-xs text-[#77756E]">
+                <span class="text-[#8A8D76]">[{featuredProjects[0].index}]</span>
+                <span class="uppercase tracking-widest">{featuredProjects[0].category}</span>
+                <span>•</span>
+                <span>{featuredProjects[0].location}</span>
+              </div>
+
+              <h3 class="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-[#292925] group-hover:text-[#8A8D76] transition-colors">
+                <a href={`/progetti/${featuredProjects[0].slug}`}>
+                  {featuredProjects[0].title}
+                </a>
+              </h3>
+
+              <p class="text-[#77756E] text-base font-light leading-relaxed">
+                {featuredProjects[0].editorialExcerpt}
+              </p>
+
+              <!-- Quick Specs plaque -->
+              <div class="py-3 border-y border-[#D7CDBE]/70 space-y-1 font-mono text-xs text-[#77756E]">
+                <div class="flex justify-between">
+                  <span class="text-[#8A8D76] uppercase">Elemento:</span>
+                  <span class="text-[#292925]">Libreria scultorea in cartongesso</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-[#8A8D76] uppercase">Materiali:</span>
+                  <span class="text-[#292925]">Gres grigio perla uniforme</span>
+                </div>
+              </div>
+
+              <div class="pt-2 flex items-center justify-between">
+                <a
+                  href={`/progetti/${featuredProjects[0].slug}`}
+                  class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] group-hover:translate-x-1 transition-transform"
+                >
+                  <span>Esplora il progetto completo</span>
+                  <svg class="w-3.5 h-3.5 text-[#8A8D76]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                  </svg>
+                </a>
+                <span class="font-mono text-xs text-[#8A8D76]">{featuredProjects[0].gallery.length} foto</span>
+              </div>
+            </div>
+
+            <!-- Picture Frame Container -->
+            <div class="lg:col-span-7 order-1 lg:order-2">
+              <a
+                href={`/progetti/${featuredProjects[0].slug}`}
+                class="block relative overflow-hidden bg-[#EAE6DF] border border-[#292925]/15 rounded-[2px] aspect-[16/10] sm:aspect-[3/2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
+                aria-label={`Vedi ${featuredProjects[0].title}`}
+              >
+                <picture>
+                  <source srcset={featuredProjects[0].coverImage.webp} type="image/webp" />
+                  <img
+                    src={featuredProjects[0].coverImage.src}
+                    alt={featuredProjects[0].coverImage.alt}
+                    width={featuredProjects[0].coverImage.width}
+                    height={featuredProjects[0].coverImage.height}
+                    loading="eager"
+                    decoding="async"
+                    class="w-full h-full object-cover object-center group-hover:scale-[1.025] transition-transform duration-700 ease-out"
+                  />
+                </picture>
+                <div class="absolute inset-0 bg-[#292925]/0 group-hover:bg-[#292925]/4 transition-colors duration-300" aria-hidden="true" />
+              </a>
+              <div class="mt-2.5 flex items-center justify-between text-[11px] font-mono text-[#77756E]">
+                <span>TAV. 01 / VISTA DEL LIVING CON LIBRERIA INTEGRATA</span>
+                <span class="text-[#8A8D76]">ROMA</span>
+              </div>
+            </div>
           </div>
         </article>
       </div>
 
-      <!-- Projects 2 & 3 (Two column pairing) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12 mb-16">
-        <ProjectCard project={featuredProjects[1]} />
-        <ProjectCard project={featuredProjects[2]} />
+      <!-- 3.2 Projects 2 & 3: Asymmetrical Diptych (Casa MG & Casa JD) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 mb-20 sm:mb-28 items-start">
+        <!-- Casa MG: Landscape Architectural Frame -->
+        <div class="lg:col-span-7">
+          <ProjectCard project={featuredProjects[1]} aspectRatio="wide" />
+        </div>
+
+        <!-- Casa JD: Vertical Portrait Plate with Staggered Alignment -->
+        <div class="lg:col-span-5 lg:pt-10">
+          <ProjectCard project={featuredProjects[2]} variant="tall" aspectRatio="tall" />
+        </div>
       </div>
 
-      <!-- Projects 4 & 5 (Two column pairing) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12">
-        <ProjectCard project={featuredProjects[3]} />
-        <ProjectCard project={featuredProjects[4]} />
+      <!-- 3.3 Projects 4 & 5: Asymmetric Dual Composition (Casa FP & Villa Residenziale) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
+        <!-- Casa FP: Architectural Frame -->
+        <div class="lg:col-span-5">
+          <ProjectCard project={featuredProjects[3]} aspectRatio="standard" />
+        </div>
+
+        <!-- Villa Residenziale: Widescreen Panoramic Frame -->
+        <div class="lg:col-span-7">
+          <ProjectCard project={featuredProjects[4]} aspectRatio="wide" />
+        </div>
       </div>
 
       <!-- Bottom Portfolio CTA -->

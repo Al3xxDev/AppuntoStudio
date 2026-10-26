@@ -17,6 +17,24 @@ interface Props {
 
 const { project } = Astro.props;
 const { prev, next } = getAdjacentProjects(project.slug);
+
+// Split gallery into regular photos and plan(s)
+const photos = project.gallery.filter(img => !img.isPlan);
+const plans = project.gallery.filter(img => img.isPlan);
+
+// Compute a varied layout: 
+// Photos grouped into sequences to create rhythm:
+// First image: full-width hero; then pairs + occasional portrait
+const galleryWithLayout: Array<{ img: typeof photos[0]; span: 'full' | 'wide' | 'narrow' | 'portrait' }> = [];
+photos.forEach((img, i) => {
+  if (i === 0) {
+    galleryWithLayout.push({ img, span: 'full' });
+  } else if (img.orientation === 'portrait' || (img.width < img.height)) {
+    galleryWithLayout.push({ img, span: 'portrait' });
+  } else {
+    galleryWithLayout.push({ img, span: 'wide' });
+  }
+});
 ---
 
 <BaseLayout
@@ -25,8 +43,9 @@ const { prev, next } = getAdjacentProjects(project.slug);
   image={project.coverImage.webp}
   type="article"
 >
-  <article class="pt-8 pb-24 sm:pt-16 sm:pb-32">
-    <!-- Breadcrumb & Project Index Header -->
+  <article class="pt-8 pb-24 sm:pt-16 sm:pb-36">
+
+    <!-- Breadcrumb -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
       <nav class="flex items-center gap-2 font-mono text-xs text-[#77756E] pb-6 border-b border-[#E2DBD0]" aria-label="Percorso di navigazione">
         <a href="/" class="hover:text-[#292925] transition-colors">Home</a>
@@ -37,7 +56,7 @@ const { prev, next } = getAdjacentProjects(project.slug);
       </nav>
     </div>
 
-    <!-- 1. Project Title & Overview Header -->
+    <!-- 1. Project Header -->
     <header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
         <div class="lg:col-span-8 space-y-4">
@@ -63,13 +82,14 @@ const { prev, next } = getAdjacentProjects(project.slug);
           </p>
         </div>
 
-        <!-- Metadata sidebar badge -->
-        <div class="lg:col-span-4 bg-[#F1EFE9] border border-[#E2DBD0] p-6 space-y-3 font-mono text-xs">
-          <div class="text-[#8A8D76] uppercase tracking-widest text-[10px] pb-2 border-b border-[#E2DBD0]">
-            [ SCHEDA TECNICA ]
+        <!-- Technical Specs Sheet -->
+        <div class="lg:col-span-4 bg-white border-2 border-[#292925]/15 p-5 space-y-3 font-mono text-xs shadow-xs">
+          <div class="text-[#8A8D76] uppercase tracking-widest text-[10px] pb-2 border-b border-[#292925]/10 flex items-center justify-between">
+            <span>[ SCHEDA TECNICA ]</span>
+            <span class="text-[#292925] font-normal">TAV. {project.index}</span>
           </div>
           {project.specs.map(spec => (
-            <div class="flex justify-between gap-4 py-1 border-b border-[#E2DBD0]/60 last:border-b-0">
+            <div class="flex justify-between gap-4 py-1 border-b border-[#292925]/8 last:border-b-0">
               <span class="text-[#77756E]">{spec.label}:</span>
               <span class="text-[#292925] text-right font-sans font-medium">{spec.value}</span>
             </div>
@@ -78,29 +98,52 @@ const { prev, next } = getAdjacentProjects(project.slug);
       </div>
     </header>
 
-    <!-- 2. Hero Cover Image (Full visual impact) -->
+    <!-- 2. Hero Cover — Grand Exhibition Plate -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-24">
-      <div class="relative overflow-hidden bg-[#F1EFE9] border border-[#E2DBD0] aspect-[16/9] sm:aspect-[21/9]">
-        <picture>
-          <source srcset={project.coverImage.webp} type="image/webp" />
-          <img
-            src={project.coverImage.src}
-            alt={project.coverImage.alt}
-            width={project.coverImage.width}
-            height={project.coverImage.height}
-            loading="eager"
-            fetchpriority="high"
-            decoding="sync"
-            class="w-full h-full object-cover object-center"
-          />
-        </picture>
-        <div class="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 bg-[#292925]/80 backdrop-blur-sm text-[#F8F7F4] px-4 py-2 text-xs font-mono">
-          {project.title} — Vista principale
+      <div class="relative bg-[#F4F1EA] border border-[#D7CDBE] p-3.5 sm:p-6 lg:p-8 shadow-[0_2px_16px_rgba(41,41,37,0.04)]">
+        <!-- Corner Crosshairs -->
+        <div class="pointer-events-none select-none" aria-hidden="true">
+          <span class="absolute top-2 left-2.5 font-mono text-[9px] text-[#8A8D76]/70 leading-none">+</span>
+          <span class="absolute top-2 right-2.5 font-mono text-[9px] text-[#8A8D76]/70 leading-none">+</span>
+          <span class="absolute bottom-2 left-2.5 font-mono text-[9px] text-[#8A8D76]/70 leading-none">+</span>
+          <span class="absolute bottom-2 right-2.5 font-mono text-[9px] text-[#8A8D76]/70 leading-none">+</span>
+        </div>
+
+        <!-- Floating Tag -->
+        <div class="absolute -top-3 left-5 z-10 px-3 py-1 bg-[#292925] text-[#F8F7F4] font-mono text-[10px] uppercase tracking-widest border border-[#292925] shadow-xs select-none">
+          TAV. {project.index} / VISTA D'INSIEME — {project.title.toUpperCase()}
+        </div>
+
+        <!-- Inner image with hairline inner frame -->
+        <div class="relative overflow-hidden bg-[#EAE6DF] border border-[#292925]/12 rounded-[2px] aspect-[16/9] sm:aspect-[21/9]">
+          <picture>
+            <source srcset={project.coverImage.webp} type="image/webp" />
+            <img
+              src={project.coverImage.src}
+              alt={project.coverImage.alt}
+              width={project.coverImage.width}
+              height={project.coverImage.height}
+              loading="eager"
+              fetchpriority="high"
+              decoding="sync"
+              class="w-full h-full object-cover object-center"
+            />
+          </picture>
+        </div>
+
+        <!-- Bottom Plaque -->
+        <div class="mt-3.5 pt-2.5 border-t border-[#D7CDBE]/70 flex items-center justify-between text-xs font-mono">
+          <span class="text-[#77756E] text-[11px]">
+            {project.title.toUpperCase()} — {project.subtitle}
+          </span>
+          <span class="text-[#8A8D76] text-[10px] uppercase tracking-wider shrink-0 ml-4">
+            {project.location}
+          </span>
         </div>
       </div>
     </div>
 
-    <!-- 3. Project Narrative Description -->
+    <!-- 3. Project Narrative -->
     <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 sm:mb-28">
       <div class="border-t border-[#E2DBD0] pt-10 sm:pt-14">
         <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-4">
@@ -117,97 +160,258 @@ const { prev, next } = getAdjacentProjects(project.slug);
       </div>
     </section>
 
-    <!-- 4. Photo Gallery with Interactive Lightbox -->
+    <!-- 4. Editorial Photo Gallery -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 sm:mb-32">
       <div class="flex items-baseline justify-between pb-6 mb-10 border-b border-[#E2DBD0]">
         <div>
           <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-1">
-            [ GALLERIA FOTOGRAFICA ]
+            [ DOCUMENTAZIONE FOTOGRAFICA ]
           </span>
           <h2 class="text-2xl sm:text-4xl font-light tracking-tight text-[#292925]">
-            Dettagli e ambienti ({project.gallery.length} scatti)
+            Spazi e dettagli ({photos.length} fotografie)
           </h2>
         </div>
         <span class="font-mono text-xs text-[#77756E] hidden sm:block">
-          Fai clic per ingrandire
+          Clic per ingrandire
         </span>
       </div>
 
-      <!-- Architectural Gallery Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        {project.gallery.map((img) => (
-          <div class="relative group overflow-hidden bg-[#F1EFE9] border border-[#E2DBD0] flex flex-col justify-between">
-            <button
-              type="button"
-              data-lightbox-trigger
-              data-src={img.webp}
-              data-alt={img.alt}
-              data-caption={img.caption || img.alt}
-              class="w-full text-left flex flex-col flex-grow justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
-              aria-label={`Ingrandisci fotografia: ${img.alt}`}
-            >
-              <div class="aspect-[4/3] w-full overflow-hidden bg-[#E2DBD0]">
-                <picture>
-                  <source srcset={img.webp} type="image/webp" />
-                  <img
-                    src={img.src}
-                    alt={img.alt}
-                    width={img.width}
-                    height={img.height}
-                    loading="eager"
-                    decoding="async"
-                    class={`w-full h-full ${img.src.toLowerCase().includes('pianta') ? 'object-contain p-2 bg-white' : 'object-cover'} object-center group-hover:scale-105 transition-transform duration-500 ease-out`}
-                  />
-                </picture>
-              </div>
+      <!-- 
+        Editorial Gallery Grid:
+        - First image: full-width cinematic plate
+        - Remaining: alternating compositions:
+          * Two landscape images side-by-side
+          * Portrait + landscape diptych
+          * Three-column for rooms
+      -->
 
-              <div class="p-4 bg-[#F8F7F4] border-t border-[#E2DBD0] flex items-center justify-between w-full">
-                <p class="text-xs text-[#77756E] font-light truncate max-w-[80%]">
-                  {img.caption || img.alt}
-                </p>
-                <span class="font-mono text-[10px] text-[#8A8D76] uppercase tracking-wider ml-2 shrink-0">
-                  + Ingrandisci
-                </span>
+      {galleryWithLayout.length > 0 && (
+        <div class="space-y-6 sm:space-y-8">
+
+          <!-- First image: Full-width cinematic -->
+          {galleryWithLayout[0] && (
+            <div class="relative group bg-[#F4F1EA] border border-[#D7CDBE] p-3.5 sm:p-5 hover:border-[#8A8D76] transition-all duration-300 shadow-[0_1px_4px_rgba(41,41,37,0.02)]">
+              <div class="pointer-events-none select-none" aria-hidden="true">
+                <span class="absolute top-1.5 left-2 font-mono text-[9px] text-[#8A8D76]/60 group-hover:text-[#8A8D76] transition-colors leading-none">+</span>
+                <span class="absolute top-1.5 right-2 font-mono text-[9px] text-[#8A8D76]/60 group-hover:text-[#8A8D76] transition-colors leading-none">+</span>
+                <span class="absolute bottom-1.5 left-2 font-mono text-[9px] text-[#8A8D76]/60 group-hover:text-[#8A8D76] transition-colors leading-none">+</span>
+                <span class="absolute bottom-1.5 right-2 font-mono text-[9px] text-[#8A8D76]/60 group-hover:text-[#8A8D76] transition-colors leading-none">+</span>
               </div>
-            </button>
+              <div class="absolute -top-3 left-4 z-10 px-2.5 py-0.5 bg-[#292925] text-[#F8F7F4] font-mono text-[9px] uppercase tracking-widest border border-[#292925] shadow-xs select-none">
+                F.01 / {(galleryWithLayout[0].img.caption || galleryWithLayout[0].img.alt).slice(0, 40).toUpperCase()}
+              </div>
+              <button
+                type="button"
+                data-lightbox-trigger
+                data-src={galleryWithLayout[0].img.webp}
+                data-alt={galleryWithLayout[0].img.alt}
+                data-caption={galleryWithLayout[0].img.caption || galleryWithLayout[0].img.alt}
+                class="block w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925] cursor-zoom-in"
+                aria-label={`Ingrandisci: ${galleryWithLayout[0].img.alt}`}
+              >
+                <div class="relative overflow-hidden bg-[#EAE6DF] border border-[#292925]/10 rounded-[2px] aspect-[16/9] sm:aspect-[21/9]">
+                  <picture>
+                    <source srcset={galleryWithLayout[0].img.webp} type="image/webp" />
+                    <img
+                      src={galleryWithLayout[0].img.src}
+                      alt={galleryWithLayout[0].img.alt}
+                      width={galleryWithLayout[0].img.width}
+                      height={galleryWithLayout[0].img.height}
+                      loading="eager"
+                      decoding="async"
+                      class="w-full h-full object-cover object-center group-hover:scale-[1.025] transition-transform duration-700 ease-out"
+                    />
+                  </picture>
+                  <div class="absolute inset-0 bg-[#292925]/0 group-hover:bg-[#292925]/4 transition-colors duration-300" aria-hidden="true" />
+                </div>
+              </button>
+              <div class="mt-3 pt-2.5 border-t border-[#D7CDBE]/70 flex items-center justify-between text-xs">
+                <p class="text-[#77756E] font-light truncate max-w-[75%]">{galleryWithLayout[0].img.caption || galleryWithLayout[0].img.alt}</p>
+                <span class="font-mono text-[10px] text-[#8A8D76] uppercase tracking-wider group-hover:text-[#292925] transition-colors">+ Ingrandisci</span>
+              </div>
+            </div>
+          )}
+
+          <!-- Remaining photos: grid-based editorial compositions -->
+          {galleryWithLayout.length > 1 && (() => {
+            const rest = galleryWithLayout.slice(1);
+            const groups: typeof rest[] = [];
+            let i = 0;
+            while (i < rest.length) {
+              const curr = rest[i];
+              const next2 = rest[i + 1];
+              // Portrait images get paired with a landscape, or go solo
+              if (curr.span === 'portrait' && next2 && next2.span !== 'portrait') {
+                groups.push([curr, next2]);
+                i += 2;
+              } else if (curr.span !== 'portrait' && next2 && next2.span === 'portrait') {
+                groups.push([curr, next2]);
+                i += 2;
+              } else if (next2) {
+                // Pair two landscape images
+                groups.push([curr, next2]);
+                i += 2;
+              } else {
+                // Solo image (full-width)
+                groups.push([curr]);
+                i += 1;
+              }
+            }
+            return groups.map((group, gIdx) => (
+              <div class:list={[
+                'grid gap-5 sm:gap-6',
+                group.length === 1 ? 'grid-cols-1' :
+                group.some(g => g.span === 'portrait')
+                  ? 'grid-cols-1 md:grid-cols-[3fr_2fr] lg:grid-cols-[2fr_1fr]'
+                  : 'grid-cols-1 md:grid-cols-2',
+              ]}>
+                {group.map((item, iIdx) => {
+                  const frameNum = String(gIdx * 2 + iIdx + 2).padStart(2, '0');
+                  const isPortrait = item.span === 'portrait';
+                  return (
+                    <div class="relative group bg-[#F4F1EA] border border-[#D7CDBE] p-3 sm:p-4 hover:border-[#8A8D76] transition-all duration-300 shadow-[0_1px_3px_rgba(41,41,37,0.02)]">
+                      <div class="pointer-events-none select-none" aria-hidden="true">
+                        <span class="absolute top-1.5 left-2 font-mono text-[9px] text-[#8A8D76]/60 group-hover:text-[#8A8D76] transition-colors leading-none">+</span>
+                        <span class="absolute top-1.5 right-2 font-mono text-[9px] text-[#8A8D76]/60 group-hover:text-[#8A8D76] transition-colors leading-none">+</span>
+                        <span class="absolute bottom-1.5 left-2 font-mono text-[9px] text-[#8A8D76]/60 group-hover:text-[#8A8D76] transition-colors leading-none">+</span>
+                        <span class="absolute bottom-1.5 right-2 font-mono text-[9px] text-[#8A8D76]/60 group-hover:text-[#8A8D76] transition-colors leading-none">+</span>
+                      </div>
+                      <button
+                        type="button"
+                        data-lightbox-trigger
+                        data-src={item.img.webp}
+                        data-alt={item.img.alt}
+                        data-caption={item.img.caption || item.img.alt}
+                        class="block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925] cursor-zoom-in"
+                        aria-label={`Ingrandisci fotografia: ${item.img.alt}`}
+                      >
+                        <div class:list={[
+                          'relative overflow-hidden bg-[#EAE6DF] border border-[#292925]/10 rounded-[2px]',
+                          group.length === 1 ? 'aspect-[16/9]' :
+                          isPortrait ? 'aspect-[3/4]' : 'aspect-[4/3]',
+                        ]}>
+                          <picture>
+                            <source srcset={item.img.webp} type="image/webp" />
+                            <img
+                              src={item.img.src}
+                              alt={item.img.alt}
+                              width={item.img.width}
+                              height={item.img.height}
+                              loading="eager"
+                              decoding="async"
+                              class="w-full h-full object-cover object-center group-hover:scale-[1.025] transition-transform duration-700 ease-out"
+                            />
+                          </picture>
+                          <div class="absolute inset-0 bg-[#292925]/0 group-hover:bg-[#292925]/4 transition-colors duration-300" aria-hidden="true" />
+                        </div>
+                      </button>
+                      <div class="mt-2.5 pt-2 border-t border-[#D7CDBE]/70 flex items-center justify-between text-xs">
+                        <p class="text-[#77756E] font-light text-[11px] truncate max-w-[75%]">
+                          {item.img.caption || item.img.alt}
+                        </p>
+                        <span class="font-mono text-[10px] text-[#8A8D76] uppercase tracking-wider group-hover:text-[#292925] transition-colors shrink-0 ml-2">
+                          F.{frameNum}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ));
+          })()}
+        </div>
+      )}
+
+      <!-- Technical Drawings: CAD Plans (separate sheet-style section) -->
+      {plans.length > 0 && (
+        <div class="mt-16 sm:mt-20 border-t border-[#E2DBD0] pt-10">
+          <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-8">
+            [ TAVOLE TECNICHE — PLANIMETRIA E DISTRIBUZIONE ]
+          </span>
+          <div class="space-y-6">
+            {plans.map((img, pIdx) => (
+              <div class="relative bg-white border-2 border-[#292925]/20 p-4 sm:p-6 shadow-xs hover:border-[#292925]/40 transition-colors group">
+                <div class="absolute -top-3 left-4 z-10 px-2.5 py-0.5 bg-white border-2 border-[#292925]/20 text-[#292925] font-mono text-[9px] uppercase tracking-widest shadow-xs select-none">
+                  TAVOLA TECNICA {String(pIdx + 1).padStart(2, '0')} / RILIEVO E DISTRIBUZIONE
+                </div>
+                <div class="flex items-center justify-between font-mono text-[10px] text-[#77756E] pb-3 border-b border-[#292925]/10 mb-3">
+                  <span class="text-[#8A8D76] uppercase tracking-wider">[ {project.title.toUpperCase()} ]</span>
+                  <span class="text-[#292925]">SCALA 1:100 — {project.location.toUpperCase()}</span>
+                </div>
+                <button
+                  type="button"
+                  data-lightbox-trigger
+                  data-src={img.webp}
+                  data-alt={img.alt}
+                  data-caption={img.caption || img.alt}
+                  class="block w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925] cursor-zoom-in"
+                  aria-label={`Ingrandisci tavola tecnica: ${img.alt}`}
+                >
+                  <div class="bg-white overflow-hidden aspect-[2.4/1] sm:aspect-[3/1]">
+                    <picture>
+                      <source srcset={img.webp} type="image/webp" />
+                      <img
+                        src={img.src}
+                        alt={img.alt}
+                        width={img.width}
+                        height={img.height}
+                        loading="eager"
+                        decoding="async"
+                        class="w-full h-full object-contain p-2 sm:p-4 group-hover:scale-[1.01] transition-transform duration-500"
+                      />
+                    </picture>
+                  </div>
+                </button>
+                <div class="mt-3 pt-2 border-t border-[#292925]/10 flex items-center justify-between text-xs font-mono">
+                  <p class="text-[#77756E] text-[11px] truncate max-w-[75%]">{img.caption || img.alt}</p>
+                  <span class="text-[#8A8D76] text-[10px] uppercase tracking-wider group-hover:text-[#292925] transition-colors">
+                    + Visualizza
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </section>
 
     <!-- 5. Adjacent Projects Navigation -->
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-[#E2DBD0] pt-12 pb-8" aria-label="Navigazione tra progetti">
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <!-- Prev Project -->
         <a
           href={`/progetti/${prev.slug}`}
-          class="group p-6 border border-[#E2DBD0] bg-[#F1EFE9]/40 hover:bg-[#F1EFE9] transition-colors"
+          class="group relative bg-[#F4F1EA] border border-[#D7CDBE] p-5 sm:p-6 hover:border-[#8A8D76] transition-all duration-300"
         >
+          <div class="pointer-events-none select-none" aria-hidden="true">
+            <span class="absolute top-1.5 left-2 font-mono text-[9px] text-[#8A8D76]/60 group-hover:text-[#8A8D76] transition-colors leading-none">+</span>
+            <span class="absolute bottom-1.5 right-2 font-mono text-[9px] text-[#8A8D76]/60 group-hover:text-[#8A8D76] transition-colors leading-none">+</span>
+          </div>
           <span class="font-mono text-xs text-[#8A8D76] block mb-2">
             ← PROGETTO PRECEDENTE [{prev.index}]
           </span>
           <span class="text-xl sm:text-2xl font-light text-[#292925] group-hover:text-[#8A8D76] transition-colors block">
             {prev.title}
           </span>
-          <span class="text-xs text-[#77756E] mt-1 block">
-            {prev.subtitle}
-          </span>
+          <span class="text-xs text-[#77756E] mt-1 block">{prev.subtitle}</span>
         </a>
 
         <!-- Next Project -->
         <a
           href={`/progetti/${next.slug}`}
-          class="group p-6 border border-[#E2DBD0] bg-[#F1EFE9]/40 hover:bg-[#F1EFE9] transition-colors text-left sm:text-right"
+          class="group relative bg-[#F4F1EA] border border-[#D7CDBE] p-5 sm:p-6 hover:border-[#8A8D76] transition-all duration-300 text-left sm:text-right"
         >
+          <div class="pointer-events-none select-none" aria-hidden="true">
+            <span class="absolute top-1.5 right-2 font-mono text-[9px] text-[#8A8D76]/60 group-hover:text-[#8A8D76] transition-colors leading-none">+</span>
+            <span class="absolute bottom-1.5 left-2 font-mono text-[9px] text-[#8A8D76]/60 group-hover:text-[#8A8D76] transition-colors leading-none">+</span>
+          </div>
           <span class="font-mono text-xs text-[#8A8D76] block mb-2">
             PROGETTO SUCCESSIVO [{next.index}] →
           </span>
           <span class="text-xl sm:text-2xl font-light text-[#292925] group-hover:text-[#8A8D76] transition-colors block">
             {next.title}
           </span>
-          <span class="text-xs text-[#77756E] mt-1 block">
-            {next.subtitle}
-          </span>
+          <span class="text-xs text-[#77756E] mt-1 block">{next.subtitle}</span>
         </a>
       </div>
 
@@ -216,7 +420,7 @@ const { prev, next } = getAdjacentProjects(project.slug);
           href="/progetti"
           class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-[#77756E] hover:text-[#292925] transition-colors"
         >
-          <span>Torna a tutti i progetti</span>
+          <span>Torna all'archivio dei progetti</span>
           <span aria-hidden="true">↑</span>
         </a>
       </div>
