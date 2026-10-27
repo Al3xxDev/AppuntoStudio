@@ -209,7 +209,11 @@ async function run() {
     // Title & heading hierarchy test
     for (const route of ['/', '/progetti', '/progetti/casa-gracchi', '/studio', '/servizi', '/contatti', '/privacy']) {
       await page.goto(`${BASE_URL}${route}`, { waitUntil: 'networkidle' });
-      const h1Count = await page.locator('h1').count();
+      const h1Count = await page.evaluate(() => {
+        return Array.from(document.querySelectorAll('h1'))
+          .filter(el => !el.closest('astro-dev-toolbar') && !el.querySelector('astro-dev-toolbar-icon'))
+          .length;
+      });
       if (h1Count !== 1) {
         throw new Error(`Rotta ${route} ha ${h1Count} tag h1 (atteso esattamente 1)`);
       }
