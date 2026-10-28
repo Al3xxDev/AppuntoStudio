@@ -52,7 +52,7 @@ const schemaData = {
 ---
 
 <!doctype html>
-<html lang="it" class="h-full scroll-smooth">
+<html lang="it" class="h-full">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -84,6 +84,7 @@ const schemaData = {
 
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
   </head>
   <body class="min-h-full flex flex-col bg-[#F8F7F4] text-[#292925] font-sans selection:bg-[#D7CDBE] selection:text-[#292925]">
     <!-- Accessibility Skip to Main Content Link -->
@@ -104,5 +105,13 @@ const schemaData = {
 
     <!-- Global Footer -->
     <Footer />
+
+    <script>
+      import { initEditorialMotion } from '../scripts/editorial-motion';
+      void initEditorialMotion();
+      document.addEventListener('astro:after-swap', () => {
+        void initEditorialMotion();
+      });
+    </script>
   </body>
 </html>

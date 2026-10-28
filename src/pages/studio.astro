@@ -8,103 +8,113 @@ import { STUDIO_DATA } from '../data/studio';
   description="Storia, metodo e filosofia progettuale di Appuntostudio: fondato a Roma nel 2013 dagli architetti Angelo Paolino, Monica Molinaro e Rosella Cippone."
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24 sm:pt-20 sm:pb-36">
-    <!-- Breadcrumb & Index Header -->
-    <div class="flex items-center gap-2 font-mono text-xs text-[#77756E] pb-6 mb-8 border-b border-[#E2DBD0]">
-      <a href="/" class="hover:text-[#292925] transition-colors">Home</a>
-      <span>/</span>
-      <span class="text-[#8A8D76]">[01 / LO STUDIO]</span>
+    <!-- Page Entrance Sequence -->
+    <div data-page-entrance>
+      <!-- Breadcrumb -->
+      <div class="relative pb-6 mb-8">
+        <div data-entrance-breadcrumb class="flex items-center gap-2 font-mono text-xs text-[#77756E]">
+          <a href="/" class="hover:text-[#292925] transition-colors">Home</a>
+          <span aria-hidden="true">/</span>
+          <span class="text-[#8A8D76]">Lo Studio</span>
+        </div>
+        <span data-rule-reveal class="block absolute bottom-0 inset-x-0 h-px bg-[#E2DBD0] origin-left" aria-hidden="true"></span>
+      </div>
+
+      <!-- Editorial Intro with Founding Quote -->
+      <header class="max-w-4xl mb-20 sm:mb-28">
+        <span data-entrance-eyebrow class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-4">
+          Identità e visione
+        </span>
+        <h1 data-entrance-title class="text-4xl sm:text-6xl font-light tracking-tight text-[#292925] leading-tight mb-8">
+          La forma dello spazio costruita intorno a chi lo vive.
+        </h1>
+
+        <!-- Architectural Quote Callout -->
+        <blockquote data-entrance-copy class="relative p-8 sm:p-10 rounded-[14px] bg-[#F1EFE9] text-xl sm:text-2xl font-light text-[#292925] leading-relaxed italic overflow-hidden">
+          <span data-rule-vertical class="block absolute left-0 inset-y-0 w-[3px] bg-[#8A8D76] origin-top" aria-hidden="true"></span>
+          «{STUDIO_DATA.quote}»
+        </blockquote>
+      </header>
     </div>
 
-    <!-- Editorial Intro with Founding Quote -->
-    <header class="max-w-4xl mb-20 sm:mb-28">
-      <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-4">
-        [ IDENTITÀ E VISIONE ]
-      </span>
-      <h1 class="text-4xl sm:text-6xl font-light tracking-tight text-[#292925] leading-tight mb-8">
-        La forma dello spazio costruita intorno a chi lo vive.
-      </h1>
-
-      <!-- Architectural Quote Callout -->
-      <blockquote class="p-8 sm:p-10 bg-[#F1EFE9] border-l-2 border-[#8A8D76] text-xl sm:text-2xl font-light text-[#292925] leading-relaxed italic">
-        «{STUDIO_DATA.quote}»
-      </blockquote>
-    </header>
-
     <!-- Main Editorial Content: 3 Chapters -->
-    <div class="space-y-20 sm:space-y-28 border-t border-[#E2DBD0] pt-16">
+    <div class="space-y-20 sm:space-y-28">
       <!-- Chapter 1: Origini e Fondazione -->
-      <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      <section data-scroll-section class="relative grid grid-cols-1 lg:grid-cols-12 gap-10 items-start pt-16">
+        <span data-rule-reveal class="block absolute top-0 inset-x-0 h-px bg-[#E2DBD0] origin-left" aria-hidden="true"></span>
         <div class="lg:col-span-4">
-          <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
-            [ 01 / LE ORIGINI ]
+          <span data-reveal-eyebrow class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
+            01 — Le Origini
           </span>
-          <h2 class="text-2xl sm:text-3xl font-light tracking-tight text-[#292925]">
+          <h2 data-split-heading class="text-2xl sm:text-3xl font-light tracking-tight text-[#292925]">
             Fondazione e identità
           </h2>
-          <div class="mt-4 font-mono text-xs text-[#77756E] space-y-1">
+          <div data-reveal-item class="mt-4 font-mono text-xs text-[#77756E] space-y-1">
             <p>ROMA — ANNO 2013</p>
             <p>COLLABORAZIONE — 2016</p>
           </div>
         </div>
 
         <div class="lg:col-span-8 space-y-6 text-base sm:text-lg text-[#383833] font-light leading-relaxed">
-          <p>
+          <p data-reveal-copy>
             Fondato a Roma nel 2013 dagli architetti <strong>Angelo Paolino</strong>, <strong>Monica Molinaro</strong> e <strong>Rosella Cippone</strong>; nel 2016 l’incontro con il <strong>prof. arch. Alfredo Benedetti</strong>, la cui esperienza spazia dall’architettura all’insegnamento, al design e all’arte in genere, apre le porte a nuove percezioni artistico-architettoniche.
           </p>
 
-          <div class="p-6 bg-[#F1EFE9]/60 border border-[#E2DBD0] grid grid-cols-1 sm:grid-cols-3 gap-6 font-mono text-xs">
+          <div class="p-6 rounded-[14px] bg-[#F1EFE9]/60 border border-[#E2DBD0]/90 grid grid-cols-1 sm:grid-cols-3 gap-6 font-mono text-xs">
             {STUDIO_DATA.founders.map(founder => (
-              <div>
-                <span class="text-[#8A8D76] block uppercase tracking-wider">[ SOCIO FONDATORE ]</span>
+              <div data-reveal-item>
+                <span class="text-[#8A8D76] block uppercase tracking-wider text-[11px]">Socio Fondatore</span>
                 <span class="text-sm font-sans text-[#292925] font-medium block mt-1">{founder.name}</span>
                 <span class="text-[#77756E] block">{founder.role}</span>
               </div>
             ))}
           </div>
 
-          <p class="text-sm text-[#77756E] pt-2">
+          <p data-reveal-copy class="text-sm text-[#77756E] pt-2">
             {STUDIO_DATA.collaboration.description}
           </p>
         </div>
       </section>
 
       <!-- Chapter 2: Struttura Operativa e Competenze -->
-      <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start border-t border-[#E2DBD0] pt-16">
+      <section data-scroll-section class="relative grid grid-cols-1 lg:grid-cols-12 gap-10 items-start pt-16">
+        <span data-rule-reveal class="block absolute top-0 inset-x-0 h-px bg-[#E2DBD0] origin-left" aria-hidden="true"></span>
         <div class="lg:col-span-4">
-          <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
-            [ 02 / METODO E SERVIZIO ]
+          <span data-reveal-eyebrow class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
+            02 — Metodo e Servizio
           </span>
-          <h2 class="text-2xl sm:text-3xl font-light tracking-tight text-[#292925]">
+          <h2 data-split-heading class="text-2xl sm:text-3xl font-light tracking-tight text-[#292925]">
             Il processo progettuale integrato
           </h2>
         </div>
 
         <div class="lg:col-span-8 space-y-6 text-base sm:text-lg text-[#383833] font-light leading-relaxed">
-          <p>
+          <p data-reveal-copy>
             {STUDIO_DATA.mission}
           </p>
-          <p>
+          <p data-reveal-copy>
             {STUDIO_DATA.scope}
           </p>
         </div>
       </section>
 
       <!-- Chapter 3: Il Committente come Motore -->
-      <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start border-t border-[#E2DBD0] pt-16">
+      <section data-scroll-section class="relative grid grid-cols-1 lg:grid-cols-12 gap-10 items-start pt-16">
+        <span data-rule-reveal class="block absolute top-0 inset-x-0 h-px bg-[#E2DBD0] origin-left" aria-hidden="true"></span>
         <div class="lg:col-span-4">
-          <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
-            [ 03 / FILOSOFIA DELL'ASCOLTO ]
+          <span data-reveal-eyebrow class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
+            03 — Filosofia dell'Ascolto
           </span>
-          <h2 class="text-2xl sm:text-3xl font-light tracking-tight text-[#292925]">
+          <h2 data-split-heading class="text-2xl sm:text-3xl font-light tracking-tight text-[#292925]">
             Il committente al centro
           </h2>
         </div>
 
         <div class="lg:col-span-8 space-y-6 text-base sm:text-lg text-[#383833] font-light leading-relaxed">
-          <p>
+          <p data-reveal-copy>
             {STUDIO_DATA.philosophy}
           </p>
-          <div class="p-8 bg-[#F1EFE9] border border-[#E2DBD0] my-4">
+          <div data-reveal-item class="p-8 rounded-[14px] bg-[#F1EFE9] border border-[#E2DBD0]/90 my-4">
             <h3 class="text-xl font-light text-[#292925] mb-3">
               Un percorso condiviso in ogni fase
             </h3>
@@ -112,15 +122,19 @@ import { STUDIO_DATA } from '../data/studio';
               {STUDIO_DATA.clientRelationship}
             </p>
           </div>
-          <div class="pt-4 flex flex-wrap items-center gap-4">
+          <div data-reveal-item class="pt-4 flex flex-wrap items-center gap-4">
             <a
               href="/progetti"
-              class="inline-flex items-center justify-center px-8 py-4 text-xs uppercase tracking-[0.18em] font-medium text-[#F8F7F4] bg-[#292925] hover:bg-[#383833] transition-colors"
+              data-curtain-cta
+              class="group relative inline-flex items-center justify-center px-8 py-4 text-xs uppercase tracking-[0.18em] font-medium text-[#F8F7F4] bg-[#292925] hover:bg-[#383833] transition-colors overflow-hidden"
             >
-              <span>Vedi le realizzazioni</span>
-              <svg class="w-3.5 h-3.5 ml-2.5 text-[#D7CDBE]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-              </svg>
+              <span data-cta-cover class="pointer-events-none absolute inset-0 bg-[#E2DBD0] origin-right scale-x-0" aria-hidden="true"></span>
+              <span data-cta-content class="relative z-10 inline-flex items-center">
+                <span>Vedi le realizzazioni</span>
+                <svg data-cta-arrow class="w-3.5 h-3.5 ml-2.5 text-[#D7CDBE] transition-transform duration-300 ease-out group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </span>
             </a>
             <a
               href="/contatti"

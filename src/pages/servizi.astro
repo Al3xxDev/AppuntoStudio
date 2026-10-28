@@ -9,46 +9,56 @@ import { SITE } from '../data/site';
   description="Dalla progettazione architettonica alla ristrutturazione edilizia di pregio, interior design e consulenze specialistiche a Roma."
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24 sm:pt-20 sm:pb-36">
-    <!-- Breadcrumb & Index Header -->
-    <div class="flex items-center gap-2 font-mono text-xs text-[#77756E] pb-6 mb-8 border-b border-[#E2DBD0]">
-      <a href="/" class="hover:text-[#292925] transition-colors">Home</a>
-      <span>/</span>
-      <span class="text-[#8A8D76]">[03 / SERVIZI]</span>
+    <!-- Page Entrance Sequence -->
+    <div data-page-entrance>
+      <!-- Breadcrumb -->
+      <div class="relative pb-6 mb-8">
+        <div data-entrance-breadcrumb class="flex items-center gap-2 font-mono text-xs text-[#77756E]">
+          <a href="/" class="hover:text-[#292925] transition-colors">Home</a>
+          <span aria-hidden="true">/</span>
+          <span class="text-[#8A8D76]">Servizi</span>
+        </div>
+        <span data-rule-reveal class="block absolute bottom-0 inset-x-0 h-px bg-[#E2DBD0] origin-left" aria-hidden="true"></span>
+      </div>
+
+      <!-- Editorial Header -->
+      <header class="max-w-3xl mb-16 sm:mb-24">
+        <span data-entrance-eyebrow class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-4">
+          Aree di attività
+        </span>
+        <h1 data-entrance-title class="text-4xl sm:text-6xl font-light tracking-tight text-[#292925] leading-tight">
+          Competenze integrate per ogni scala del progetto.
+        </h1>
+        <p data-entrance-copy class="mt-6 text-lg sm:text-xl text-[#77756E] font-light leading-relaxed">
+          Lo studio offre un supporto tecnico e creativo continuativo, coprendo 18 ambiti operativi raggruppati in quattro macro-discipline. Dalla prima perizia alla consegna chiavi in mano.
+        </p>
+      </header>
     </div>
 
-    <!-- Editorial Header -->
-    <header class="max-w-3xl mb-16 sm:mb-24">
-      <h1 class="text-4xl sm:text-6xl font-light tracking-tight text-[#292925] leading-tight">
-        Competenze integrate per ogni scala del progetto.
-      </h1>
-      <p class="mt-6 text-lg sm:text-xl text-[#77756E] font-light leading-relaxed">
-        Lo studio offre un supporto tecnico e creativo continuativo, coprendo 18 ambiti operativi raggruppati in quattro macro-discipline. Dalla prima perizia alla consegna chiavi in mano.
-      </p>
-    </header>
-
     <!-- Detailed Service Categories -->
-    <div class="space-y-16 sm:space-y-24 border-t border-[#E2DBD0] pt-16">
+    <div class="space-y-16 sm:space-y-24">
       {SERVICE_CATEGORIES.map((cat) => (
-        <article class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start border-b border-[#E2DBD0] pb-16 last:border-b-0">
+        <article data-scroll-section class="relative grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start pt-16">
+          <span data-rule-reveal class="block absolute top-0 inset-x-0 h-px bg-[#E2DBD0] origin-left" aria-hidden="true"></span>
           <div class="lg:col-span-5 space-y-4">
-            <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block">
-              [{cat.index} / DISCIPLINA]
+            <span data-reveal-eyebrow class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block">
+              {cat.index} — Disciplina
             </span>
-            <h2 class="text-3xl sm:text-4xl font-light tracking-tight text-[#292925]">
+            <h2 data-split-heading class="text-3xl sm:text-4xl font-light tracking-tight text-[#292925]">
               {cat.title}
             </h2>
-            <p class="text-base text-[#77756E] font-light leading-relaxed">
+            <p data-reveal-copy class="text-base text-[#77756E] font-light leading-relaxed">
               {cat.description}
             </p>
           </div>
 
-          <div class="lg:col-span-7 bg-[#F1EFE9]/50 border border-[#E2DBD0] p-6 sm:p-10">
+          <div data-reveal-item class="lg:col-span-7 rounded-[14px] sm:rounded-[16px] bg-[#F1EFE9]/50 border border-[#E2DBD0]/90 p-6 sm:p-10">
             <h3 class="font-mono text-xs uppercase tracking-[0.16em] text-[#8A8D76] mb-6">
-              [ PRESTAZIONI COMPRESE ]
+              Prestazioni comprese
             </h3>
             <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {cat.items.map(item => (
-                <li class="flex items-start gap-3 text-sm text-[#292925] font-light py-2 border-b border-[#E2DBD0]/60">
+                <li data-service-item class="flex items-start gap-3 text-sm text-[#292925] font-light py-2 border-b border-[#E2DBD0]/60">
                   <span class="w-1.5 h-1.5 rounded-full bg-[#8A8D76] mt-2 shrink-0" aria-hidden="true"></span>
                   <span>{item}</span>
                 </li>
@@ -60,25 +70,29 @@ import { SITE } from '../data/site';
     </div>
 
     <!-- Contact Banner for Services -->
-    <div class="mt-20 p-8 sm:p-12 bg-[#292925] text-[#F8F7F4] flex flex-col sm:flex-row items-center justify-between gap-8">
+    <div data-scroll-section class="mt-20 p-8 sm:p-12 rounded-[16px] bg-[#292925] text-[#F8F7F4] flex flex-col sm:flex-row items-center justify-between gap-8">
       <div class="max-w-xl">
-        <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
-          [ CONSULENZA PERSONALIZZATA ]
+        <span data-reveal-eyebrow class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
+          Consulenza personalizzata
         </span>
-        <h3 class="text-2xl sm:text-3xl font-light tracking-tight">
+        <h3 data-split-heading class="text-2xl sm:text-3xl font-light tracking-tight">
           Hai un immobile da valorizzare o ristrutturare?
         </h3>
-        <p class="mt-2 text-sm text-[#A3A199] font-light">
+        <p data-reveal-copy class="mt-2 text-sm text-[#A3A199] font-light">
           Contattaci direttamente al telefono per concordare una prima valutazione con il nostro team.
         </p>
       </div>
 
-      <div class="flex flex-col sm:flex-row items-center gap-4 shrink-0">
+      <div data-reveal-item class="flex flex-col sm:flex-row items-center gap-4 shrink-0">
         <a
           href="/contatti"
-          class="px-8 py-4 text-xs uppercase tracking-[0.18em] font-medium text-[#292925] bg-[#F8F7F4] hover:bg-[#D7CDBE] transition-colors"
+          data-curtain-cta
+          class="group relative px-8 py-4 text-xs uppercase tracking-[0.18em] font-medium text-[#292925] bg-[#F8F7F4] hover:bg-[#D7CDBE] transition-colors overflow-hidden"
         >
-          <span>Richiedi un confronto</span>
+          <span data-cta-cover class="pointer-events-none absolute inset-0 bg-[#8A8D76] origin-right scale-x-0" aria-hidden="true"></span>
+          <span data-cta-content class="relative z-10 inline-flex items-center">
+            <span>Richiedi un confronto</span>
+          </span>
         </a>
         <a
           href={SITE.phoneHref}

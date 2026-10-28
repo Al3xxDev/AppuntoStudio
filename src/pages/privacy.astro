@@ -7,30 +7,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   description="Informativa sul trattamento dei dati personali e sull'utilizzo dei cookie di Appuntostudio ai sensi del Regolamento UE 2016/679 (GDPR)."
 >
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24 sm:pt-20 sm:pb-36">
-    <!-- Breadcrumb -->
-    <div class="flex items-center gap-2 font-mono text-xs text-[#77756E] pb-6 mb-8 border-b border-[#E2DBD0]">
-      <a href="/" class="hover:text-[#292925] transition-colors">Home</a>
-      <span>/</span>
-      <span class="text-[#8A8D76]">[ PRIVACY & COOKIE POLICY ]</span>
+    <!-- Page Entrance Sequence -->
+    <div data-page-entrance>
+      <!-- Breadcrumb -->
+      <div class="relative pb-6 mb-8">
+        <div data-entrance-breadcrumb class="flex items-center gap-2 font-mono text-xs text-[#77756E]">
+          <a href="/" class="hover:text-[#292925] transition-colors">Home</a>
+          <span aria-hidden="true">/</span>
+          <span class="text-[#8A8D76]">Privacy & Cookie Policy</span>
+        </div>
+        <span data-rule-reveal class="block absolute bottom-0 inset-x-0 h-px bg-[#E2DBD0] origin-left" aria-hidden="true"></span>
+      </div>
+
+      <!-- Header -->
+      <header class="mb-14">
+        <span data-entrance-eyebrow class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-3">
+          Conformità Regolamento UE 2016/679 — GDPR
+        </span>
+        <h1 data-entrance-title class="text-3xl sm:text-5xl font-light tracking-tight text-[#292925] leading-tight">
+          Informativa sul trattamento dei dati personali
+        </h1>
+        <p data-entrance-copy class="mt-4 text-sm font-mono text-[#77756E]">
+          Ultimo aggiornamento: Ottobre 2026
+        </p>
+      </header>
     </div>
 
-    <!-- Header -->
-    <header class="mb-14">
-      <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-3">
-        [ CONFORMITÀ REGOLAMENTO UE 2016/679 — GDPR ]
-      </span>
-      <h1 class="text-3xl sm:text-5xl font-light tracking-tight text-[#292925] leading-tight">
-        Informativa sul trattamento dei dati personali
-      </h1>
-      <p class="mt-4 text-sm font-mono text-[#77756E]">
-        Ultimo aggiornamento: Ottobre 2026
-      </p>
-    </header>
-
     <!-- Policy Sections -->
-    <div class="space-y-12 text-[#383833] font-light leading-relaxed border-t border-[#E2DBD0] pt-12">
+    <div data-scroll-section class="relative space-y-12 text-[#383833] font-light leading-relaxed pt-12">
+      <span data-rule-reveal class="block absolute top-0 inset-x-0 h-px bg-[#E2DBD0] origin-left" aria-hidden="true"></span>
       <!-- 1. Premessa e Principio di Minimizzazione -->
-      <section class="space-y-4">
+      <section data-reveal-item class="space-y-4">
         <h2 class="text-xl sm:text-2xl font-normal text-[#292925]">
           1. Approccio alla tutela dei dati e principio di minimizzazione
         </h2>

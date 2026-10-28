@@ -10,64 +10,74 @@ const [gracchi, mg, jd, fp, villa] = PROJECTS;
   description="Esplora i progetti realizzati da Appuntostudio: ristrutturazioni residenziali di pregio a Roma e architettura su misura."
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24 sm:pt-20 sm:pb-36">
-    <!-- Breadcrumb & Header -->
-    <div class="flex items-center gap-2 font-mono text-xs text-[#77756E] pb-6 mb-8 border-b border-[#E2DBD0]">
-      <a href="/" class="hover:text-[#292925] transition-colors">Home</a>
-      <span aria-hidden="true">/</span>
-      <span class="text-[#8A8D76]">Archivio Progetti</span>
-    </div>
+    <!-- Page Entrance Header -->
+    <div data-page-entrance>
+      <!-- Breadcrumb -->
+      <div class="relative pb-6 mb-8">
+        <div data-entrance-breadcrumb class="flex items-center gap-2 font-mono text-xs text-[#77756E]">
+          <a href="/" class="hover:text-[#292925] transition-colors">Home</a>
+          <span aria-hidden="true">/</span>
+          <span class="text-[#8A8D76]">Archivio Progetti</span>
+        </div>
+        <span data-rule-reveal class="block absolute bottom-0 inset-x-0 h-px bg-[#E2DBD0] origin-left" aria-hidden="true"></span>
+      </div>
 
-    <!-- Editorial Header -->
-    <div class="max-w-3xl mb-16 sm:mb-24">
-      <h1 class="text-4xl sm:text-6xl font-light tracking-tight text-[#292925] leading-tight">
-        Opere, ristrutturazioni e architettura d’interni.
-      </h1>
-      <p class="mt-6 text-lg sm:text-xl text-[#77756E] font-light leading-relaxed">
-        Una selezione di interventi in cui il rigore geometrico incontra la sensibilità materica. Ogni progetto risponde a un programma specifico, valorizzando la luce naturale e l’identità autentica del luogo.
-      </p>
+      <!-- Editorial Header -->
+      <div class="max-w-3xl mb-16 sm:mb-24">
+        <h1 data-entrance-title class="text-4xl sm:text-6xl font-light tracking-tight text-[#292925] leading-tight">
+          Opere, ristrutturazioni e architettura d’interni.
+        </h1>
+        <p data-entrance-copy class="mt-6 text-lg sm:text-xl text-[#77756E] font-light leading-relaxed">
+          Una selezione di interventi in cui il rigore geometrico incontra la sensibilità materica. Ogni progetto risponde a un programma specifico, valorizzando la luce naturale e l’identità autentica del luogo.
+        </p>
+      </div>
     </div>
 
     <!-- Editorial Project Sequence -->
     <div class="space-y-24 sm:space-y-36">
 
       <!-- 1. CASA GRACCHI (Protagonist Monograph Spread) -->
-      <article class="border-t border-[#E2DBD0] pt-12 sm:pt-16">
+      <article data-project-spread class="relative pt-12 sm:pt-16">
+        <span data-rule-reveal class="block absolute top-0 inset-x-0 h-px bg-[#E2DBD0] origin-left" aria-hidden="true"></span>
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           <!-- Text column -->
           <div class="lg:col-span-5 space-y-6">
-            <div class="flex items-center gap-2 font-mono text-xs text-[#8A8D76]">
+            <div data-card-meta class="flex items-center gap-2 font-mono text-xs text-[#8A8D76]">
               <span class="uppercase tracking-widest">{gracchi.category}</span>
               <span>•</span>
               <span class="text-[#77756E]">{gracchi.location}</span>
             </div>
 
-            <h2 class="text-3xl sm:text-5xl font-light tracking-tight text-[#292925] hover:text-[#8A8D76] transition-colors">
+            <h2 data-split-heading class="text-3xl sm:text-5xl font-light tracking-tight text-[#292925] hover:text-[#8A8D76] transition-colors">
               <a href={`/progetti/${gracchi.slug}`}>
                 {gracchi.title}
               </a>
             </h2>
 
-            <p class="text-base sm:text-lg text-[#77756E] font-light leading-relaxed">
+            <p data-card-subtitle class="text-base sm:text-lg text-[#77756E] font-light leading-relaxed">
               {gracchi.editorialExcerpt}
             </p>
 
             <!-- Specs Summary: Clean and Editorial -->
-            <div class="py-4 border-y border-[#E2DBD0]/80 space-y-2 text-xs text-[#77756E]">
+            <div class="relative py-4 space-y-2 text-xs text-[#77756E]">
+              <span data-rule-reveal class="block absolute top-0 inset-x-0 h-px bg-[#E2DBD0]/80 origin-left" aria-hidden="true"></span>
               {gracchi.specs.slice(0, 3).map(spec => (
-                <div class="flex justify-between gap-4">
+                <div data-spec-row class="flex justify-between gap-4">
                   <span class="text-[#8A8D76] font-mono uppercase tracking-wider">{spec.label}:</span>
                   <span class="text-[#292925] font-light text-right">{spec.value}</span>
                 </div>
               ))}
+              <span data-rule-reveal class="block absolute bottom-0 inset-x-0 h-px bg-[#E2DBD0]/80 origin-left" aria-hidden="true"></span>
             </div>
 
-            <div class="pt-2">
+            <div data-card-cta class="pt-2">
               <a
                 href={`/progetti/${gracchi.slug}`}
-                class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] font-medium text-[#292925] hover:text-[#8A8D76] hover:translate-x-1 transition-all"
+                data-editorial-link
+                class="group/cta inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] font-medium text-[#292925] hover:text-[#8A8D76] transition-colors"
               >
-                <span>Vedi scheda completa ({gracchi.gallery.length} foto)</span>
-                <svg class="w-3.5 h-3.5 text-[#8A8D76]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <span data-editorial-label>Vedi scheda completa ({gracchi.gallery.length} foto)</span>
+                <svg data-card-arrow class="w-3.5 h-3.5 text-[#8A8D76] transition-transform duration-300 ease-out group-hover/cta:translate-x-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                 </svg>
               </a>
@@ -78,10 +88,10 @@ const [gracchi, mg, jd, fp, villa] = PROJECTS;
           <div class="lg:col-span-7 group">
             <a
               href={`/progetti/${gracchi.slug}`}
-              class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[18px] bg-[#EAE6DF] border border-[#E2DBD0]/90 shadow-[0_4px_24px_-4px_rgba(41,41,37,0.06)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
+              class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[18px] bg-[#EAE6DF] border border-[#E2DBD0]/90 shadow-[0_4px_24px_-4px_rgba(41,41,37,0.06)] group-hover:shadow-[0_14px_36px_-8px_rgba(41,41,37,0.11)] group-hover:border-[#D5CEC2] transition-[border-color,box-shadow] duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
               aria-label={`Apri scheda ${gracchi.title}`}
             >
-              <div class="relative w-full aspect-[16/10] sm:aspect-[3/2] overflow-hidden">
+              <div data-scroll-photo data-scroll-variant="hero" class="relative w-full aspect-[16/10] sm:aspect-[3/2] overflow-hidden">
                 <picture>
                   <source srcset={gracchi.coverImage.webp} type="image/webp" />
                   <img
@@ -91,7 +101,7 @@ const [gracchi, mg, jd, fp, villa] = PROJECTS;
                     height={gracchi.coverImage.height}
                     loading="eager"
                     decoding="sync"
-                    class="w-full h-full object-cover object-center group-hover:scale-[1.025] transition-transform duration-700 ease-out"
+                    class="scroll-photo-img w-full h-full object-cover object-center"
                   />
                 </picture>
                 <div class="absolute inset-0 bg-[#292925]/0 group-hover:bg-[#292925]/3 transition-colors duration-500" aria-hidden="true" />
@@ -99,7 +109,7 @@ const [gracchi, mg, jd, fp, villa] = PROJECTS;
             </a>
 
             <!-- Caption Under Photo -->
-            <div class="mt-3.5 flex items-center justify-between text-xs text-[#77756E] font-light">
+            <div data-card-caption class="mt-3.5 flex items-center justify-between text-xs text-[#77756E] font-light">
               <span>Zona living con libreria scultorea in cartongesso</span>
               <span class="font-mono text-[11px] text-[#8A8D76] uppercase tracking-wider">{gracchi.location}</span>
             </div>
@@ -108,25 +118,26 @@ const [gracchi, mg, jd, fp, villa] = PROJECTS;
       </article>
 
       <!-- 2. DITTICO ASIMMETRICO: CASA MG (Landscape) & CASA JD (Portrait) -->
-      <div class="border-t border-[#E2DBD0] pt-12 sm:pt-20">
-        <div class="mb-12 max-w-2xl">
-          <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
+      <div class="relative pt-12 sm:pt-20">
+        <span data-rule-reveal class="block absolute top-0 inset-x-0 h-px bg-[#E2DBD0] origin-left" aria-hidden="true"></span>
+        <div data-scroll-section class="mb-12 max-w-2xl">
+          <span data-reveal-eyebrow class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
             Interventi a confronto
           </span>
-          <p class="text-base font-light text-[#77756E] leading-relaxed">
+          <p data-reveal-copy class="text-base font-light text-[#77756E] leading-relaxed">
             Due interpretazioni dell’abitare a Roma: dal rigore post-industriale della grande distribuzione al recupero del purismo neoclassico valaderiano.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+        <div data-project-diptych class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           <!-- Casa MG: Landscape Format (7 cols) -->
-          <article class="lg:col-span-7 group flex flex-col justify-between">
+          <article data-project-card class="lg:col-span-7 group flex flex-col justify-between">
             <a
               href={`/progetti/${mg.slug}`}
-              class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[16px] bg-[#EAE6DF] border border-[#E2DBD0]/90 shadow-[0_4px_20px_-4px_rgba(41,41,37,0.05)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
+              class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[16px] bg-[#EAE6DF] border border-[#E2DBD0]/90 shadow-[0_4px_20px_-4px_rgba(41,41,37,0.05)] group-hover:shadow-[0_12px_32px_-6px_rgba(41,41,37,0.1)] group-hover:border-[#D5CEC2] transition-[border-color,box-shadow] duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
               aria-label={`Apri scheda ${mg.title}`}
             >
-              <div class="relative w-full aspect-[16/10] overflow-hidden">
+              <div data-scroll-photo data-scroll-variant="landscape" class="relative w-full aspect-[16/10] overflow-hidden">
                 <picture>
                   <source srcset={mg.coverImage.webp} type="image/webp" />
                   <img
@@ -136,7 +147,7 @@ const [gracchi, mg, jd, fp, villa] = PROJECTS;
                     height={mg.coverImage.height}
                     loading="lazy"
                     decoding="async"
-                    class="w-full h-full object-cover object-center group-hover:scale-[1.025] transition-transform duration-700 ease-out"
+                    class="scroll-photo-img w-full h-full object-cover object-center"
                   />
                 </picture>
                 <div class="absolute inset-0 bg-[#292925]/0 group-hover:bg-[#292925]/3 transition-colors duration-500" aria-hidden="true" />
@@ -145,37 +156,38 @@ const [gracchi, mg, jd, fp, villa] = PROJECTS;
 
             <!-- Content Under Photo -->
             <div class="mt-4 sm:mt-5 space-y-1.5">
-              <div class="flex items-center gap-2 font-mono text-xs text-[#8A8D76]">
+              <div data-card-meta class="flex items-center gap-2 font-mono text-xs text-[#8A8D76]">
                 <span class="uppercase tracking-widest text-[11px]">{mg.category}</span>
                 <span>•</span>
                 <span class="text-[#77756E] text-[11px]">{mg.location}</span>
               </div>
-              <h3 class="text-2xl sm:text-3xl font-light text-[#292925] group-hover:text-[#8A8D76] transition-colors">
+              <h3 data-card-title class="text-2xl sm:text-3xl font-light text-[#292925] group-hover:text-[#8A8D76] transition-colors">
                 <a href={`/progetti/${mg.slug}`}>{mg.title}</a>
               </h3>
-              <p class="text-sm sm:text-base text-[#77756E] font-light leading-relaxed">
+              <p data-card-subtitle class="text-sm sm:text-base text-[#77756E] font-light leading-relaxed">
                 {mg.subtitle}
               </p>
-              <div class="pt-2">
+              <div data-card-cta class="pt-2">
                 <a
                   href={`/progetti/${mg.slug}`}
-                  class="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] group-hover:text-[#8A8D76] group-hover:translate-x-1 transition-all"
+                  data-editorial-link
+                  class="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] group-hover:text-[#8A8D76] transition-colors"
                 >
-                  <span>Esplora progetto ({mg.gallery.length} foto)</span>
-                  <span class="text-[#8A8D76]">→</span>
+                  <span data-editorial-label>Esplora progetto ({mg.gallery.length} foto)</span>
+                  <span data-card-arrow class="text-[#8A8D76] inline-block transition-transform duration-300 ease-out group-hover:translate-x-1.5">→</span>
                 </a>
               </div>
             </div>
           </article>
 
           <!-- Casa JD: Vertical Portrait Format (5 cols) with subtle offset -->
-          <article class="lg:col-span-5 lg:pt-8 group flex flex-col justify-between">
+          <article data-project-card class="lg:col-span-5 lg:pt-8 group flex flex-col justify-between">
             <a
               href={`/progetti/${jd.slug}`}
-              class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[16px] bg-[#EAE6DF] border border-[#E2DBD0]/90 shadow-[0_4px_20px_-4px_rgba(41,41,37,0.05)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
+              class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[16px] bg-[#EAE6DF] border border-[#E2DBD0]/90 shadow-[0_4px_20px_-4px_rgba(41,41,37,0.05)] group-hover:shadow-[0_12px_32px_-6px_rgba(41,41,37,0.1)] group-hover:border-[#D5CEC2] transition-[border-color,box-shadow] duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
               aria-label={`Apri scheda ${jd.title}`}
             >
-              <div class="relative w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden">
+              <div data-scroll-photo data-scroll-variant="portrait" class="relative w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden">
                 <picture>
                   <source srcset={jd.coverImage.webp} type="image/webp" />
                   <img
@@ -185,7 +197,7 @@ const [gracchi, mg, jd, fp, villa] = PROJECTS;
                     height={jd.coverImage.height}
                     loading="lazy"
                     decoding="async"
-                    class="w-full h-full object-cover object-center group-hover:scale-[1.025] transition-transform duration-700 ease-out"
+                    class="scroll-photo-img w-full h-full object-cover object-center"
                   />
                 </picture>
                 <div class="absolute inset-0 bg-[#292925]/0 group-hover:bg-[#292925]/3 transition-colors duration-500" aria-hidden="true" />
@@ -194,24 +206,25 @@ const [gracchi, mg, jd, fp, villa] = PROJECTS;
 
             <!-- Content Under Photo -->
             <div class="mt-4 sm:mt-5 space-y-1.5">
-              <div class="flex items-center gap-2 font-mono text-xs text-[#8A8D76]">
+              <div data-card-meta class="flex items-center gap-2 font-mono text-xs text-[#8A8D76]">
                 <span class="uppercase tracking-widest text-[11px]">{jd.category}</span>
                 <span>•</span>
                 <span class="text-[#77756E] text-[11px]">{jd.location}</span>
               </div>
-              <h3 class="text-2xl sm:text-3xl font-light text-[#292925] group-hover:text-[#8A8D76] transition-colors">
+              <h3 data-card-title class="text-2xl sm:text-3xl font-light text-[#292925] group-hover:text-[#8A8D76] transition-colors">
                 <a href={`/progetti/${jd.slug}`}>{jd.title}</a>
               </h3>
-              <p class="text-sm sm:text-base text-[#77756E] font-light leading-relaxed">
+              <p data-card-subtitle class="text-sm sm:text-base text-[#77756E] font-light leading-relaxed">
                 {jd.subtitle}
               </p>
-              <div class="pt-2">
+              <div data-card-cta class="pt-2">
                 <a
                   href={`/progetti/${jd.slug}`}
-                  class="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] group-hover:text-[#8A8D76] group-hover:translate-x-1 transition-all"
+                  data-editorial-link
+                  class="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] group-hover:text-[#8A8D76] transition-colors"
                 >
-                  <span>Esplora progetto ({jd.gallery.length} foto)</span>
-                  <span class="text-[#8A8D76]">→</span>
+                  <span data-editorial-label>Esplora progetto ({jd.gallery.length} foto)</span>
+                  <span data-card-arrow class="text-[#8A8D76] inline-block transition-transform duration-300 ease-out group-hover:translate-x-1.5">→</span>
                 </a>
               </div>
             </div>
@@ -220,40 +233,44 @@ const [gracchi, mg, jd, fp, villa] = PROJECTS;
       </div>
 
       <!-- 3. CASA FP (Photo & Complementary Study) -->
-      <article class="border-t border-[#E2DBD0] pt-12 sm:pt-20">
+      <article data-project-spread class="relative pt-12 sm:pt-20">
+        <span data-rule-reveal class="block absolute top-0 inset-x-0 h-px bg-[#E2DBD0] origin-left" aria-hidden="true"></span>
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           <!-- Text Column -->
           <div class="lg:col-span-5 space-y-6">
-            <div class="flex items-center gap-2 font-mono text-xs text-[#8A8D76]">
+            <div data-card-meta class="flex items-center gap-2 font-mono text-xs text-[#8A8D76]">
               <span class="uppercase tracking-widest">{fp.category}</span>
               <span>•</span>
               <span class="text-[#77756E]">{fp.location}</span>
             </div>
 
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-[#292925] hover:text-[#8A8D76] transition-colors">
+            <h2 data-split-heading class="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-[#292925] hover:text-[#8A8D76] transition-colors">
               <a href={`/progetti/${fp.slug}`}>{fp.title}</a>
             </h2>
 
-            <p class="text-base sm:text-lg text-[#77756E] font-light leading-relaxed">
+            <p data-card-subtitle class="text-base sm:text-lg text-[#77756E] font-light leading-relaxed">
               {fp.editorialExcerpt}
             </p>
 
-            <div class="py-4 border-y border-[#E2DBD0]/80 space-y-2 text-xs text-[#77756E]">
+            <div class="relative py-4 space-y-2 text-xs text-[#77756E]">
+              <span data-rule-reveal class="block absolute top-0 inset-x-0 h-px bg-[#E2DBD0]/80 origin-left" aria-hidden="true"></span>
               {fp.specs.slice(0, 3).map(spec => (
-                <div class="flex justify-between gap-4">
+                <div data-spec-row class="flex justify-between gap-4">
                   <span class="text-[#8A8D76] font-mono uppercase tracking-wider">{spec.label}:</span>
                   <span class="text-[#292925] font-light text-right">{spec.value}</span>
                 </div>
               ))}
+              <span data-rule-reveal class="block absolute bottom-0 inset-x-0 h-px bg-[#E2DBD0]/80 origin-left" aria-hidden="true"></span>
             </div>
 
-            <div class="pt-2">
+            <div data-card-cta class="pt-2">
               <a
                 href={`/progetti/${fp.slug}`}
-                class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] font-medium text-[#292925] hover:text-[#8A8D76] hover:translate-x-1 transition-all"
+                data-editorial-link
+                class="group/cta inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] font-medium text-[#292925] hover:text-[#8A8D76] transition-colors"
               >
-                <span>Vedi scheda completa ({fp.gallery.length} foto)</span>
-                <svg class="w-3.5 h-3.5 text-[#8A8D76]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <span data-editorial-label>Vedi scheda completa ({fp.gallery.length} foto)</span>
+                <svg data-card-arrow class="w-3.5 h-3.5 text-[#8A8D76] transition-transform duration-300 ease-out group-hover/cta:translate-x-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                 </svg>
               </a>
@@ -266,10 +283,10 @@ const [gracchi, mg, jd, fp, villa] = PROJECTS;
             <div class="group">
               <a
                 href={`/progetti/${fp.slug}`}
-                class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[18px] bg-[#EAE6DF] border border-[#E2DBD0]/90 shadow-[0_4px_24px_-4px_rgba(41,41,37,0.06)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
+                class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[18px] bg-[#EAE6DF] border border-[#E2DBD0]/90 shadow-[0_4px_24px_-4px_rgba(41,41,37,0.06)] group-hover:shadow-[0_14px_36px_-8px_rgba(41,41,37,0.11)] group-hover:border-[#D5CEC2] transition-[border-color,box-shadow] duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
                 aria-label={`Apri scheda ${fp.title}`}
               >
-                <div class="relative w-full aspect-[16/10] overflow-hidden">
+                <div data-scroll-photo data-scroll-variant="landscape" class="relative w-full aspect-[16/10] overflow-hidden">
                   <picture>
                     <source srcset={fp.coverImage.webp} type="image/webp" />
                     <img
@@ -279,21 +296,21 @@ const [gracchi, mg, jd, fp, villa] = PROJECTS;
                       height={fp.coverImage.height}
                       loading="lazy"
                       decoding="async"
-                      class="w-full h-full object-cover object-center group-hover:scale-[1.025] transition-transform duration-700 ease-out"
+                      class="scroll-photo-img w-full h-full object-cover object-center"
                     />
                   </picture>
                   <div class="absolute inset-0 bg-[#292925]/0 group-hover:bg-[#292925]/3 transition-colors duration-500" aria-hidden="true" />
                 </div>
               </a>
 
-              <div class="mt-3 flex items-center justify-between text-xs text-[#77756E] font-light">
+              <div data-card-caption class="mt-3 flex items-center justify-between text-xs text-[#77756E] font-light">
                 <span>Vetrata lignea storica restaurata e zona conversazione</span>
                 <span class="font-mono text-[11px] text-[#8A8D76] uppercase tracking-wider">{fp.location}</span>
               </div>
             </div>
 
             <!-- Inset Plan Preview (clean, soft) -->
-            <div class="rounded-[12px] bg-white border border-[#E2DBD0]/80 p-3 sm:p-4 shadow-xs">
+            <div data-card-caption class="rounded-[12px] bg-white border border-[#E2DBD0]/80 p-3 sm:p-4 shadow-xs">
               <div class="flex items-center justify-between font-mono text-[10px] text-[#77756E] pb-2 border-b border-[#E2DBD0]/60 mb-2">
                 <span class="text-[#8A8D76] uppercase tracking-wider">Planimetria di rilievo e progetto</span>
                 <span class="text-[#292925]">Scala 1:100</span>
@@ -318,32 +335,34 @@ const [gracchi, mg, jd, fp, villa] = PROJECTS;
       </article>
 
       <!-- 4. VILLA RESIDENZIALE (Monumental Panoramic Landscape) -->
-      <article class="border-t border-[#E2DBD0] pt-12 sm:pt-20">
+      <article data-project-spread class="relative pt-12 sm:pt-20">
+        <span data-rule-reveal class="block absolute top-0 inset-x-0 h-px bg-[#E2DBD0] origin-left" aria-hidden="true"></span>
         <div class="space-y-6">
           <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div class="max-w-2xl space-y-2">
-              <div class="flex items-center gap-2 font-mono text-xs text-[#8A8D76]">
+              <div data-card-meta class="flex items-center gap-2 font-mono text-xs text-[#8A8D76]">
                 <span class="uppercase tracking-widest">{villa.category}</span>
                 <span>•</span>
                 <span>{villa.year}</span>
                 <span>•</span>
                 <span class="text-[#77756E]">{villa.location}</span>
               </div>
-              <h2 class="text-3xl sm:text-5xl font-light tracking-tight text-[#292925] hover:text-[#8A8D76] transition-colors">
+              <h2 data-split-heading class="text-3xl sm:text-5xl font-light tracking-tight text-[#292925] hover:text-[#8A8D76] transition-colors">
                 <a href={`/progetti/${villa.slug}`}>{villa.title}</a>
               </h2>
-              <p class="text-base sm:text-lg text-[#77756E] font-light leading-relaxed">
+              <p data-card-subtitle class="text-base sm:text-lg text-[#77756E] font-light leading-relaxed">
                 {villa.editorialExcerpt}
               </p>
             </div>
 
-            <div class="shrink-0">
+            <div data-card-cta class="shrink-0">
               <a
                 href={`/progetti/${villa.slug}`}
-                class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] font-medium text-[#292925] hover:text-[#8A8D76] hover:translate-x-1 transition-all pb-1 border-b border-[#292925]"
+                data-editorial-link
+                class="group/cta inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] font-medium text-[#292925] hover:text-[#8A8D76] transition-colors pb-1"
               >
-                <span>Vedi scheda completa e SPA ({villa.gallery.length} foto)</span>
-                <span class="text-[#8A8D76]">→</span>
+                <span data-editorial-label>Vedi scheda completa e SPA ({villa.gallery.length} foto)</span>
+                <span data-card-arrow class="text-[#8A8D76] inline-block transition-transform duration-300 ease-out group-hover/cta:translate-x-1.5">→</span>
               </a>
             </div>
           </div>
@@ -352,10 +371,10 @@ const [gracchi, mg, jd, fp, villa] = PROJECTS;
           <div class="group">
             <a
               href={`/progetti/${villa.slug}`}
-              class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[20px] bg-[#EAE6DF] border border-[#E2DBD0]/90 shadow-[0_6px_28px_-6px_rgba(41,41,37,0.07)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
+              class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[20px] bg-[#EAE6DF] border border-[#E2DBD0]/90 shadow-[0_6px_28px_-6px_rgba(41,41,37,0.07)] group-hover:shadow-[0_16px_40px_-8px_rgba(41,41,37,0.12)] group-hover:border-[#D5CEC2] transition-[border-color,box-shadow] duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
               aria-label={`Apri scheda ${villa.title}`}
             >
-              <div class="relative w-full aspect-[16/9] sm:aspect-[2.3/1] overflow-hidden">
+              <div data-scroll-photo data-scroll-variant="panorama" class="relative w-full aspect-[16/9] sm:aspect-[2.3/1] overflow-hidden">
                 <picture>
                   <source srcset={villa.coverImage.webp} type="image/webp" />
                   <img
@@ -365,7 +384,7 @@ const [gracchi, mg, jd, fp, villa] = PROJECTS;
                     height={villa.coverImage.height}
                     loading="lazy"
                     decoding="async"
-                    class="w-full h-full object-cover object-center group-hover:scale-[1.025] transition-transform duration-700 ease-out"
+                    class="scroll-photo-img w-full h-full object-cover object-center"
                   />
                 </picture>
                 <div class="absolute inset-0 bg-[#292925]/0 group-hover:bg-[#292925]/3 transition-colors duration-500" aria-hidden="true" />
@@ -373,7 +392,7 @@ const [gracchi, mg, jd, fp, villa] = PROJECTS;
             </a>
 
             <!-- Details Under Photo -->
-            <div class="mt-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-[#77756E] font-light">
+            <div data-card-caption class="mt-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-[#77756E] font-light">
               <span>Sbalzo in cemento armato con innesto orografico nel pendio naturale e tetto giardino</span>
               <span class="font-mono text-[11px] text-[#8A8D76] uppercase tracking-wider">Anno 2017 • Italia</span>
             </div>

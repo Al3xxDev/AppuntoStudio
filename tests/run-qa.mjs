@@ -1,5 +1,5 @@
 import { chromium } from 'playwright';
-import { spawn } from 'child_process';
+import { spawn, spawnSync } from 'child_process';
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
@@ -258,6 +258,12 @@ async function run() {
         window.scrollTo(0, document.body.scrollHeight);
         await new Promise(r => setTimeout(r, 150));
         window.scrollTo(0, 0);
+        await Promise.all(
+          Array.from(document.querySelectorAll('img')).map((img) => {
+            img.loading = 'eager';
+            return img.decode ? img.decode().catch(() => {}) : Promise.resolve();
+          })
+        );
       });
       await page.waitForTimeout(200);
       await page.screenshot({ path, fullPage: true });
@@ -283,6 +289,7 @@ async function run() {
     await browser.close();
   } finally {
     server.kill();
+    spawnSync('npx', ['astro', 'preview', 'stop'], { stdio: 'ignore' });
   }
 }
 

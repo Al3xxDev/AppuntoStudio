@@ -8,14 +8,37 @@ interface Props {
 const { currentPath = '' } = Astro.props;
 ---
 
-<header class="sticky top-0 z-40 w-full bg-[#F8F7F4]/90 backdrop-blur-md border-b border-[#E2DBD0]/70 transition-all duration-300">
+<header data-home-motion={currentPath === '/' ? '' : undefined} class="sticky top-0 z-40 w-full bg-[#F8F7F4]/90 backdrop-blur-md relative transition-all duration-300">
+  <script is:inline>
+    if (document.currentScript?.parentElement?.hasAttribute('data-home-motion') && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const root = document.documentElement;
+      root.classList.add('motion-sequence-pending');
+      const finishFallbackAnimation = (event) => {
+        if (event.animationName === 'appunto-hero-photo-settle') {
+          root.classList.remove('motion-sequence-fallback');
+          document.removeEventListener('animationend', finishFallbackAnimation, true);
+        }
+      };
+      document.addEventListener('animationend', finishFallbackAnimation, true);
+      const fallbackTimer = window.setTimeout(() => {
+        root.classList.add('motion-sequence-fallback');
+        root.classList.remove('motion-sequence-pending');
+      }, 900);
+      window.addEventListener('appunto:motion-ready', () => window.clearTimeout(fallbackTimer), { once: true });
+      document.addEventListener('focusin', () => {
+        window.clearTimeout(fallbackTimer);
+        root.classList.remove('motion-sequence-pending');
+      }, { once: true });
+    }
+  </script>
+  <span data-header-rule class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-px origin-left bg-[#E2DBD0]/80" aria-hidden="true"></span>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
     <!-- Brand Wordmark -->
-    <a href="/" class="group flex items-center gap-2 text-[#292925] tracking-tight hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925] p-1 -m-1">
-      <span class="font-sans text-xl sm:text-2xl font-light tracking-[-0.03em] text-[#292925]">
-        Appunto<span class="font-medium">studio</span>
+    <a href="/" data-header-brand class="group flex items-center gap-2 text-[#292925] tracking-tight hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925] p-1 -m-1">
+      <span class="font-sans text-xl sm:text-2xl font-light tracking-[-0.03em] text-[#292925] inline-flex">
+        <span class="inline-block overflow-hidden align-bottom pb-[0.08em] -mb-[0.08em]"><span data-wordmark-piece class="inline-block">Appunto</span></span><span class="inline-block overflow-hidden align-bottom pb-[0.08em] -mb-[0.08em]"><span data-wordmark-piece class="inline-block font-medium">studio</span></span>
       </span>
-      <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#8A8D76] group-hover:scale-125 transition-transform" aria-hidden="true"></span>
+      <span data-wordmark-dot class="inline-block w-1.5 h-1.5 rounded-full bg-[#8A8D76] group-hover:scale-125 transition-transform" aria-hidden="true"></span>
     </a>
 
     <!-- Desktop Navigation -->
@@ -25,15 +48,14 @@ const { currentPath = '' } = Astro.props;
         return (
           <a
             href={item.href}
+            data-header-link
             class={`group flex items-center gap-1.5 text-xs uppercase tracking-[0.16em] transition-colors py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925] ${
               isActive ? 'text-[#292925] font-semibold' : 'text-[#77756E] hover:text-[#292925]'
             }`}
             aria-current={isActive ? 'page' : undefined}
           >
-            <span class="font-mono text-[10px] text-[#8A8D76] opacity-75 group-hover:opacity-100 transition-opacity" aria-hidden="true">
-              {item.index}
-            </span>
-            <span>{item.label}</span>
+            <span class="inline-block overflow-hidden"><span data-nav-index class="inline-block font-mono text-[10px] text-[#8A8D76] opacity-75 group-hover:opacity-100 transition-opacity" aria-hidden="true">{item.index}</span></span>
+            <span class="inline-block overflow-hidden"><span data-nav-label class="inline-block">{item.label}</span></span>
           </a>
         );
       })}
@@ -43,23 +65,30 @@ const { currentPath = '' } = Astro.props;
     <div class="hidden lg:flex items-center gap-4">
       <a
         href={SITE.phoneHref}
-        class="hidden xl:inline-flex items-center gap-2 text-xs font-mono text-[#77756E] hover:text-[#292925] transition-colors py-2 px-3 border border-[#E2DBD0] hover:border-[#292925]/40"
+        data-header-phone
+        class="hidden xl:inline-flex relative items-center gap-2 text-xs font-mono text-[#77756E] hover:text-[#292925] transition-colors py-2 px-3 border border-[#E2DBD0] hover:border-[#292925]/40"
         aria-label={`Chiama lo studio al numero ${SITE.phone}`}
       >
-        <svg class="w-3.5 h-3.5 text-[#8A8D76]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-        </svg>
-        <span>{SITE.phone}</span>
+        <span data-header-phone-content class="relative z-10 inline-flex items-center gap-2">
+          <svg class="w-3.5 h-3.5 text-[#8A8D76]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+          </svg>
+          <span>{SITE.phone}</span>
+        </span>
+        <span data-header-phone-cover class="pointer-events-none absolute inset-0 origin-right scale-x-0 bg-[#F8F7F4]" aria-hidden="true"></span>
       </a>
 
       <a
         href="/contatti"
-        class="inline-flex items-center justify-center px-4 py-2.5 text-xs uppercase tracking-[0.14em] font-medium text-[#F8F7F4] bg-[#292925] hover:bg-[#383833] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925] focus-visible:ring-offset-2"
+        data-header-cta
+        class="relative inline-flex items-center justify-center overflow-hidden px-4 py-2.5 text-xs uppercase tracking-[0.14em] font-medium text-[#F8F7F4] bg-[#292925] hover:bg-[#383833] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925] focus-visible:ring-offset-2"
       >
-        <span>Parliamone</span>
-        <svg class="w-3 h-3 ml-2 text-[#D7CDBE]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-        </svg>
+        <span data-header-cta-content class="relative z-10 inline-flex items-center">Parliamone
+          <svg data-header-cta-arrow class="w-3 h-3 ml-2 text-[#D7CDBE]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </span>
+        <span data-header-cta-cover class="pointer-events-none absolute inset-0 origin-right scale-x-0 bg-[#F8F7F4]" aria-hidden="true"></span>
       </a>
     </div>
 
@@ -67,6 +96,7 @@ const { currentPath = '' } = Astro.props;
     <div class="flex items-center gap-2 lg:hidden">
       <a
         href={SITE.phoneHref}
+        data-header-mobile-control
         class="p-2.5 text-[#292925] border border-[#E2DBD0] hover:bg-[#F1EFE9] transition-colors"
         aria-label={`Chiama subito il numero ${SITE.phone}`}
       >
@@ -78,6 +108,7 @@ const { currentPath = '' } = Astro.props;
       <button
         id="mobile-menu-btn"
         type="button"
+        data-header-mobile-control
         class="p-2.5 text-[#292925] border border-[#E2DBD0] hover:bg-[#F1EFE9] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
         aria-expanded="false"
         aria-controls="mobile-nav-dialog"
@@ -149,6 +180,252 @@ const { currentPath = '' } = Astro.props;
     </div>
   </div>
 </header>
+
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  async function playEntrance() {
+    const root = document.documentElement;
+    const finishWithoutMotion = () => {
+      window.dispatchEvent(new Event('appunto:motion-ready'));
+      root.classList.remove('motion-sequence-pending');
+    };
+    const useMotionFallback = () => {
+      root.classList.add('motion-sequence-fallback');
+      finishWithoutMotion();
+    };
+
+    if (!root.classList.contains('motion-sequence-pending') || reduceMotion.matches) {
+      finishWithoutMotion();
+      return;
+    }
+
+    const home = document.querySelector('[data-home-entrance]');
+    if (!home) {
+      finishWithoutMotion();
+      return;
+    }
+
+    const header = document.querySelector('header');
+    if (!header) {
+      finishWithoutMotion();
+      return;
+    }
+
+    let gsap;
+    let SplitText;
+    const photo = home.querySelector<HTMLImageElement>('[data-hero-photo-image]');
+    try {
+      const [gsapModule, splitTextModule] = await Promise.all([
+        import('gsap'),
+        import('gsap/SplitText'),
+        document.fonts.ready,
+        photo?.decode().catch(() => undefined) ?? Promise.resolve()
+      ]);
+      gsap = gsapModule.gsap;
+      SplitText = splitTextModule.SplitText;
+      if (!root.classList.contains('motion-sequence-pending') || root.classList.contains('motion-sequence-fallback') || reduceMotion.matches) {
+        finishWithoutMotion();
+        return;
+      }
+      gsap.registerPlugin(SplitText);
+    } catch {
+      useMotionFallback();
+      return;
+    }
+
+    const timeline = gsap.timeline({ paused: true });
+    const brand = header.querySelector('[data-header-brand]');
+    const headerLinks = header.querySelectorAll('[data-header-link]');
+    const navIndexes = header.querySelectorAll('[data-nav-index]');
+    const navLabels = header.querySelectorAll('[data-nav-label]');
+    const phone = header.querySelector('[data-header-phone]');
+    const phoneCover = header.querySelector('[data-header-phone-cover]');
+    const phoneContent = header.querySelector('[data-header-phone-content]');
+    const headerCta = header.querySelector('[data-header-cta]');
+    const headerCtaCover = header.querySelector('[data-header-cta-cover]');
+    const headerCtaContent = header.querySelector('[data-header-cta-content]');
+    const mobileControls = header.querySelectorAll('[data-header-mobile-control]');
+
+    try {
+      gsap.set(header.querySelector('[data-header-rule]'), { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set(brand, { autoAlpha: 1 });
+      gsap.set(header.querySelectorAll('[data-wordmark-piece]'), { yPercent: 112, autoAlpha: 0 });
+      gsap.set(header.querySelector('[data-wordmark-dot]'), { scale: 0.55, autoAlpha: 0, transformOrigin: 'center' });
+      gsap.set(headerLinks, { autoAlpha: 1 });
+      gsap.set(navIndexes, { yPercent: 115, autoAlpha: 0 });
+      gsap.set(navLabels, { yPercent: 115, autoAlpha: 0 });
+      gsap.set(phone, { autoAlpha: 1 });
+      gsap.set(phoneContent, { x: 7, autoAlpha: 0 });
+      gsap.set(phoneCover, { scaleX: 1, transformOrigin: 'right center' });
+      gsap.set(headerCta, { autoAlpha: 1 });
+      gsap.set(headerCtaContent, { y: 6, autoAlpha: 0 });
+      gsap.set(header.querySelector('[data-header-cta-arrow]'), { x: -3 });
+      gsap.set(headerCtaCover, { scaleX: 1, transformOrigin: 'right center' });
+      gsap.set(mobileControls, { y: -6, autoAlpha: 0 });
+
+      timeline.to(header.querySelector('[data-header-rule]'), {
+        scaleX: 1, duration: 0.68, ease: 'power2.inOut'
+      }, 0);
+      timeline.to(header.querySelectorAll('[data-wordmark-piece]'), {
+        yPercent: 0, autoAlpha: 1, duration: 0.68, stagger: 0.075, ease: 'power4.out'
+      }, 0.12);
+      timeline.to(header.querySelector('[data-wordmark-dot]'), {
+        scale: 1, autoAlpha: 1, duration: 0.34, ease: 'power3.out'
+      }, 0.55);
+      timeline.to(navIndexes, {
+        yPercent: 0, autoAlpha: 1, duration: 0.44, stagger: 0.09, ease: 'power3.out'
+      }, 0.38);
+      timeline.to(navLabels, {
+        yPercent: 0, autoAlpha: 1, duration: 0.48, stagger: 0.09, ease: 'power3.out'
+      }, 0.46);
+      timeline.to(phoneCover, {
+        scaleX: 0, duration: 0.52, ease: 'power2.inOut'
+      }, 0.64);
+      timeline.to(phoneContent, {
+        x: 0, autoAlpha: 1, duration: 0.42, ease: 'power3.out'
+      }, 0.76);
+      timeline.to(headerCtaCover, {
+        scaleX: 0, duration: 0.56, ease: 'power2.inOut'
+      }, 0.74);
+      timeline.to(headerCtaContent, {
+        y: 0, autoAlpha: 1, duration: 0.46, ease: 'power3.out'
+      }, 0.92);
+      timeline.to(header.querySelector('[data-header-cta-arrow]'), {
+        x: 0, duration: 0.42, ease: 'power3.out'
+      }, 1.08);
+      timeline.to(mobileControls, {
+        y: 0, autoAlpha: 1, duration: 0.48, stagger: 0.075, ease: 'power3.out'
+      }, 0.48);
+
+      if (home) {
+        const coordinates = home.querySelectorAll('[data-hero-coordinate]');
+        const coordinateRule = home.querySelector('[data-coordinate-rule]');
+        const title = home.querySelector('[data-hero-title]');
+        const copy = home.querySelector('[data-hero-copy]');
+        const primary = home.querySelector('[data-hero-action="primary"]');
+        const primaryContent = home.querySelector('[data-primary-content]');
+        const primaryCover = home.querySelector('[data-primary-cover]');
+        const primaryArrow = home.querySelector('[data-primary-arrow]');
+        const secondary = home.querySelector('[data-hero-action="secondary"]');
+        const secondaryContent = home.querySelector('[data-secondary-content]');
+        const factLabels = home.querySelectorAll('[data-fact-label]');
+        const factValues = home.querySelectorAll('[data-fact-value]');
+        const factsRule = home.querySelector('[data-facts-rule]');
+        const photoMask = home.querySelector<HTMLElement>('[data-hero-photo-mask]');
+        const projectDetails = home.querySelectorAll('[data-project-detail]');
+        const projectArrow = home.querySelector('[data-project-arrow]');
+        let titleSplit;
+
+        gsap.set(coordinates, { y: -5, autoAlpha: 0 });
+        gsap.set(coordinateRule, { scaleX: 0, transformOrigin: 'left center' });
+        gsap.set(title, { autoAlpha: 1 });
+        gsap.set(copy, { y: 12, autoAlpha: 0 });
+        gsap.set(primary, { autoAlpha: 1 });
+        gsap.set(primaryContent, { y: 7, autoAlpha: 0 });
+        gsap.set(primaryCover, { scaleX: 1, transformOrigin: 'right center' });
+        gsap.set(primaryArrow, { y: -3 });
+        gsap.set(secondary, { autoAlpha: 0 });
+        gsap.set(secondaryContent, { y: 5, autoAlpha: 0 });
+        gsap.set([factLabels, factValues], { y: 5, autoAlpha: 0 });
+        gsap.set(factsRule, { scaleX: 0, transformOrigin: 'left center' });
+        gsap.set(photoMask, { clipPath: 'inset(0 49.5% 0 49.5%)' });
+        gsap.set(photo, { scale: 1.065, x: 4, transformOrigin: 'center center' });
+        gsap.set(projectDetails, { y: 7, autoAlpha: 0 });
+        gsap.set(projectArrow, { x: -4, autoAlpha: 0 });
+
+        if (title) {
+          titleSplit = SplitText.create(title, {
+            type: 'lines',
+            mask: 'lines',
+            aria: 'auto',
+            linesClass: 'hero-title-line'
+          });
+          timeline.fromTo(titleSplit.lines,
+            { yPercent: 112, autoAlpha: 0 },
+            { yPercent: 0, autoAlpha: 1, duration: 0.72, stagger: 0.11, ease: 'power4.out' },
+            0.34
+          );
+        }
+
+        timeline.to(coordinateRule, {
+          scaleX: 1, duration: 0.62, ease: 'power2.inOut'
+        }, 0.18);
+        timeline.to(coordinates, {
+          y: 0, autoAlpha: 1, duration: 0.44, stagger: 0.07, ease: 'power3.out'
+        }, 0.28);
+        if (photoMask) {
+          timeline.to(photoMask, {
+            clipPath: 'inset(0% 0% 0% 0%)',
+            duration: 0.98,
+            ease: 'power3.inOut',
+            clearProps: 'clipPath'
+          }, 0.38);
+        }
+        timeline.to(photo, {
+          scale: 1, x: 0, duration: 1.16, ease: 'power3.out', clearProps: 'transform'
+        }, 0.38);
+        timeline.to(copy, {
+          y: 0, autoAlpha: 1, duration: 0.52, ease: 'power3.out'
+        }, 0.62);
+        timeline.to(primaryCover, {
+          scaleX: 0, duration: 0.46, ease: 'power2.inOut'
+        }, 0.76);
+        timeline.to(primaryContent, {
+          y: 0, autoAlpha: 1, duration: 0.42, ease: 'power3.out'
+        }, 0.88);
+        timeline.to(primaryArrow, {
+          y: 0, duration: 0.36, ease: 'power3.out', clearProps: 'transform'
+        }, 0.98);
+        timeline.to(secondaryContent, {
+          y: 0, autoAlpha: 1, duration: 0.42, ease: 'power3.out'
+        }, 0.92);
+        timeline.to(secondary, {
+          autoAlpha: 1, duration: 0.24, ease: 'power2.out'
+        }, 0.92);
+        timeline.to(factsRule, {
+          scaleX: 1, duration: 0.52, ease: 'power2.inOut'
+        }, 0.96);
+        timeline.to(factLabels, {
+          y: 0, autoAlpha: 1, duration: 0.36, stagger: 0.07, ease: 'power3.out'
+        }, 1.06);
+        timeline.to(factValues, {
+          y: 0, autoAlpha: 1, duration: 0.38, stagger: 0.07, ease: 'power3.out'
+        }, 1.14);
+        timeline.to(projectDetails, {
+          y: 0, autoAlpha: 1, duration: 0.42, stagger: 0.06, ease: 'power3.out'
+        }, 1.08);
+        timeline.to(projectArrow, {
+          x: 0, autoAlpha: 1, duration: 0.36, ease: 'power3.out', clearProps: 'transform'
+        }, 1.24);
+      }
+
+      const finishOnReducedMotion = (event: MediaQueryListEvent) => {
+        if (event.matches) timeline.progress(1);
+      };
+      reduceMotion.addEventListener('change', finishOnReducedMotion, { once: true });
+
+      const onScrollJump = () => {
+        if (window.scrollY > (window.innerHeight || 600) * 0.6) {
+          timeline.progress(1);
+          window.removeEventListener('scroll', onScrollJump);
+        }
+      };
+      window.addEventListener('scroll', onScrollJump, { passive: true });
+      timeline.eventCallback('onComplete', () => {
+        window.removeEventListener('scroll', onScrollJump);
+      });
+
+      window.dispatchEvent(new Event('appunto:motion-ready'));
+      root.classList.remove('motion-sequence-pending');
+      timeline.play(0);
+    } catch {
+      useMotionFallback();
+    }
+  }
+
+  void playEntrance();
+</script>
 
 <script>
   function setupMobileMenu() {

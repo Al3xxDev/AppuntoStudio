@@ -14,22 +14,23 @@ const featuredProjects = PROJECTS;
   description="Studio di architettura e architettura d'interni a Roma. Progettazione residenziale, ristrutturazioni, recupero filologico e spazi su misura."
 >
   <!-- 1. HERO SECTION -->
-  <section class="relative pt-12 pb-20 sm:pt-20 sm:pb-28 lg:pt-24 lg:pb-36 border-b border-[#E2DBD0]">
+  <section data-home-entrance class="relative pt-12 pb-20 sm:pt-20 sm:pb-28 lg:pt-24 lg:pb-36 border-b border-[#E2DBD0]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Top coordinates & index -->
-      <div class="flex items-center justify-between font-mono text-xs text-[#77756E] pb-8 mb-8 border-b border-[#E2DBD0]/60">
-        <span class="text-[#8A8D76]">[ ARCHITETTURA & INTERIOR DESIGN ]</span>
-        <span>ROMA — VIA APUANIA 3</span>
+      <div data-hero-coordinate-row class="relative flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4 font-mono text-[10px] sm:text-xs text-[#77756E] pb-5 sm:pb-8 mb-6 sm:mb-8">
+        <span data-hero-coordinate class="text-[#8A8D76]">[ ARCHITETTURA & INTERIOR DESIGN ]</span>
+        <span data-hero-coordinate class="self-end sm:self-auto">ROMA — VIA APUANIA 3</span>
+        <span data-coordinate-rule class="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left bg-[#E2DBD0]/60" aria-hidden="true"></span>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-end">
         <!-- Left: Editorial Headline & Actions -->
         <div class="lg:col-span-7 space-y-8">
           <div class="space-y-4">
-            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight text-[#292925] leading-[1.08]">
+            <h1 data-hero-title class="text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight text-[#292925] leading-[1.08]">
               Architettura, interni e spazi da vivere.
             </h1>
-            <p class="text-lg sm:text-xl text-[#77756E] font-light max-w-xl leading-relaxed pt-2">
+            <p data-hero-copy class="text-lg sm:text-xl text-[#77756E] font-light max-w-xl leading-relaxed pt-2">
               Ascoltiamo le esigenze di chi abiterà gli spazi e le trasformiamo in progetti attenti, equilibrati e concreti.
             </p>
           </div>
@@ -37,36 +38,42 @@ const featuredProjects = PROJECTS;
           <!-- CTAs -->
           <div class="flex flex-wrap items-center gap-4 pt-2">
             <a
+              data-hero-action="primary"
               href="/progetti"
-              class="inline-flex items-center justify-center px-8 py-4 text-xs uppercase tracking-[0.18em] font-medium text-[#F8F7F4] bg-[#292925] hover:bg-[#383833] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
+              class="relative isolate inline-flex items-center justify-center overflow-hidden px-8 py-4 text-xs uppercase tracking-[0.18em] font-medium text-[#F8F7F4] bg-[#292925] hover:bg-[#383833] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
             >
-              <span>Esplora i progetti</span>
-              <svg class="w-3.5 h-3.5 ml-2.5 text-[#D7CDBE]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-              </svg>
+              <span data-primary-content class="relative z-10 inline-flex items-center">
+                <span data-primary-label>Esplora i progetti</span>
+                <svg data-primary-arrow class="w-3.5 h-3.5 ml-2.5 text-[#D7CDBE]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                </svg>
+              </span>
+              <span data-primary-cover class="pointer-events-none absolute inset-0 z-0 origin-right scale-x-0 bg-[#F8F7F4]" aria-hidden="true"></span>
             </a>
 
             <a
+              data-hero-action="secondary"
               href="/contatti"
               class="inline-flex items-center justify-center px-8 py-4 text-xs uppercase tracking-[0.18em] font-medium text-[#292925] border border-[#292925] hover:bg-[#F1EFE9] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
             >
-              <span>Entra in contatto</span>
+              <span data-secondary-content>Entra in contatto</span>
             </a>
           </div>
 
           <!-- Quick facts micro-list -->
-          <div class="pt-8 border-t border-[#E2DBD0]/60 grid grid-cols-3 gap-4 font-mono text-xs">
+          <div data-hero-facts class="relative pt-8 grid grid-cols-3 gap-3 sm:gap-4 font-mono text-xs">
+            <span data-facts-rule class="pointer-events-none absolute inset-x-0 top-0 h-px origin-left bg-[#E2DBD0]/60" aria-hidden="true"></span>
             <div>
-              <span class="text-[#8A8D76] block text-[10px] uppercase tracking-widest">[ FONDAZIONE ]</span>
-              <span class="text-[#292925] font-medium text-sm">2013, Roma</span>
+              <span data-fact-label class="text-[#8A8D76] block text-[10px] uppercase tracking-widest">[ FONDAZIONE ]</span>
+              <span data-fact-value class="text-[#292925] font-medium text-sm">2013, Roma</span>
             </div>
             <div>
-              <span class="text-[#8A8D76] block text-[10px] uppercase tracking-widest">[ RATING HOUZZ ]</span>
-              <span class="text-[#292925] font-medium text-sm">4,9 / 5 (23 rec.)</span>
+              <span data-fact-label class="text-[#8A8D76] block text-[10px] uppercase tracking-widest">[ RATING HOUZZ ]</span>
+              <span data-fact-value class="text-[#292925] font-medium text-sm">4,9 / 5 (23 rec.)</span>
             </div>
             <div>
-              <span class="text-[#8A8D76] block text-[10px] uppercase tracking-widest">[ AMBITO ]</span>
-              <span class="text-[#292925] font-medium text-sm">Residenziale</span>
+              <span data-fact-label class="text-[#8A8D76] block text-[10px] uppercase tracking-widest">[ AMBITO ]</span>
+              <span data-fact-value class="text-[#292925] font-medium text-sm">Residenziale</span>
             </div>
           </div>
         </div>
@@ -74,11 +81,12 @@ const featuredProjects = PROJECTS;
         <!-- Right: Calm Editorial Hero Photography -->
         <div class="lg:col-span-5 group">
           <a
+            data-hero-photo-link
             href="/progetti/casa-mg"
             class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[18px] bg-[#EAE6DF] border border-[#E2DBD0]/90 shadow-[0_6px_24px_-6px_rgba(41,41,37,0.07)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
             aria-label="Esplora il progetto Casa MG — Salone open space e ferro nero"
           >
-            <div class="relative w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden">
+            <div data-hero-photo-mask class="relative w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden">
               <picture>
                 <source srcset="/images/appartamento-mg-soggiorno.webp" type="image/webp" />
                 <img
@@ -89,7 +97,8 @@ const featuredProjects = PROJECTS;
                   loading="eager"
                   fetchpriority="high"
                   decoding="sync"
-                  class="w-full h-full object-cover object-center group-hover:scale-[1.025] transition-transform duration-700 ease-out"
+                  data-hero-photo-image
+                  class="hero-photo-image w-full h-full object-cover object-center transition-transform duration-700 ease-out"
                 />
               </picture>
               <div class="absolute inset-0 bg-[#292925]/0 group-hover:bg-[#292925]/3 transition-colors duration-500" aria-hidden="true" />
@@ -97,24 +106,25 @@ const featuredProjects = PROJECTS;
           </a>
 
           <!-- Title & Context Under Photo: Natural & Clean -->
-          <div class="mt-4 sm:mt-5 flex items-baseline justify-between gap-4">
+          <div data-hero-project-caption class="mt-4 sm:mt-5 flex items-baseline justify-between gap-4">
             <div>
-              <span class="text-[11px] font-mono text-[#8A8D76] uppercase tracking-wider block mb-1">
+              <span data-project-detail class="text-[11px] font-mono text-[#8A8D76] uppercase tracking-wider block mb-1">
                 Ristrutturazione • Roma
               </span>
-              <h2 class="text-xl sm:text-2xl font-light text-[#292925] group-hover:text-[#8A8D76] transition-colors">
+              <h2 data-project-detail class="text-xl sm:text-2xl font-light text-[#292925] group-hover:text-[#8A8D76] transition-colors">
                 <a href="/progetti/casa-mg">Casa MG</a>
               </h2>
-              <p class="text-xs sm:text-sm text-[#77756E] font-light mt-0.5">
+              <p data-project-detail class="text-xs sm:text-sm text-[#77756E] font-light mt-0.5">
                 Salone open space e ferro nero
               </p>
             </div>
             <a
+              data-project-detail
               href="/progetti/casa-mg"
               class="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest font-medium text-[#292925] hover:text-[#8A8D76] transition-colors shrink-0"
             >
               <span>Vedi scheda</span>
-              <span class="text-[#8A8D76]" aria-hidden="true">→</span>
+              <span data-project-arrow class="text-[#8A8D76]" aria-hidden="true">→</span>
             </a>
           </div>
         </div>
@@ -125,30 +135,31 @@ const featuredProjects = PROJECTS;
   <!-- 2. STUDIO PHILOSOPHY INTRO -->
   <section class="py-20 sm:py-28 bg-[#F1EFE9]/40 border-b border-[#E2DBD0]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <div data-scroll-section class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         <div class="lg:col-span-4">
-          <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-3">
+          <span data-reveal-eyebrow class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-3">
             [ 01 / LA NOSTRA VISIONE ]
           </span>
-          <h2 class="text-3xl sm:text-4xl font-light tracking-tight text-[#292925] leading-tight">
+          <h2 data-split-heading class="text-3xl sm:text-4xl font-light tracking-tight text-[#292925] leading-tight">
             La cerniera sensibile tra architettura e vita quotidiana.
           </h2>
         </div>
 
         <div class="lg:col-span-8 space-y-6 text-[#77756E] text-base sm:text-lg font-light leading-relaxed">
-          <p class="text-[#292925] font-normal text-xl sm:text-2xl leading-snug">
+          <p data-split-heading class="text-[#292925] font-normal text-xl sm:text-2xl leading-snug">
             «Ogni progetto nasce dall’ascolto. Dalle prime analisi alla realizzazione, accompagniamo il committente in un percorso in cui architettura, interni e design dialogano per dare forma a spazi autentici e funzionali.»
           </p>
-          <p>
+          <p data-reveal-copy>
             Fondato a Roma nel 2013 dagli architetti Angelo Paolino, Monica Molinaro e Rosella Cippone, e arricchito dal 2016 dall’esperienza artistica e progettuale del prof. arch. Alfredo Benedetti, lo studio copre tutte le necessità del processo progettuale: dall’indagine normativa al risanamento, dal restauro alla nuova edilizia.
           </p>
-          <div class="pt-4">
+          <div data-reveal-item class="pt-4">
             <a
               href="/studio"
-              class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] hover:text-[#8A8D76] transition-colors pb-1 border-b border-[#292925]"
+              data-editorial-link
+              class="group inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] hover:text-[#8A8D76] transition-colors"
             >
-              <span>Approfondisci la storia dello studio</span>
-              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <span data-editorial-label>Approfondisci la storia dello studio</span>
+              <svg class="w-3.5 h-3.5 text-[#8A8D76] transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
             </a>
@@ -162,60 +173,64 @@ const featuredProjects = PROJECTS;
   <section id="progetti-evidenza" class="py-20 sm:py-32 border-b border-[#E2DBD0]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Header -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between pb-12 mb-14 border-b border-[#E2DBD0] gap-6">
+      <div data-scroll-section class="relative flex flex-col md:flex-row md:items-end justify-between pb-12 mb-14 gap-6">
         <div>
-          <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
+          <span data-reveal-eyebrow class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
             [ 02 / SELEZIONE OPERE ]
           </span>
-          <h2 class="text-3xl sm:text-5xl font-light tracking-tight text-[#292925]">
+          <h2 data-split-heading class="text-3xl sm:text-5xl font-light tracking-tight text-[#292925]">
             Opere e interventi selezionati
           </h2>
         </div>
-        <p class="text-sm sm:text-base text-[#77756E] font-light max-w-md">
+        <p data-reveal-copy class="text-sm sm:text-base text-[#77756E] font-light max-w-md">
           Cinque progetti distinti tra ristrutturazioni sartoriali a Roma e architettura residenziale contemporanea.
         </p>
+        <span data-rule-reveal class="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left bg-[#E2DBD0]" aria-hidden="true"></span>
       </div>
 
       <!-- 3.1 Project 1: Casa Gracchi — Protagonist Editorial Spread -->
       <div class="mb-20 sm:mb-28">
-        <article class="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+        <article data-project-spread class="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           <!-- Narrative Column -->
           <div class="lg:col-span-5 order-2 lg:order-1 space-y-6">
-            <div class="flex items-center gap-2 font-mono text-xs text-[#8A8D76]">
+            <div data-card-meta class="flex items-center gap-2 font-mono text-xs text-[#8A8D76]">
               <span class="uppercase tracking-widest">{featuredProjects[0].category}</span>
               <span>•</span>
               <span class="text-[#77756E]">{featuredProjects[0].location}</span>
             </div>
 
-            <h3 class="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-[#292925] group-hover:text-[#8A8D76] transition-colors">
+            <h3 data-split-heading class="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-[#292925] group-hover:text-[#8A8D76] transition-colors">
               <a href={`/progetti/${featuredProjects[0].slug}`}>
                 {featuredProjects[0].title}
               </a>
             </h3>
 
-            <p class="text-[#77756E] text-base sm:text-lg font-light leading-relaxed">
+            <p data-card-subtitle class="text-[#77756E] text-base sm:text-lg font-light leading-relaxed">
               {featuredProjects[0].editorialExcerpt}
             </p>
 
-            <!-- Key Materials Summary: Clean & Editorial -->
-            <div class="py-3 border-y border-[#E2DBD0]/80 space-y-1.5 text-xs text-[#77756E]">
-              <div class="flex justify-between">
+            <!-- Key Materials Summary: Clean & Editorial with Drawing Rules -->
+            <div class="relative py-3.5 space-y-2 text-xs text-[#77756E]">
+              <span data-rule-reveal class="pointer-events-none absolute inset-x-0 top-0 h-px origin-left bg-[#E2DBD0]" aria-hidden="true"></span>
+              <div data-spec-row class="flex justify-between gap-4">
                 <span class="text-[#8A8D76] font-mono uppercase tracking-wider">Elemento cardine:</span>
-                <span class="text-[#292925] font-light">Libreria scultorea in cartongesso</span>
+                <span class="text-[#292925] font-light text-right">Libreria scultorea in cartongesso</span>
               </div>
-              <div class="flex justify-between">
+              <div data-spec-row class="flex justify-between gap-4">
                 <span class="text-[#8A8D76] font-mono uppercase tracking-wider">Materiali:</span>
-                <span class="text-[#292925] font-light">Gres grigio perla uniforme</span>
+                <span class="text-[#292925] font-light text-right">Gres grigio perla uniforme</span>
               </div>
+              <span data-rule-reveal class="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left bg-[#E2DBD0]" aria-hidden="true"></span>
             </div>
 
-            <div class="pt-2 flex items-center justify-between">
+            <div data-card-cta class="pt-2 flex items-center justify-between">
               <a
                 href={`/progetti/${featuredProjects[0].slug}`}
-                class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] group-hover:text-[#8A8D76] group-hover:translate-x-1 transition-all"
+                data-editorial-link
+                class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] group-hover:text-[#8A8D76] transition-colors"
               >
-                <span>Esplora il progetto completo</span>
-                <svg class="w-3.5 h-3.5 text-[#8A8D76]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <span data-editorial-label>Esplora il progetto completo</span>
+                <svg data-card-arrow class="w-3.5 h-3.5 text-[#8A8D76] transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                 </svg>
               </a>
@@ -227,10 +242,10 @@ const featuredProjects = PROJECTS;
           <div class="lg:col-span-7 order-1 lg:order-2">
             <a
               href={`/progetti/${featuredProjects[0].slug}`}
-              class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[18px] bg-[#EAE6DF] border border-[#E2DBD0]/90 shadow-[0_4px_24px_-4px_rgba(41,41,37,0.06)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
+              class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[18px] bg-[#EAE6DF] border border-[#E2DBD0]/90 group-hover:border-[#8A8D76]/70 shadow-[0_4px_24px_-4px_rgba(41,41,37,0.06)] group-hover:shadow-[0_14px_36px_-8px_rgba(41,41,37,0.1)] transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
               aria-label={`Vedi ${featuredProjects[0].title}`}
             >
-              <div class="relative w-full aspect-[16/10] sm:aspect-[3/2] overflow-hidden">
+              <div data-scroll-photo data-scroll-variant="center" class="relative w-full aspect-[16/10] sm:aspect-[3/2] overflow-hidden">
                 <picture>
                   <source srcset={featuredProjects[0].coverImage.webp} type="image/webp" />
                   <img
@@ -240,13 +255,13 @@ const featuredProjects = PROJECTS;
                     height={featuredProjects[0].coverImage.height}
                     loading="eager"
                     decoding="async"
-                    class="w-full h-full object-cover object-center group-hover:scale-[1.025] transition-transform duration-700 ease-out"
+                    class="scroll-photo-img w-full h-full object-cover object-center group-hover:scale-[1.028] transition-transform duration-700 ease-out"
                   />
                 </picture>
                 <div class="absolute inset-0 bg-[#292925]/0 group-hover:bg-[#292925]/3 transition-colors duration-500" aria-hidden="true" />
               </div>
             </a>
-            <div class="mt-3 flex items-center justify-between text-xs text-[#77756E] font-light">
+            <div data-card-caption class="mt-3 flex items-center justify-between text-xs text-[#77756E] font-light">
               <span>Zona living con libreria scultorea e tavolo da pranzo</span>
               <span class="font-mono text-[11px] text-[#8A8D76] uppercase tracking-wider">Roma (Vaticano)</span>
             </div>
@@ -255,41 +270,46 @@ const featuredProjects = PROJECTS;
       </div>
 
       <!-- 3.2 Projects 2 & 3: Asymmetrical Diptych (Casa MG & Casa JD) -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 mb-20 sm:mb-28 items-start">
+      <div data-project-diptych class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 mb-20 sm:mb-28 items-start">
         <!-- Casa MG: Landscape Architectural Frame -->
         <div class="lg:col-span-7">
-          <ProjectCard project={featuredProjects[1]} aspectRatio="wide" />
+          <ProjectCard project={featuredProjects[1]} aspectRatio="wide" photoVariant="left" />
         </div>
 
         <!-- Casa JD: Vertical Portrait Plate with Staggered Alignment -->
         <div class="lg:col-span-5 lg:pt-10">
-          <ProjectCard project={featuredProjects[2]} variant="tall" aspectRatio="tall" />
+          <ProjectCard project={featuredProjects[2]} variant="tall" aspectRatio="tall" photoVariant="up" />
         </div>
       </div>
 
       <!-- 3.3 Projects 4 & 5: Asymmetric Dual Composition (Casa FP & Villa Residenziale) -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
+      <div data-project-diptych class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
         <!-- Casa FP: Architectural Frame -->
         <div class="lg:col-span-5">
-          <ProjectCard project={featuredProjects[3]} aspectRatio="standard" />
+          <ProjectCard project={featuredProjects[3]} aspectRatio="standard" photoVariant="up" />
         </div>
 
         <!-- Villa Residenziale: Widescreen Panoramic Frame -->
         <div class="lg:col-span-7">
-          <ProjectCard project={featuredProjects[4]} aspectRatio="wide" />
+          <ProjectCard project={featuredProjects[4]} aspectRatio="wide" photoVariant="right" />
         </div>
       </div>
 
       <!-- Bottom Portfolio CTA -->
-      <div class="mt-16 pt-12 border-t border-[#E2DBD0] text-center">
+      <div data-scroll-section class="relative mt-16 pt-12 text-center">
+        <span data-rule-reveal class="pointer-events-none absolute inset-x-0 top-0 h-px origin-left bg-[#E2DBD0]" aria-hidden="true"></span>
         <a
           href="/progetti"
-          class="inline-flex items-center justify-center px-10 py-5 text-xs uppercase tracking-[0.2em] font-medium text-[#F8F7F4] bg-[#292925] hover:bg-[#383833] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
+          data-curtain-cta
+          class="group relative isolate inline-flex items-center justify-center overflow-hidden px-10 py-5 text-xs uppercase tracking-[0.2em] font-medium text-[#F8F7F4] bg-[#292925] hover:bg-[#383833] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
         >
-          <span>Scopri tutti i progetti</span>
-          <svg class="w-4 h-4 ml-3 text-[#D7CDBE]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-          </svg>
+          <span data-cta-content class="relative z-10 inline-flex items-center">
+            <span>Scopri tutti i progetti</span>
+            <svg data-cta-arrow class="w-4 h-4 ml-3 text-[#D7CDBE] transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </span>
+          <span data-cta-cover class="pointer-events-none absolute inset-0 z-0 origin-right bg-[#F8F7F4]" aria-hidden="true"></span>
         </a>
       </div>
     </div>
@@ -298,39 +318,44 @@ const featuredProjects = PROJECTS;
   <!-- 4. SERVICES SECTION -->
   <section class="py-20 sm:py-32 bg-[#F1EFE9]/40 border-b border-[#E2DBD0]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="pb-12 mb-12 border-b border-[#E2DBD0] flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div data-scroll-section class="relative pb-12 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-          <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
+          <span data-reveal-eyebrow class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
             [ 03 / AMBITI OPERATIVI ]
           </span>
-          <h2 class="text-3xl sm:text-5xl font-light tracking-tight text-[#292925]">
+          <h2 data-split-heading class="text-3xl sm:text-5xl font-light tracking-tight text-[#292925]">
             Servizi di architettura
           </h2>
         </div>
-        <p class="text-sm sm:text-base text-[#77756E] font-light max-w-md">
+        <p data-reveal-copy class="text-sm sm:text-base text-[#77756E] font-light max-w-md">
           Un approccio completo che integra tutte le fasi progettuali: dall’inquadramento normativo al disegno del dettaglio costruttivo.
         </p>
+        <span data-rule-reveal class="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left bg-[#E2DBD0]" aria-hidden="true"></span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div data-service-grid class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {SERVICE_CATEGORIES.map((cat) => (
-          <div class="bg-[#F8F7F4] border border-[#E2DBD0] p-6 sm:p-8 flex flex-col justify-between hover:border-[#8A8D76] transition-colors">
+          <div
+            data-service-card
+            class="group rounded-[14px] bg-[#F8F7F4] border border-[#E2DBD0]/90 p-6 sm:p-8 flex flex-col justify-between hover:border-[#8A8D76]/70 hover:-translate-y-1 hover:shadow-[0_12px_30px_-10px_rgba(41,41,37,0.07)] transition-all duration-400"
+          >
             <div>
-              <div class="font-mono text-xs text-[#8A8D76] mb-4">
+              <div data-service-index class="font-mono text-xs text-[#8A8D76] mb-4">
                 [{cat.index}]
               </div>
-              <h3 class="text-xl font-light text-[#292925] mb-3">
+              <h3 data-service-title class="text-xl font-light text-[#292925] mb-3 group-hover:text-[#8A8D76] transition-colors">
                 {cat.title}
               </h3>
-              <p class="text-xs sm:text-sm text-[#77756E] font-light leading-relaxed mb-6">
+              <p data-service-desc class="text-xs sm:text-sm text-[#77756E] font-light leading-relaxed mb-6">
                 {cat.description}
               </p>
             </div>
 
-            <ul class="space-y-2 border-t border-[#E2DBD0] pt-4 text-xs text-[#292925] font-light">
+            <ul class="relative space-y-2 pt-4 text-xs text-[#292925] font-light">
+              <span data-rule-reveal class="pointer-events-none absolute inset-x-0 top-0 h-px origin-left bg-[#E2DBD0]" aria-hidden="true"></span>
               {cat.items.map(item => (
-                <li class="flex items-center gap-2">
-                  <span class="w-1 h-1 rounded-full bg-[#8A8D76]" aria-hidden="true"></span>
+                <li data-service-item class="flex items-center gap-2">
+                  <span class="w-1 h-1 rounded-full bg-[#8A8D76] group-hover:scale-125 transition-transform" aria-hidden="true"></span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -339,13 +364,15 @@ const featuredProjects = PROJECTS;
         ))}
       </div>
 
-      <div class="mt-12 text-center">
+      <div data-scroll-section class="mt-12 text-center">
         <a
           href="/servizi"
-          class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] hover:text-[#8A8D76] transition-colors pb-1 border-b border-[#292925]"
+          data-reveal-item
+          data-editorial-link
+          class="group inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] hover:text-[#8A8D76] transition-colors"
         >
-          <span>Visualizza l'elenco completo dei 18 servizi</span>
-          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <span data-editorial-label>Visualizza l'elenco completo dei 18 servizi</span>
+          <svg class="w-3.5 h-3.5 text-[#8A8D76] transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
           </svg>
         </a>
@@ -357,21 +384,21 @@ const featuredProjects = PROJECTS;
   <section class="py-20 sm:py-32 border-b border-[#E2DBD0]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Header with Houzz Aggregated Rating Badge -->
-      <div class="pb-12 mb-12 border-b border-[#E2DBD0] flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+      <div data-scroll-section class="relative pb-12 mb-12 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
         <div>
-          <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
+          <span data-reveal-eyebrow class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-2">
             [ 04 / TESTIMONIANZE ]
           </span>
-          <h2 class="text-3xl sm:text-5xl font-light tracking-tight text-[#292925]">
+          <h2 data-split-heading class="text-3xl sm:text-5xl font-light tracking-tight text-[#292925]">
             La voce dei committenti
           </h2>
-          <p class="mt-3 text-sm sm:text-base text-[#77756E] font-light max-w-xl">
+          <p data-reveal-copy class="mt-3 text-sm sm:text-base text-[#77756E] font-light max-w-xl">
             Esperienze dirette di proprietari, clienti continuativi e colleghi professionisti che hanno collaborato con il nostro team.
           </p>
         </div>
 
         <!-- Houzz Aggregated Verified Badge -->
-        <div class="bg-[#F1EFE9] border border-[#E2DBD0] p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-6 max-w-md">
+        <div data-reveal-item class="rounded-[14px] bg-[#F1EFE9] border border-[#E2DBD0] p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-6 max-w-md shadow-[0_2px_12px_rgba(41,41,37,0.03)]">
           <div>
             <div class="flex items-baseline gap-2">
               <span class="font-sans text-3xl font-light text-[#292925]">{REVIEWS_META.average}</span>
@@ -386,25 +413,32 @@ const featuredProjects = PROJECTS;
             href={REVIEWS_META.url}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center justify-center px-4 py-2.5 text-xs uppercase tracking-[0.14em] font-medium bg-[#292925] text-[#F8F7F4] hover:bg-[#383833] transition-colors"
+            data-curtain-cta
+            class="group relative isolate inline-flex items-center justify-center overflow-hidden px-4 py-2.5 text-xs uppercase tracking-[0.14em] font-medium bg-[#292925] text-[#F8F7F4] hover:bg-[#383833] transition-colors"
           >
-            <span>Leggi su Houzz</span>
-            <svg class="w-3 h-3 ml-1.5 text-[#D7CDBE]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-            </svg>
+            <span data-cta-content class="relative z-10 inline-flex items-center">
+              <span>Leggi su Houzz</span>
+              <svg data-cta-arrow class="w-3 h-3 ml-1.5 text-[#D7CDBE] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+              </svg>
+            </span>
+            <span data-cta-cover class="pointer-events-none absolute inset-0 z-0 origin-right bg-[#F1EFE9]" aria-hidden="true"></span>
           </a>
         </div>
+        <span data-rule-reveal class="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left bg-[#E2DBD0]" aria-hidden="true"></span>
       </div>
 
-      <!-- The 6 Verified Reviews in 2-column editorial grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <!-- The 6 Verified Reviews in 3-column editorial grid -->
+      <div data-review-grid class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         {REVIEWS.map((rev, idx) => (
           <ReviewCard review={rev} index={idx} />
         ))}
       </div>
 
-      <div class="mt-8 text-center text-xs font-mono text-[#77756E]">
-        * Tutte le sei testimonianze riportate corrispondono a recensioni autentiche con valutazione individuale di 5/5 pubblicate sul profilo pubblico di Appuntostudio.
+      <div data-scroll-section class="mt-8 text-center text-xs font-mono text-[#77756E]">
+        <p data-reveal-copy>
+          * Tutte le sei testimonianze riportate corrispondono a recensioni autentiche con valutazione individuale di 5/5 pubblicate sul profilo pubblico di Appuntostudio.
+        </p>
       </div>
     </div>
   </section>

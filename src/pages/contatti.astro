@@ -8,32 +8,42 @@ import { SITE } from '../data/site';
   description="Contatta Appuntostudio a Roma: Via Apuania 3, 00162 Roma. Telefono 349 832 8323. Consulenza architettonica e ristrutturazioni."
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24 sm:pt-20 sm:pb-36">
-    <!-- Breadcrumb & Index Header -->
-    <div class="flex items-center gap-2 font-mono text-xs text-[#77756E] pb-6 mb-8 border-b border-[#E2DBD0]">
-      <a href="/" class="hover:text-[#292925] transition-colors">Home</a>
-      <span>/</span>
-      <span class="text-[#8A8D76]">[04 / CONTATTI]</span>
+    <!-- Page Entrance Sequence -->
+    <div data-page-entrance>
+      <!-- Breadcrumb -->
+      <div class="relative pb-6 mb-8">
+        <div data-entrance-breadcrumb class="flex items-center gap-2 font-mono text-xs text-[#77756E]">
+          <a href="/" class="hover:text-[#292925] transition-colors">Home</a>
+          <span aria-hidden="true">/</span>
+          <span class="text-[#8A8D76]">Contatti</span>
+        </div>
+        <span data-rule-reveal class="block absolute bottom-0 inset-x-0 h-px bg-[#E2DBD0] origin-left" aria-hidden="true"></span>
+      </div>
+
+      <!-- Editorial Header -->
+      <header class="max-w-3xl mb-16 sm:mb-24">
+        <span data-entrance-eyebrow class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-4">
+          Colloqui e appuntamenti
+        </span>
+        <h1 data-entrance-title class="text-4xl sm:text-6xl font-light tracking-tight text-[#292925] leading-tight">
+          Parliamo del tuo spazio e dei tuoi progetti.
+        </h1>
+        <p data-entrance-copy class="mt-6 text-lg sm:text-xl text-[#77756E] font-light leading-relaxed">
+          Siamo a tua disposizione per valutare fattibilità, tempi e impostazione progettuale. Privilegiamo un contatto telefonico diretto per comprendere al meglio le tue necessità.
+        </p>
+      </header>
     </div>
 
-    <!-- Editorial Header -->
-    <header class="max-w-3xl mb-16 sm:mb-24">
-      <h1 class="text-4xl sm:text-6xl font-light tracking-tight text-[#292925] leading-tight">
-        Parliamo del tuo spazio e dei tuoi progetti.
-      </h1>
-      <p class="mt-6 text-lg sm:text-xl text-[#77756E] font-light leading-relaxed">
-        Siamo a tua disposizione per valutare fattibilità, tempi e impostazione progettuale. Privilegiamo un contatto telefonico diretto per comprendere al meglio le tue necessità.
-      </p>
-    </header>
-
     <!-- Main Contacts Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-[#E2DBD0] pt-16">
+    <div data-scroll-section class="relative grid grid-cols-1 lg:grid-cols-12 gap-12 pt-16">
+      <span data-rule-reveal class="block absolute top-0 inset-x-0 h-px bg-[#E2DBD0] origin-left" aria-hidden="true"></span>
       <!-- Left Column: Primary Contact Card (7 cols) -->
       <div class="lg:col-span-7 space-y-10">
         <!-- Direct Phone Dial Card -->
-        <div class="p-8 sm:p-10 bg-[#F1EFE9] border border-[#E2DBD0] space-y-6">
+        <div data-reveal-item class="p-8 sm:p-10 rounded-[14px] sm:rounded-[18px] bg-[#F1EFE9] border border-[#E2DBD0]/90 space-y-6 shadow-[0_2px_16px_rgba(41,41,37,0.03)]">
           <div class="flex items-center justify-between">
             <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76]">
-              [ CONTATTO DIRETTO ]
+              Contatto Diretto
             </span>
             <span class="font-mono text-xs text-[#77756E]">Disponibile per colloqui</span>
           </div>
@@ -55,23 +65,28 @@ import { SITE } from '../data/site';
             Per garantire risposte puntuali e accurate, il nostro team riceve e concorda gli appuntamenti in studio tramite contatto telefonico preliminare.
           </p>
 
-          <div class="pt-4 border-t border-[#E2DBD0]">
+          <div class="relative pt-4">
+            <span data-rule-reveal class="block absolute top-0 inset-x-0 h-px bg-[#E2DBD0] origin-left" aria-hidden="true"></span>
             <a
               href={SITE.phoneHref}
-              class="inline-flex items-center justify-center px-8 py-4 text-xs uppercase tracking-[0.18em] font-medium text-[#F8F7F4] bg-[#292925] hover:bg-[#383833] transition-colors w-full sm:w-auto"
+              data-curtain-cta
+              class="group relative inline-flex items-center justify-center px-8 py-4 text-xs uppercase tracking-[0.18em] font-medium text-[#F8F7F4] bg-[#292925] hover:bg-[#383833] transition-colors w-full sm:w-auto overflow-hidden"
             >
-              <svg class="w-4 h-4 mr-2 text-[#D7CDBE]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-              </svg>
-              <span>Chiama Ora (+39 {SITE.phone})</span>
+              <span data-cta-cover class="pointer-events-none absolute inset-0 bg-[#E2DBD0] origin-right scale-x-0" aria-hidden="true"></span>
+              <span data-cta-content class="relative z-10 inline-flex items-center">
+                <svg class="w-4 h-4 mr-2 text-[#D7CDBE]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                </svg>
+                <span>Chiama Ora (+39 {SITE.phone})</span>
+              </span>
             </a>
           </div>
         </div>
 
         <!-- Location & Directions -->
-        <div class="p-8 sm:p-10 bg-[#F8F7F4] border border-[#E2DBD0] space-y-6">
+        <div data-reveal-item class="p-8 sm:p-10 rounded-[14px] sm:rounded-[18px] bg-[#F8F7F4] border border-[#E2DBD0]/90 space-y-6 shadow-[0_2px_16px_rgba(41,41,37,0.02)]">
           <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block">
-            [ SEDE OPERATIVA ]
+            Sede Operativa
           </span>
 
           <div class="space-y-1">
@@ -86,15 +101,17 @@ import { SITE } from '../data/site';
             </p>
           </div>
 
-          <div class="pt-4 border-t border-[#E2DBD0] flex flex-wrap items-center gap-4">
+          <div class="relative pt-4 flex flex-wrap items-center gap-4">
+            <span data-rule-reveal class="block absolute top-0 inset-x-0 h-px bg-[#E2DBD0] origin-left" aria-hidden="true"></span>
             <a
               href={SITE.socials.maps}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] hover:text-[#8A8D76] transition-colors pb-1 border-b border-[#292925]"
+              data-editorial-link
+              class="group/link inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] hover:text-[#8A8D76] transition-colors pb-1"
             >
-              <span>Apri la posizione su Google Maps</span>
-              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <span data-editorial-label>Apri la posizione su Google Maps</span>
+              <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
               </svg>
             </a>
@@ -105,9 +122,9 @@ import { SITE } from '../data/site';
       <!-- Right Column: Verification & Channels (5 cols) -->
       <div class="lg:col-span-5 space-y-8">
         <!-- Houzz Official Profile -->
-        <div class="p-8 border border-[#E2DBD0] bg-[#F1EFE9]/40 space-y-4">
+        <div data-reveal-item class="p-8 rounded-[14px] border border-[#E2DBD0]/90 bg-[#F1EFE9]/40 space-y-4 hover:bg-white hover:border-[#8A8D76]/50 transition-all duration-300">
           <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block">
-            [ PROFILO PROFESSIONALE ]
+            Profilo Professionale
           </span>
           <h3 class="text-xl font-light text-[#292925]">
             Houzz Italia
@@ -120,10 +137,11 @@ import { SITE } from '../data/site';
               href={SITE.socials.houzz}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] hover:text-[#8A8D76] transition-colors"
+              data-editorial-link
+              class="group/link inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] hover:text-[#8A8D76] transition-colors"
             >
-              <span>Visita profilo Houzz ({SITE.rating.score}/5)</span>
-              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <span data-editorial-label>Visita profilo Houzz ({SITE.rating.score}/5)</span>
+              <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
               </svg>
             </a>
@@ -131,9 +149,9 @@ import { SITE } from '../data/site';
         </div>
 
         <!-- Facebook Official Page -->
-        <div class="p-8 border border-[#E2DBD0] bg-[#F1EFE9]/40 space-y-4">
+        <div data-reveal-item class="p-8 rounded-[14px] border border-[#E2DBD0]/90 bg-[#F1EFE9]/40 space-y-4 hover:bg-white hover:border-[#8A8D76]/50 transition-all duration-300">
           <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block">
-            [ COMUNITÀ DIGITALE ]
+            Comunità Digitale
           </span>
           <h3 class="text-xl font-light text-[#292925]">
             Facebook
@@ -146,10 +164,11 @@ import { SITE } from '../data/site';
               href={SITE.socials.facebook}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] hover:text-[#8A8D76] transition-colors"
+              data-editorial-link
+              class="group/link inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] font-medium text-[#292925] hover:text-[#8A8D76] transition-colors"
             >
-              <span>Segui la pagina Facebook</span>
-              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <span data-editorial-label>Segui la pagina Facebook</span>
+              <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
               </svg>
             </a>
@@ -157,8 +176,8 @@ import { SITE } from '../data/site';
         </div>
 
         <!-- Transparency & Privacy Note -->
-        <div class="p-6 border border-[#E2DBD0] bg-[#F8F7F4] font-mono text-xs text-[#77756E] space-y-2">
-          <span class="text-[#8A8D76] block uppercase tracking-wider">[ TRASPARENZA & PRIVACY ]</span>
+        <div data-reveal-item class="p-6 rounded-[14px] border border-[#E2DBD0]/90 bg-[#F8F7F4] font-mono text-xs text-[#77756E] space-y-2">
+          <span class="text-[#8A8D76] block uppercase tracking-wider">Trasparenza & Privacy</span>
           <p class="leading-relaxed">
             Questo sito web non raccoglie dati personali tramite moduli non protetti e non utilizza cookie o tracker di profilazione di terze parti.
           </p>

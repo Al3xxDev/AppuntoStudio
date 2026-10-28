@@ -33,7 +33,6 @@ html {
   font-family: var(--font-sans);
   background-color: var(--color-warm-white);
   color: var(--color-anthracite);
-  scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -56,6 +55,156 @@ html {
 :focus-visible {
   outline: 2px solid var(--color-anthracite);
   outline-offset: 3px;
+}
+
+/* Entrance choreography is opt-in: if its script does not run, all content stays visible. */
+.motion-sequence-pending [data-header-brand],
+.motion-sequence-pending [data-header-link],
+.motion-sequence-pending [data-header-phone],
+.motion-sequence-pending [data-header-cta],
+.motion-sequence-pending [data-header-mobile-control],
+.motion-sequence-pending [data-hero-coordinate],
+.motion-sequence-pending [data-hero-title],
+.motion-sequence-pending [data-hero-copy],
+.motion-sequence-pending [data-hero-action],
+.motion-sequence-pending [data-fact-label],
+.motion-sequence-pending [data-fact-value],
+.motion-sequence-pending [data-project-detail] {
+  opacity: 0;
+}
+
+.motion-sequence-pending [data-header-rule],
+.motion-sequence-pending [data-coordinate-rule],
+.motion-sequence-pending [data-facts-rule] {
+  transform: scaleX(0);
+}
+
+.motion-sequence-pending [data-header-phone-cover],
+.motion-sequence-pending [data-header-cta-cover],
+.motion-sequence-pending [data-primary-cover] {
+  transform: scaleX(1);
+}
+
+.motion-sequence-pending [data-hero-photo-mask] {
+  clip-path: inset(0 49.5% 0 49.5%);
+}
+
+.motion-sequence-pending [data-hero-photo-image] {
+  transform: scale(1.065);
+}
+
+.motion-sequence-pending [data-project-arrow] {
+  opacity: 0;
+  transform: translateX(-4px);
+}
+
+/* Keep the hero photo moving if the optional motion modules arrive late or fail. */
+.hero-photo-mask-is-revealing,
+.motion-sequence-fallback [data-hero-photo-mask] {
+  animation: appunto-hero-photo-reveal 1.16s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+.motion-sequence-fallback [data-hero-photo-image] {
+  animation: appunto-hero-photo-settle 1.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Editorial scroll reveals share the hero's soft rise, restrained stagger, and photo wipe. */
+.has-scroll-motion [data-scroll-reveal],
+.has-scroll-motion [data-scroll-stagger] > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 680ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 760ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.has-scroll-motion [data-scroll-stagger] > * {
+  transition-delay: calc(var(--reveal-index, 0) * 85ms);
+}
+
+.has-scroll-motion [data-scroll-reveal].is-in-view,
+.has-scroll-motion [data-scroll-stagger].is-in-view > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Smooth hover zoom for all editorial photography */
+.scroll-photo-img {
+  transition: transform 780ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .scroll-photo-img {
+    transform: scale(1.028);
+  }
+}
+
+@keyframes appunto-hero-photo-reveal {
+  from { clip-path: inset(0 49.5% 0 49.5%); }
+  to { clip-path: inset(0); }
+}
+
+@keyframes appunto-hero-photo-settle {
+  from { transform: translateX(4px) scale(1.065); }
+  to { transform: translateX(0) scale(1); }
+}
+
+[data-nav-label],
+[data-editorial-label] {
+  position: relative;
+}
+
+[data-nav-label]::after,
+[data-editorial-label]::after {
+  position: absolute;
+  right: 0;
+  bottom: -0.24rem;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-header-link]:hover [data-nav-label]::after,
+[data-header-link]:focus-visible [data-nav-label]::after,
+[data-editorial-link]:hover [data-editorial-label]::after,
+[data-editorial-link]:focus-visible [data-editorial-label]::after,
+.group:hover [data-editorial-link] [data-editorial-label]::after {
+  transform: scaleX(1);
+}
+
+[data-primary-arrow],
+[data-header-cta-arrow] {
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-hero-action="primary"]:hover [data-primary-arrow] {
+  transform: translateY(2px);
+}
+
+[data-header-cta]:hover [data-header-cta-arrow] {
+  transform: translateX(2px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-hero-photo-link]:hover .hero-photo-image {
+    transform: scale(1.025);
+  }
+
+  [data-project-arrow] {
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  [data-hero-project-caption] a:hover [data-project-arrow] {
+    transform: translateX(3px);
+  }
 }
 
 /* Editorial selection */
