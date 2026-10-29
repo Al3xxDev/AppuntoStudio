@@ -107,7 +107,7 @@ AppuntoStudio/
 
 ### Prerequisites
 
-- **Node.js**: `v20.x` or `v22.x` (LTS recommended)
+- **Node.js**: `v22.x` (`>=22.23.4`, LTS recommended)
 - **npm**: `v10.x` or higher
 
 ### 1. Clone the repository
@@ -207,7 +207,7 @@ This project is pre-configured for continuous deployment on **Netlify** via `net
    - **Base directory**: `.` (leave empty or default)
    - **Build command**: `npm run build`
    - **Publish directory**: `dist`
-   - **Node.js Version**: `20`
+   - **Node.js Version**: `22`
 6. Click **"Deploy site"**. Every commit pushed to `main` will automatically trigger a clean static build and instant global edge deployment.
 
 ### Method B: Netlify CLI Deployment
