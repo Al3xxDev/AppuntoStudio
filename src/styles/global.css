@@ -311,9 +311,81 @@ html:not(.js-motion) .hero-photo-image {
   }
 }
 
+/* ==========================================================================
+   FULL-SCREEN ARCHITECTURAL MOBILE NAVIGATION OVERLAY
+   ========================================================================== */
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  background-color: var(--color-warm-white);
+  padding-top: calc(5rem + env(safe-area-inset-top, 0px));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  will-change: clip-path, opacity;
+}
+
+.mobile-nav-overlay[data-menu-state="closed"] {
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+  clip-path: inset(0% 0% 100% 0%);
+}
+
+.mobile-nav-overlay[data-menu-state="closing"] {
+  visibility: visible;
+  pointer-events: none;
+}
+
+.mobile-nav-overlay[data-menu-state="open"] {
+  visibility: visible;
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.mobile-nav-scroll {
+  flex: 1 1 0%;
+  width: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1rem max(1.25rem, env(safe-area-inset-bottom, 1.25rem));
+}
+
+@media (min-width: 360px) {
+  .mobile-nav-scroll {
+    padding: 1.5rem 1.5rem max(1.5rem, env(safe-area-inset-bottom, 1.5rem));
+  }
+}
+
+@media (min-width: 640px) {
+  .mobile-nav-scroll {
+    padding: 2rem 2.5rem max(2rem, env(safe-area-inset-bottom, 2rem));
+  }
+}
+
+@media (min-width: 1024px) {
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+}
+
+html.mobile-menu-open,
+html.mobile-menu-open body {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
 /* Editorial selection */
 ::selection {
   background-color: var(--color-sand);
   color: var(--color-anthracite);
 }
+
 

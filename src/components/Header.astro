@@ -8,21 +8,50 @@ interface Props {
 const { currentPath = '' } = Astro.props;
 ---
 
-<header data-home-motion={currentPath === '/' ? '' : undefined} class="sticky top-0 z-40 w-full bg-[#F8F7F4]/90 backdrop-blur-md relative transition-all duration-300">
-  <span data-header-rule class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-px origin-left bg-[#E2DBD0]/80" aria-hidden="true"></span>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+<header
+  id="site-header"
+  data-home-motion={currentPath === '/' ? '' : undefined}
+  class="sticky top-0 z-[60] w-full transition-colors duration-300"
+>
+  <!-- Dedicated backdrop surface (kept on a child layer so <header> never creates a fixed-position containing block) -->
+  <div
+    id="site-header-backdrop"
+    class="pointer-events-none absolute inset-0 bg-[#F8F7F4]/92 backdrop-blur-md transition-colors duration-300"
+    aria-hidden="true"
+  ></div>
+
+  <span
+    data-header-rule
+    class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-px origin-left bg-[#E2DBD0]/85"
+    aria-hidden="true"
+  ></span>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3">
     <!-- Brand Wordmark -->
-    <a href="/" data-header-brand class="group flex items-center gap-2 text-[#292925] tracking-tight hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925] p-1 -m-1">
+    <a
+      href="/"
+      data-header-brand
+      class="group flex items-center gap-2 text-[#292925] tracking-tight hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925] p-1 -m-1 shrink-0"
+    >
       <span class="font-sans text-xl sm:text-2xl font-light tracking-[-0.03em] text-[#292925] inline-flex">
-        <span class="inline-block overflow-hidden align-bottom pb-[0.08em] -mb-[0.08em]"><span data-wordmark-piece class="inline-block">Appunto</span></span><span class="inline-block overflow-hidden align-bottom pb-[0.08em] -mb-[0.08em]"><span data-wordmark-piece class="inline-block font-medium">studio</span></span>
+        <span class="inline-block overflow-hidden align-bottom pb-[0.08em] -mb-[0.08em]">
+          <span data-wordmark-piece class="inline-block">Appunto</span>
+        </span><span class="inline-block overflow-hidden align-bottom pb-[0.08em] -mb-[0.08em]">
+          <span data-wordmark-piece class="inline-block font-medium">studio</span>
+        </span>
       </span>
-      <span data-wordmark-dot class="inline-block w-1.5 h-1.5 rounded-full bg-[#8A8D76] group-hover:scale-125 transition-transform" aria-hidden="true"></span>
+      <span
+        data-wordmark-dot
+        class="inline-block w-1.5 h-1.5 rounded-full bg-[#8A8D76] group-hover:scale-125 transition-transform"
+        aria-hidden="true"
+      ></span>
     </a>
 
     <!-- Desktop Navigation -->
     <nav class="hidden lg:flex items-center gap-6 xl:gap-10" aria-label="Navigazione principale">
       {NAV_LINKS.map((item) => {
-        const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+        const isActive =
+          currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
         return (
           <a
             href={item.href}
@@ -32,14 +61,24 @@ const { currentPath = '' } = Astro.props;
             }`}
             aria-current={isActive ? 'page' : undefined}
           >
-            <span class="inline-block overflow-hidden"><span data-nav-index class="inline-block font-mono text-[10px] text-[#8A8D76] opacity-75 group-hover:opacity-100 transition-opacity" aria-hidden="true">{item.index}</span></span>
-            <span class="inline-block overflow-hidden"><span data-nav-label class="inline-block">{item.label}</span></span>
+            <span class="inline-block overflow-hidden">
+              <span
+                data-nav-index
+                class="inline-block font-mono text-[10px] text-[#8A8D76] opacity-75 group-hover:opacity-100 transition-opacity"
+                aria-hidden="true"
+              >
+                {item.index}
+              </span>
+            </span>
+            <span class="inline-block overflow-hidden">
+              <span data-nav-label class="inline-block">{item.label}</span>
+            </span>
           </a>
         );
       })}
     </nav>
 
-    <!-- Header Action / CTA -->
+    <!-- Desktop Header Action / CTA -->
     <div class="hidden lg:flex items-center gap-4">
       <a
         href={SITE.phoneHref}
@@ -48,12 +87,27 @@ const { currentPath = '' } = Astro.props;
         aria-label={`Chiama lo studio al numero ${SITE.phone}`}
       >
         <span data-header-phone-content class="relative z-10 inline-flex items-center gap-2">
-          <svg class="w-3.5 h-3.5 text-[#8A8D76]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+          <svg
+            class="w-3.5 h-3.5 text-[#8A8D76]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="1.75"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+            />
           </svg>
           <span>{SITE.phone}</span>
         </span>
-        <span data-header-phone-cover class="pointer-events-none absolute inset-0 origin-right scale-x-0 bg-[#F8F7F4]" aria-hidden="true"></span>
+        <span
+          data-header-phone-cover
+          class="pointer-events-none absolute inset-0 origin-right scale-x-0 bg-[#F8F7F4]"
+          aria-hidden="true"
+        ></span>
       </a>
 
       <a
@@ -61,25 +115,54 @@ const { currentPath = '' } = Astro.props;
         data-header-cta
         class="relative inline-flex items-center justify-center overflow-hidden px-4 py-2.5 text-xs uppercase tracking-[0.14em] font-medium text-[#F8F7F4] bg-[#292925] hover:bg-[#383833] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925] focus-visible:ring-offset-2"
       >
-        <span data-header-cta-content class="relative z-10 inline-flex items-center">Parliamone
-          <svg data-header-cta-arrow class="w-3 h-3 ml-2 text-[#D7CDBE]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+        <span data-header-cta-content class="relative z-10 inline-flex items-center">
+          Parliamone
+          <svg
+            data-header-cta-arrow
+            class="w-3 h-3 ml-2 text-[#D7CDBE]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+            />
           </svg>
         </span>
-        <span data-header-cta-cover class="pointer-events-none absolute inset-0 origin-right scale-x-0 bg-[#F8F7F4]" aria-hidden="true"></span>
+        <span
+          data-header-cta-cover
+          class="pointer-events-none absolute inset-0 origin-right scale-x-0 bg-[#F8F7F4]"
+          aria-hidden="true"
+        ></span>
       </a>
     </div>
 
-    <!-- Mobile Menu Button -->
-    <div class="flex items-center gap-2 lg:hidden">
+    <!-- Mobile Controls (Phone + Hamburger/Close Toggle) -->
+    <div class="flex items-center gap-2 lg:hidden shrink-0">
       <a
         href={SITE.phoneHref}
         data-header-mobile-control
-        class="p-2.5 text-[#292925] border border-[#E2DBD0] hover:bg-[#F1EFE9] transition-colors"
+        data-header-mobile-phone
+        class="w-11 h-11 inline-flex items-center justify-center text-[#292925] border border-[#E2DBD0] bg-[#F8F7F4]/80 hover:bg-[#F1EFE9] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
         aria-label={`Chiama subito il numero ${SITE.phone}`}
       >
-        <svg class="w-4 h-4 text-[#8A8D76]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+        <svg
+          class="w-4 h-4 text-[#8A8D76]"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="1.75"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+          />
         </svg>
       </a>
 
@@ -87,136 +170,729 @@ const { currentPath = '' } = Astro.props;
         id="mobile-menu-btn"
         type="button"
         data-header-mobile-control
-        class="p-2.5 text-[#292925] border border-[#E2DBD0] hover:bg-[#F1EFE9] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
+        class="relative w-11 h-11 inline-flex items-center justify-center text-[#292925] border border-[#E2DBD0] bg-[#F8F7F4]/80 hover:bg-[#F1EFE9] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
         aria-expanded="false"
         aria-controls="mobile-nav-dialog"
         aria-label="Apri menu di navigazione"
       >
-        <svg id="hamburger-icon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+        <svg
+          id="hamburger-icon"
+          class="w-5 h-5 transition-transform duration-300"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="1.75"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"
+          />
         </svg>
-        <svg id="close-icon" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+        <svg
+          id="close-icon"
+          class="w-5 h-5 hidden transition-transform duration-300"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="1.75"
+          aria-hidden="true"
+        >
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
     </div>
   </div>
+</header>
 
-  <!-- Mobile Navigation Overlay -->
-  <div
-    id="mobile-nav-dialog"
-    class="fixed inset-x-0 top-20 bottom-0 bg-[#F8F7F4] z-50 overflow-y-auto px-6 py-8 flex-col justify-between hidden lg:hidden border-t border-[#E2DBD0]"
-    aria-label="Menu di navigazione mobile"
-  >
-    <nav class="flex flex-col space-y-6">
-      <div class="text-[11px] font-mono uppercase tracking-[0.2em] text-[#8A8D76]">
-        [ Navigazione ]
+<!-- Full-Screen Mobile Navigation Overlay (placed outside <header> so no ancestor filter/containing block can clip it) -->
+<div
+  id="mobile-nav-dialog"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menu di navigazione mobile"
+  aria-hidden="true"
+  inert
+  data-menu-state="closed"
+  class="mobile-nav-overlay lg:hidden"
+>
+  <div class="mobile-nav-scroll">
+    <div class="max-w-3xl w-full mx-auto flex-1 flex flex-col justify-between gap-4">
+      <!-- Discreet Editorial Eyebrow -->
+      <div class="pt-1">
+        <div class="flex items-center justify-between gap-4 pb-2.5">
+          <span class="overflow-hidden inline-block">
+            <span
+              data-mobile-eyebrow
+              class="inline-block font-mono text-[10px] uppercase tracking-[0.22em] text-[#8A8D76]"
+            >
+              Navigazione
+            </span>
+          </span>
+          <span class="overflow-hidden inline-block">
+            <span
+              data-mobile-eyebrow
+              class="inline-block font-mono text-[10px] uppercase tracking-[0.18em] text-[#77756E]"
+            >
+              Roma · 2013
+            </span>
+          </span>
+        </div>
+        <span
+          data-mobile-eyebrow-rule
+          class="block h-px w-full origin-left bg-[#E2DBD0]"
+          aria-hidden="true"
+        ></span>
       </div>
-      {NAV_LINKS.map((item) => {
-        const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
-        return (
-          <a
-            href={item.href}
-            class={`mobile-nav-link flex items-center justify-between py-3 border-b border-[#E2DBD0]/60 text-xl font-light tracking-tight transition-colors ${
-              isActive ? 'text-[#292925] font-normal pl-2 border-l-2 border-l-[#292925]' : 'text-[#77756E] hover:text-[#292925]'
-            }`}
-            aria-current={isActive ? 'page' : undefined}
-          >
-            <span>{item.label}</span>
-            <span class="font-mono text-xs text-[#8A8D76]">{item.index}</span>
-          </a>
-        );
-      })}
 
-      <div class="pt-4">
+      <!-- Primary Navigation Links (harmoniously centered in the available viewport height) -->
+      <nav aria-label="Menu principale mobile" class="my-auto py-2 flex flex-col">
+        {NAV_LINKS.map((item) => {
+          const isActive =
+            currentPath === item.href ||
+            (item.href !== '/' && currentPath.startsWith(item.href));
+          return (
+            <div class="mobile-nav-item-wrap">
+              <a
+                href={item.href}
+                data-mobile-nav-link
+                class={`mobile-nav-link group flex items-baseline justify-between gap-4 py-[clamp(0.85rem,2.4dvh,1.5rem)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F8F7F4] ${
+                  isActive
+                    ? 'text-[#292925]'
+                    : 'text-[#292925]/85 hover:text-[#292925]'
+                }`}
+                aria-current={isActive ? 'page' : undefined}
+              >
+                <span class="flex items-baseline gap-3.5 sm:gap-5 min-w-0">
+                  <span class="overflow-hidden inline-block shrink-0">
+                    <span
+                      data-mobile-nav-index
+                      class="inline-block font-mono text-xs tracking-[0.14em] text-[#8A8D76]"
+                    >
+                      {item.index}
+                    </span>
+                  </span>
+                  <span class="overflow-hidden inline-block pb-[0.08em] -mb-[0.08em] min-w-0">
+                    <span
+                      data-mobile-nav-label
+                      class={`inline-block text-[clamp(1.65rem,5.8vw,2.4rem)] leading-[1.12] tracking-[-0.025em] ${
+                        isActive ? 'font-normal text-[#292925]' : 'font-light'
+                      }`}
+                    >
+                      {item.label}
+                    </span>
+                  </span>
+                </span>
+
+                <span class="flex items-center gap-2.5 shrink-0 self-center">
+                  {isActive && (
+                    <span
+                      data-mobile-nav-badge
+                      class="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-[#8A8D76]"
+                    >
+                      <span class="w-1.5 h-1.5 rounded-full bg-[#8A8D76]" aria-hidden="true"></span>
+                      <span>Attuale</span>
+                    </span>
+                  )}
+                  <span
+                    data-mobile-nav-arrow
+                    class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-[#E2DBD0] text-[#8A8D76] group-hover:border-[#292925]/40 group-hover:text-[#292925] transition-colors"
+                    aria-hidden="true"
+                  >
+                    <svg
+                      class="w-3.5 h-3.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.75"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+                      />
+                    </svg>
+                  </span>
+                </span>
+              </a>
+              <span
+                data-mobile-nav-rule
+                class="block h-px w-full origin-left bg-[#E2DBD0]/85"
+                aria-hidden="true"
+              ></span>
+            </div>
+          );
+        })}
+      </nav>
+
+      <!-- Bottom Contact & CTA Section -->
+      <div class="pt-1 flex flex-col gap-3.5">
+        <span
+          data-mobile-footer-rule
+          class="block h-px w-full origin-left bg-[#E2DBD0]"
+          aria-hidden="true"
+        ></span>
+
+        <div
+          data-mobile-contact-info
+          class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5"
+        >
+          <div class="flex flex-col gap-0.5">
+            <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-[#8A8D76]">
+              Contatto diretto · Studio Roma
+            </span>
+            <span class="text-xs text-[#77756E] font-light">
+              {SITE.address.street}, {SITE.address.postalCode} {SITE.address.city}
+            </span>
+          </div>
+
+          <a
+            href={SITE.phoneHref}
+            data-mobile-contact-phone
+            class="inline-flex items-center gap-2.5 py-2 px-3.5 self-start sm:self-auto rounded-[10px] border border-[#E2DBD0] bg-[#F1EFE9]/80 text-[#292925] hover:border-[#292925]/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
+            aria-label={`Chiama lo studio al numero ${SITE.phone}`}
+          >
+            <svg
+              class="w-3.5 h-3.5 text-[#8A8D76] shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="1.75"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+              />
+            </svg>
+            <span class="font-mono text-xs sm:text-sm font-medium tracking-[0.06em]">
+              {SITE.phone}
+            </span>
+          </a>
+        </div>
+
         <a
           href="/contatti"
-          class="mobile-nav-link w-full flex items-center justify-center gap-2 py-4 px-6 text-sm uppercase tracking-[0.16em] font-medium bg-[#292925] text-[#F8F7F4] hover:bg-[#383833] transition-colors"
+          data-mobile-contact-cta
+          class="mobile-nav-link group relative w-full inline-flex items-center justify-between py-4 px-5 rounded-[10px] bg-[#292925] text-[#F8F7F4] hover:bg-[#383833] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F8F7F4]"
         >
-          <span>Inizia un progetto</span>
-          <svg class="w-4 h-4 text-[#D7CDBE]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-          </svg>
-        </a>
-      </div>
-    </nav>
-
-    <!-- Mobile Footer snippet -->
-    <div class="pt-10 mt-6 border-t border-[#E2DBD0] text-xs text-[#77756E] space-y-3 font-mono">
-      <div>
-        <span class="text-[#292925] font-sans font-medium block text-sm">Appuntostudio</span>
-        <span>{SITE.address.street}, {SITE.address.city}</span>
-      </div>
-      <div>
-        <a href={SITE.phoneHref} class="text-[#292925] hover:underline flex items-center gap-1.5 font-medium">
-          <svg class="w-3.5 h-3.5 text-[#8A8D76]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-          </svg>
-          {SITE.phone}
+          <span class="text-xs uppercase tracking-[0.18em] font-medium whitespace-nowrap">
+            Parliamone
+          </span>
+          <span class="inline-flex items-center gap-2 font-mono text-[11px] text-[#D7CDBE] shrink-0">
+            <span class="hidden min-[360px]:inline">Richiedi consulenza</span>
+            <svg
+              data-mobile-cta-arrow
+              class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+              />
+            </svg>
+          </span>
         </a>
       </div>
     </div>
   </div>
-</header>
+</div>
 
 <script>
+  import { gsap } from 'gsap';
+
+  let cleanupMobileMenuController: (() => void) | null = null;
+
   function setupMobileMenu() {
-    const btn = document.getElementById('mobile-menu-btn');
-    const dialog = document.getElementById('mobile-nav-dialog');
+    cleanupMobileMenuController?.();
+    cleanupMobileMenuController = null;
+
+    const header = document.getElementById('site-header');
+    const headerBackdrop = document.getElementById('site-header-backdrop');
+    const btn = document.getElementById('mobile-menu-btn') as HTMLButtonElement | null;
+    const dialog = document.getElementById('mobile-nav-dialog') as HTMLElement | null;
     const hamburgerIcon = document.getElementById('hamburger-icon');
     const closeIcon = document.getElementById('close-icon');
-    const links = document.querySelectorAll('.mobile-nav-link');
 
     if (!btn || !dialog || !hamburgerIcon || !closeIcon) return;
 
-    const b = btn;
-    const d = dialog;
-    const h = hamburgerIcon;
-    const c = closeIcon;
+    const menuBtn = btn;
+    const menuDialog = dialog;
+    const iconOpen = hamburgerIcon;
+    const iconClose = closeIcon;
 
-    function toggleMenu(open?: boolean) {
-      const isExpanded = b.getAttribute('aria-expanded') === 'true';
-      const shouldOpen = open !== undefined ? open : !isExpanded;
+    const eyebrows = menuDialog.querySelectorAll<HTMLElement>('[data-mobile-eyebrow]');
+    const eyebrowRule = menuDialog.querySelector<HTMLElement>('[data-mobile-eyebrow-rule]');
+    const navIndices = menuDialog.querySelectorAll<HTMLElement>('[data-mobile-nav-index]');
+    const navLabels = menuDialog.querySelectorAll<HTMLElement>('[data-mobile-nav-label]');
+    const navArrows = menuDialog.querySelectorAll<HTMLElement>(
+      '[data-mobile-nav-arrow], [data-mobile-nav-badge]'
+    );
+    const navRules = menuDialog.querySelectorAll<HTMLElement>('[data-mobile-nav-rule]');
+    const footerRule = menuDialog.querySelector<HTMLElement>('[data-mobile-footer-rule]');
+    const contactInfo = menuDialog.querySelector<HTMLElement>('[data-mobile-contact-info]');
+    const contactCta = menuDialog.querySelector<HTMLElement>('[data-mobile-contact-cta]');
+    const ctaArrow = menuDialog.querySelector<HTMLElement>('[data-mobile-cta-arrow]');
+    const navLinks = menuDialog.querySelectorAll<HTMLElement>(
+      '.mobile-nav-link, [data-mobile-contact-phone]'
+    );
 
-      b.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
-      b.setAttribute('aria-label', shouldOpen ? 'Chiudi menu di navigazione' : 'Apri menu di navigazione');
+    let isOpen = false;
+    let lockedScrollY = 0;
+    let isScrollLocked = false;
+    let activeTl: gsap.core.Timeline | null = null;
 
-      if (shouldOpen) {
-        d.classList.remove('hidden');
-        d.classList.add('flex');
-        h.classList.add('hidden');
-        c.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-      } else {
-        d.classList.add('hidden');
-        d.classList.remove('flex');
-        h.classList.remove('hidden');
-        c.classList.add('hidden');
-        document.body.style.overflow = '';
+    const prefersReducedMotion = () =>
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function setBackgroundInert(makeInert: boolean) {
+      const main = document.getElementById('main-content');
+      const footer = document.querySelector('footer');
+      [main, footer].forEach((el) => {
+        if (!el) return;
+        if (makeInert) {
+          el.setAttribute('inert', '');
+          el.setAttribute('aria-hidden', 'true');
+        } else {
+          el.removeAttribute('inert');
+          el.removeAttribute('aria-hidden');
+        }
+      });
+    }
+
+    function lockDocumentScroll() {
+      if (isScrollLocked) return;
+      isScrollLocked = true;
+      lockedScrollY = window.scrollY;
+      const scrollbarWidth = Math.max(
+        0,
+        window.innerWidth - document.documentElement.clientWidth
+      );
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+        if (header) header.style.paddingRight = `${scrollbarWidth}px`;
+      }
+      document.documentElement.classList.add('mobile-menu-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function unlockDocumentScroll() {
+      if (!isScrollLocked) return;
+      isScrollLocked = false;
+      document.documentElement.classList.remove('mobile-menu-open');
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+      if (header) header.style.paddingRight = '';
+      if (Math.abs(window.scrollY - lockedScrollY) > 1) {
+        window.scrollTo(0, lockedScrollY);
       }
     }
 
-    b.addEventListener('click', () => toggleMenu());
+    function applyClosedVisualState() {
+      menuDialog.dataset.menuState = 'closed';
+      menuDialog.setAttribute('aria-hidden', 'true');
+      menuDialog.setAttribute('inert', '');
+      gsap.set(menuDialog, {
+        clipPath: 'inset(0% 0% 100% 0%)',
+        autoAlpha: 0,
+      });
+    }
 
-    links.forEach(link => {
-      link.addEventListener('click', () => toggleMenu(false));
-    });
+    function applyOpenStaticState() {
+      menuDialog.dataset.menuState = 'open';
+      menuDialog.setAttribute('aria-hidden', 'false');
+      menuDialog.removeAttribute('inert');
+      gsap.set(menuDialog, {
+        clipPath: 'inset(0% 0% 0% 0%)',
+        autoAlpha: 1,
+      });
+      gsap.set([eyebrows, navIndices, navLabels, navArrows, contactInfo, contactCta], {
+        yPercent: 0,
+        y: 0,
+        x: 0,
+        autoAlpha: 1,
+        clearProps: 'transform,opacity,visibility',
+      });
+      gsap.set([eyebrowRule, navRules, footerRule], {
+        scaleX: 1,
+        autoAlpha: 1,
+        clearProps: 'transform,opacity,visibility',
+      });
+      if (ctaArrow) gsap.set(ctaArrow, { x: 0, clearProps: 'transform' });
+    }
 
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && b.getAttribute('aria-expanded') === 'true') {
-        toggleMenu(false);
-        b.focus();
+    // Initialize in deterministic closed state
+    applyClosedVisualState();
+
+    function openMenu(focusFirstItem = false) {
+      if (isOpen) return;
+      isOpen = true;
+
+      activeTl?.kill();
+      activeTl = null;
+
+      menuBtn.setAttribute('aria-expanded', 'true');
+      menuBtn.setAttribute('aria-label', 'Chiudi menu di navigazione');
+      iconOpen.classList.add('hidden');
+      iconClose.classList.remove('hidden');
+      headerBackdrop?.classList.replace('bg-[#F8F7F4]/92', 'bg-[#F8F7F4]');
+
+      menuDialog.dataset.menuState = 'open';
+      menuDialog.setAttribute('aria-hidden', 'false');
+      menuDialog.removeAttribute('inert');
+
+      setBackgroundInert(true);
+      lockDocumentScroll();
+
+      if (prefersReducedMotion()) {
+        applyOpenStaticState();
+        if (focusFirstItem) {
+          const firstLink = menuDialog.querySelector<HTMLElement>('[data-mobile-nav-link]');
+          firstLink?.focus();
+        }
+        return;
       }
-    });
 
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 1024 && b.getAttribute('aria-expanded') === 'true') {
-        toggleMenu(false);
+      // Prepare coordinated initial states for 3-level choreography
+      gsap.set(menuDialog, {
+        autoAlpha: 1,
+        clipPath: 'inset(0% 0% 100% 0%)',
+      });
+      gsap.set(iconClose, { rotate: -45, scale: 0.85, autoAlpha: 0 });
+      gsap.set(eyebrows, { yPercent: 110, autoAlpha: 0 });
+      if (eyebrowRule) gsap.set(eyebrowRule, { scaleX: 0, transformOrigin: 'left center' });
+      gsap.set(navIndices, { yPercent: 115, autoAlpha: 0 });
+      gsap.set(navLabels, { yPercent: 108, autoAlpha: 0 });
+      gsap.set(navArrows, { x: -8, autoAlpha: 0 });
+      gsap.set(navRules, { scaleX: 0, transformOrigin: 'left center' });
+      if (footerRule) gsap.set(footerRule, { scaleX: 0, transformOrigin: 'left center' });
+      if (contactInfo) gsap.set(contactInfo, { x: -10, autoAlpha: 0 });
+      if (contactCta) gsap.set(contactCta, { y: 10, autoAlpha: 0 });
+      if (ctaArrow) gsap.set(ctaArrow, { x: -6 });
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          activeTl = null;
+          if (focusFirstItem && isOpen) {
+            const firstLink = menuDialog.querySelector<HTMLElement>('[data-mobile-nav-link]');
+            firstLink?.focus();
+          }
+        },
+      });
+
+      // Level A: Architectural Panel Aperture & Close Icon Morph
+      tl.to(
+        menuDialog,
+        {
+          clipPath: 'inset(0% 0% 0% 0%)',
+          duration: 0.44,
+          ease: 'power3.inOut',
+        },
+        0
+      );
+
+      tl.to(
+        iconClose,
+        {
+          rotate: 0,
+          scale: 1,
+          autoAlpha: 1,
+          duration: 0.34,
+          ease: 'power3.out',
+          clearProps: 'transform,opacity,visibility',
+        },
+        0.04
+      );
+
+      if (eyebrowRule) {
+        tl.to(
+          eyebrowRule,
+          {
+            scaleX: 1,
+            duration: 0.42,
+            ease: 'power3.out',
+          },
+          0.12
+        );
       }
-    });
+
+      tl.to(
+        eyebrows,
+        {
+          yPercent: 0,
+          autoAlpha: 1,
+          duration: 0.36,
+          stagger: 0.04,
+          ease: 'power3.out',
+        },
+        0.14
+      );
+
+      // Level B: Progressive Editorial Navigation Items (indices slightly precede labels)
+      tl.to(
+        navIndices,
+        {
+          yPercent: 0,
+          autoAlpha: 1,
+          duration: 0.38,
+          stagger: 0.055,
+          ease: 'power3.out',
+        },
+        0.16
+      );
+
+      tl.to(
+        navLabels,
+        {
+          yPercent: 0,
+          autoAlpha: 1,
+          duration: 0.46,
+          stagger: 0.055,
+          ease: 'power4.out',
+        },
+        0.20
+      );
+
+      tl.to(
+        navRules,
+        {
+          scaleX: 1,
+          duration: 0.44,
+          stagger: 0.055,
+          ease: 'power3.out',
+        },
+        0.22
+      );
+
+      tl.to(
+        navArrows,
+        {
+          x: 0,
+          autoAlpha: 1,
+          duration: 0.36,
+          stagger: 0.055,
+          ease: 'power3.out',
+        },
+        0.26
+      );
+
+      // Level C: Discreet Contact & CTA Completion
+      if (footerRule) {
+        tl.to(
+          footerRule,
+          {
+            scaleX: 1,
+            duration: 0.4,
+            ease: 'power2.out',
+          },
+          0.32
+        );
+      }
+
+      if (contactInfo) {
+        tl.to(
+          contactInfo,
+          {
+            x: 0,
+            autoAlpha: 1,
+            duration: 0.38,
+            ease: 'power2.out',
+          },
+          0.35
+        );
+      }
+
+      if (contactCta) {
+        tl.to(
+          contactCta,
+          {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.4,
+            ease: 'power3.out',
+          },
+          0.39
+        );
+      }
+
+      if (ctaArrow) {
+        tl.to(
+          ctaArrow,
+          {
+            x: 0,
+            duration: 0.36,
+            ease: 'power3.out',
+            clearProps: 'transform',
+          },
+          0.44
+        );
+      }
+
+      activeTl = tl;
+    }
+
+    function closeMenu(options: { instant?: boolean; restoreFocus?: boolean } = {}) {
+      const { instant = false, restoreFocus = false } = options;
+      if (!isOpen && menuDialog.dataset.menuState === 'closed') return;
+      isOpen = false;
+
+      activeTl?.kill();
+      activeTl = null;
+
+      // Immediately update interaction & accessibility state so nothing blocks the user
+      menuBtn.setAttribute('aria-expanded', 'false');
+      menuBtn.setAttribute('aria-label', 'Apri menu di navigazione');
+      iconClose.classList.add('hidden');
+      iconOpen.classList.remove('hidden');
+      headerBackdrop?.classList.replace('bg-[#F8F7F4]', 'bg-[#F8F7F4]/92');
+
+      menuDialog.setAttribute('inert', '');
+      setBackgroundInert(false);
+      unlockDocumentScroll();
+
+      if (restoreFocus) {
+        menuBtn.focus();
+      }
+
+      if (instant || prefersReducedMotion()) {
+        applyClosedVisualState();
+        return;
+      }
+
+      menuDialog.dataset.menuState = 'closing';
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          activeTl = null;
+          if (!isOpen) {
+            applyClosedVisualState();
+          }
+        },
+      });
+
+      tl.to(
+        [contactCta, contactInfo],
+        {
+          y: -6,
+          autoAlpha: 0,
+          duration: 0.18,
+          stagger: 0.02,
+          ease: 'power2.in',
+        },
+        0
+      );
+
+      tl.to(
+        [navLabels, navIndices, navArrows, eyebrows],
+        {
+          yPercent: -35,
+          autoAlpha: 0,
+          duration: 0.2,
+           ease: 'power2.in',
+        },
+        0.02
+      );
+
+      tl.to(
+        menuDialog,
+        {
+          clipPath: 'inset(0% 0% 100% 0%)',
+          duration: 0.32,
+          ease: 'power3.inOut',
+        },
+        0.06
+      );
+
+      activeTl = tl;
+    }
+
+    const onToggleClick = (e: MouseEvent) => {
+      const triggeredByKeyboard = e.detail === 0;
+      if (isOpen) {
+        closeMenu({ restoreFocus: triggeredByKeyboard });
+      } else {
+        openMenu(triggeredByKeyboard);
+      }
+    };
+
+    const onNavLinkClick = () => {
+      closeMenu({ instant: false, restoreFocus: false });
+    };
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (!isOpen) return;
+
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeMenu({ restoreFocus: true });
+        return;
+      }
+
+      if (e.key === 'Tab') {
+        const brandLink = header?.querySelector<HTMLElement>('[data-header-brand]');
+        const mobilePhoneLink = header?.querySelector<HTMLElement>('[data-header-mobile-phone]');
+        const dialogFocusable = Array.from(
+          menuDialog.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          )
+        );
+        const focusable = [
+          ...(brandLink ? [brandLink] : []),
+          ...(mobilePhoneLink ? [mobilePhoneLink] : []),
+          menuBtn,
+          ...dialogFocusable,
+        ].filter((el) => el.offsetParent !== null);
+
+        if (focusable.length === 0) return;
+
+        const firstEl = focusable[0];
+        const lastEl = focusable[focusable.length - 1];
+        const activeEl = document.activeElement as HTMLElement | null;
+
+        if (e.shiftKey) {
+          if (!activeEl || activeEl === firstEl || !focusable.includes(activeEl)) {
+            e.preventDefault();
+            lastEl.focus();
+          }
+        } else {
+          if (!activeEl || activeEl === lastEl || !focusable.includes(activeEl)) {
+            e.preventDefault();
+            firstEl.focus();
+          }
+        }
+      }
+    };
+
+    const onResize = () => {
+      if (window.innerWidth >= 1024 && isOpen) {
+        closeMenu({ instant: true, restoreFocus: false });
+      }
+    };
+
+    menuBtn.addEventListener('click', onToggleClick);
+    navLinks.forEach((link) => link.addEventListener('click', onNavLinkClick));
+    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('resize', onResize);
+
+    cleanupMobileMenuController = () => {
+      activeTl?.kill();
+      activeTl = null;
+      setBackgroundInert(false);
+      unlockDocumentScroll();
+      menuBtn.removeEventListener('click', onToggleClick);
+      navLinks.forEach((link) => link.removeEventListener('click', onNavLinkClick));
+      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('resize', onResize);
+    };
   }
 
-  // Run on initial load and page changes
   setupMobileMenu();
   document.addEventListener('astro:after-swap', setupMobileMenu);
 </script>
