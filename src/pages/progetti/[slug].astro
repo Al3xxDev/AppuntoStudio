@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Lightbox from '../../components/Lightbox.astro';
+import EditorialMasonryGallery from '../../components/EditorialMasonryGallery.astro';
 import { PROJECTS, getAdjacentProjects } from '../../data/projects';
 import type { Project } from '../../data/projects';
 
@@ -21,18 +22,7 @@ const { prev, next } = getAdjacentProjects(project.slug);
 // Split gallery into regular photos and plan(s)
 const photos = project.gallery.filter(img => !img.isPlan);
 const plans = project.gallery.filter(img => img.isPlan);
-
-// Varied layout: first image full-width; then pairs of landscape or portrait+landscape
-const galleryWithLayout: Array<{ img: typeof photos[0]; span: 'full' | 'wide' | 'narrow' | 'portrait' }> = [];
-photos.forEach((img, i) => {
-  if (i === 0) {
-    galleryWithLayout.push({ img, span: 'full' });
-  } else if (img.orientation === 'portrait' || (img.width < img.height)) {
-    galleryWithLayout.push({ img, span: 'portrait' });
-  } else {
-    galleryWithLayout.push({ img, span: 'wide' });
-  }
-});
+const isPortraitCover = project.coverImage.orientation === 'portrait' || project.coverImage.width < project.coverImage.height;
 ---
 
 <BaseLayout
@@ -105,7 +95,14 @@ photos.forEach((img, i) => {
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 sm:mb-24">
         <div data-entrance-photo class="group">
           <div class="relative w-full overflow-hidden rounded-[14px] sm:rounded-[20px] bg-[#F3F1EC] border border-[#E2DBD0]/90 shadow-[0_6px_30px_-8px_rgba(41,41,37,0.07)]">
-            <div data-scroll-photo data-scroll-variant="hero" class="relative w-full aspect-[16/9] sm:aspect-[21/9] overflow-hidden rounded-[inherit]">
+            <div
+              data-scroll-photo
+              data-scroll-variant="hero"
+              class:list={[
+                'relative w-full overflow-hidden rounded-[inherit]',
+                isPortraitCover ? 'aspect-[4/3] sm:aspect-[16/10]' : 'aspect-[16/10] sm:aspect-[16/9]',
+              ]}
+            >
               <picture>
                 <source srcset={project.coverImage.webp} type="image/webp" />
                 <img
@@ -166,138 +163,9 @@ photos.forEach((img, i) => {
         <span data-rule-reveal class="block absolute bottom-0 inset-x-0 h-px bg-[#E2DBD0] origin-left" aria-hidden="true"></span>
       </div>
 
-      <!-- Editorial Photo Gallery Layout -->
-      {galleryWithLayout.length > 0 && (
-        <div class="space-y-8 sm:space-y-12">
-
-          <!-- First image: Full-width cinematic photo -->
-          {galleryWithLayout[0] && (
-            <div data-project-card class="group">
-              <button
-                type="button"
-                data-lightbox-trigger
-                data-src={galleryWithLayout[0].img.webp}
-                data-alt={galleryWithLayout[0].img.alt}
-                data-caption={galleryWithLayout[0].img.caption || galleryWithLayout[0].img.alt}
-                class="block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925] cursor-zoom-in"
-                aria-label={`Ingrandisci: ${galleryWithLayout[0].img.alt}`}
-              >
-                <div class="relative w-full overflow-hidden rounded-[14px] sm:rounded-[18px] bg-[#F3F1EC] border border-[#E2DBD0]/90 shadow-[0_4px_24px_-4px_rgba(41,41,37,0.06)] group-hover:shadow-[0_14px_34px_-6px_rgba(41,41,37,0.1)] group-hover:border-[#D5CEC2] transition-[border-color,box-shadow] duration-500">
-                  <div data-scroll-photo data-scroll-variant="panorama" class="relative w-full overflow-hidden rounded-[inherit] aspect-[16/9] sm:aspect-[21/9]">
-                    <picture>
-                      <source srcset={galleryWithLayout[0].img.webp} type="image/webp" />
-                      <img
-                        src={galleryWithLayout[0].img.src}
-                        alt={galleryWithLayout[0].img.alt}
-                        width={galleryWithLayout[0].img.width}
-                        height={galleryWithLayout[0].img.height}
-                        loading="eager"
-                        decoding="async"
-                        class="scroll-photo-img w-full h-full object-cover object-center"
-                      />
-                    </picture>
-                    <div class="absolute inset-0 bg-[#292925]/0 group-hover:bg-[#292925]/3 transition-colors duration-500" aria-hidden="true" />
-                  </div>
-                </div>
-              </button>
-              <div data-card-caption class="mt-3 flex items-center justify-between text-xs text-[#77756E] font-light">
-                <p class="truncate max-w-[80%] text-[13px]">{galleryWithLayout[0].img.caption || galleryWithLayout[0].img.alt}</p>
-                <span class="inline-flex items-center gap-1 font-mono text-[11px] text-[#8A8D76] group-hover:text-[#292925] transition-colors shrink-0">
-                  <span>Ingrandisci</span>
-                  <span class="inline-block transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true">↗</span>
-                </span>
-              </div>
-            </div>
-          )}
-
-          <!-- Remaining photos: alternating editorial compositions -->
-          {galleryWithLayout.length > 1 && (() => {
-            const rest = galleryWithLayout.slice(1);
-            const groups: typeof rest[] = [];
-            let i = 0;
-            while (i < rest.length) {
-              const curr = rest[i];
-              const next2 = rest[i + 1];
-              if (curr.span === 'portrait' && next2 && next2.span !== 'portrait') {
-                groups.push([curr, next2]);
-                i += 2;
-              } else if (curr.span !== 'portrait' && next2 && next2.span === 'portrait') {
-                groups.push([curr, next2]);
-                i += 2;
-              } else if (next2) {
-                groups.push([curr, next2]);
-                i += 2;
-              } else {
-                groups.push([curr]);
-                i += 1;
-              }
-            }
-            return groups.map((group) => (
-              <div
-                data-project-diptych
-                class:list={[
-                  'grid gap-6 sm:gap-8',
-                  group.length === 1 ? 'grid-cols-1' :
-                  group.some(g => g.span === 'portrait')
-                    ? 'grid-cols-1 md:grid-cols-[3fr_2fr] lg:grid-cols-[2fr_1fr]'
-                    : 'grid-cols-1 md:grid-cols-2',
-                ]}
-              >
-                {group.map((item) => {
-                  const isPortrait = item.span === 'portrait';
-                  return (
-                    <div data-project-card class="group flex flex-col justify-between">
-                      <button
-                        type="button"
-                        data-lightbox-trigger
-                        data-src={item.img.webp}
-                        data-alt={item.img.alt}
-                        data-caption={item.img.caption || item.img.alt}
-                        class="block w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925] cursor-zoom-in"
-                        aria-label={`Ingrandisci fotografia: ${item.img.alt}`}
-                      >
-                        <div class="relative w-full overflow-hidden rounded-[12px] sm:rounded-[16px] bg-[#F3F1EC] border border-[#E2DBD0]/90 shadow-[0_2px_14px_rgba(41,41,37,0.04)] group-hover:shadow-[0_12px_30px_-6px_rgba(41,41,37,0.09)] group-hover:border-[#D5CEC2] transition-[border-color,box-shadow] duration-500">
-                          <div
-                            data-scroll-photo
-                            data-scroll-variant={isPortrait ? 'portrait' : 'landscape'}
-                            class:list={[
-                              'relative w-full overflow-hidden rounded-[inherit]',
-                              group.length === 1 ? 'aspect-[16/9]' :
-                              isPortrait ? 'aspect-[3/4]' : 'aspect-[4/3]',
-                            ]}
-                          >
-                            <picture>
-                              <source srcset={item.img.webp} type="image/webp" />
-                              <img
-                                src={item.img.src}
-                                alt={item.img.alt}
-                                width={item.img.width}
-                                height={item.img.height}
-                                loading="eager"
-                                decoding="async"
-                                class="scroll-photo-img w-full h-full object-cover object-center"
-                              />
-                            </picture>
-                            <div class="absolute inset-0 bg-[#292925]/0 group-hover:bg-[#292925]/3 transition-colors duration-500" aria-hidden="true" />
-                          </div>
-                        </div>
-                      </button>
-                      <div data-card-caption class="mt-2.5 flex items-center justify-between text-xs text-[#77756E] font-light">
-                        <p class="truncate max-w-[80%] text-[13px]">
-                          {item.img.caption || item.img.alt}
-                        </p>
-                        <span class="inline-flex items-center gap-1 font-mono text-[10px] text-[#8A8D76] group-hover:text-[#292925] transition-colors shrink-0 ml-2">
-                          <span>Zoom</span>
-                          <span class="inline-block transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true">↗</span>
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            ));
-          })()}
-        </div>
+      <!-- Balanced Editorial Masonry Gallery -->
+      {photos.length > 0 && (
+        <EditorialMasonryGallery photos={photos} projectTitle={project.title} />
       )}
 
       <!-- Technical Drawings: CAD Plans (clean sheet style) -->

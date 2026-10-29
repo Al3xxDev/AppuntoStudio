@@ -246,8 +246,74 @@ html:not(.js-motion) .hero-photo-image {
   }
 }
 
+/* ==========================================================================
+   EDITORIAL MASONRY GALLERY SYSTEM
+   Responsive 3-tier composition:
+   - Mobile (< 640px): single chronological column (display: contents + order)
+   - Tablet (640px - 1023px): balanced 2-column masonry (1fr / 1fr)
+   - Desktop (>= 1024px): asymmetric 2-track editorial masonry (var(--left-fr) / var(--right-fr))
+   ========================================================================== */
+.editorial-masonry-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 1.25rem;
+}
+
+.masonry-track {
+  display: contents;
+}
+
+.masonry-card {
+  order: var(--mobile-order, 0);
+  min-width: 0;
+}
+
+.masonry-photo-frame {
+  aspect-ratio: var(--aspect-mobile, 1.45);
+}
+
+@media (min-width: 640px) {
+  .editorial-masonry-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.25rem;
+    row-gap: 0;
+    align-items: start;
+  }
+
+  .masonry-track {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    min-width: 0;
+  }
+
+  .masonry-card {
+    order: initial;
+  }
+
+  .masonry-photo-frame {
+    aspect-ratio: var(--aspect-tablet, 1.38);
+  }
+}
+
+@media (min-width: 1024px) {
+  .editorial-masonry-grid {
+    grid-template-columns: minmax(0, var(--left-fr, 6.5fr)) minmax(0, var(--right-fr, 5.5fr));
+    column-gap: 1.5rem;
+  }
+
+  .masonry-track {
+    gap: 1.5rem;
+  }
+
+  .masonry-photo-frame {
+    aspect-ratio: var(--aspect-desktop, 1.42);
+  }
+}
+
 /* Editorial selection */
 ::selection {
   background-color: var(--color-sand);
   color: var(--color-anthracite);
 }
+

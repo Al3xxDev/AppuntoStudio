@@ -129,15 +129,15 @@ const [gracchi, mg, jd, fp, villa] = PROJECTS;
           </p>
         </div>
 
-        <div data-project-diptych class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-          <!-- Casa MG: Landscape Format (7 cols) -->
+        <div data-project-diptych class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          <!-- Casa MG: Spacious Landscape Format (7 cols, 4:3 architectural ratio) -->
           <article data-project-card class="lg:col-span-7 group flex flex-col justify-between">
             <a
               href={`/progetti/${mg.slug}`}
               class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[16px] bg-[#F3F1EC] border border-[#E2DBD0]/90 shadow-[0_4px_20px_-4px_rgba(41,41,37,0.05)] group-hover:shadow-[0_12px_32px_-6px_rgba(41,41,37,0.1)] group-hover:border-[#D5CEC2] transition-[border-color,box-shadow] duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
               aria-label={`Apri scheda ${mg.title}`}
             >
-              <div data-scroll-photo data-scroll-variant="landscape" class="relative w-full aspect-[16/10] overflow-hidden rounded-[inherit]">
+              <div data-scroll-photo data-scroll-variant="landscape" class="relative w-full aspect-[4/3] overflow-hidden rounded-[inherit]">
                 <picture>
                   <source srcset={mg.coverImage.webp} type="image/webp" />
                   <img
@@ -180,14 +180,14 @@ const [gracchi, mg, jd, fp, villa] = PROJECTS;
             </div>
           </article>
 
-          <!-- Casa JD: Vertical Portrait Format (5 cols) with subtle offset -->
-          <article data-project-card class="lg:col-span-5 lg:pt-8 group flex flex-col justify-between">
+          <!-- Casa JD: Vertical Portrait Format (5 cols, height-matched to 7-col 4:3 frame) -->
+          <article data-project-card class="lg:col-span-5 group flex flex-col justify-between">
             <a
               href={`/progetti/${jd.slug}`}
               class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[16px] bg-[#F3F1EC] border border-[#E2DBD0]/90 shadow-[0_4px_20px_-4px_rgba(41,41,37,0.05)] group-hover:shadow-[0_12px_32px_-6px_rgba(41,41,37,0.1)] group-hover:border-[#D5CEC2] transition-[border-color,box-shadow] duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
               aria-label={`Apri scheda ${jd.title}`}
             >
-              <div data-scroll-photo data-scroll-variant="portrait" class="relative w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden rounded-[inherit]">
+              <div data-scroll-photo data-scroll-variant="portrait" class="relative w-full aspect-[4/5] lg:aspect-[0.94] overflow-hidden rounded-[inherit]">
                 <picture>
                   <source srcset={jd.coverImage.webp} type="image/webp" />
                   <img

@@ -269,29 +269,43 @@ const featuredProjects = PROJECTS;
         </article>
       </div>
 
-      <!-- 3.2 Projects 2 & 3: Asymmetrical Diptych (Casa MG & Casa JD) -->
-      <div data-project-diptych class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 mb-20 sm:mb-28 items-start">
-        <!-- Casa MG: Landscape Architectural Frame -->
-        <div class="lg:col-span-7">
-          <ProjectCard project={featuredProjects[1]} aspectRatio="wide" photoVariant="left" />
+      <!-- 3.2 Projects 2, 3, 4 & 5: Balanced 2-Track Editorial Masonry -->
+      <div
+        data-editorial-masonry
+        style="--left-fr: 6.5fr; --right-fr: 5.5fr;"
+        class="editorial-masonry-grid sm:gap-x-8 lg:gap-x-12"
+      >
+        <!-- Left Masonry Track: Spacious Architectural Landscapes (Casa MG & Villa Residenziale) -->
+        <div class="masonry-track masonry-track-left sm:gap-10 lg:gap-14">
+          <ProjectCard
+            project={featuredProjects[1]}
+            photoVariant="left"
+            mobileOrder={0}
+            customAspectStyle="--aspect-mobile: 1.45; --aspect-tablet: 1.34; --aspect-desktop: 1.38;"
+          />
+          <ProjectCard
+            project={featuredProjects[4]}
+            photoVariant="right"
+            mobileOrder={3}
+            customAspectStyle="--aspect-mobile: 1.45; --aspect-tablet: 1.40; --aspect-desktop: 1.42;"
+          />
         </div>
 
-        <!-- Casa JD: Vertical Portrait Plate with Staggered Alignment -->
-        <div class="lg:col-span-5 lg:pt-10">
-          <ProjectCard project={featuredProjects[2]} variant="tall" aspectRatio="tall" photoVariant="up" />
-        </div>
-      </div>
-
-      <!-- 3.3 Projects 4 & 5: Asymmetric Dual Composition (Casa FP & Villa Residenziale) -->
-      <div data-project-diptych class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
-        <!-- Casa FP: Architectural Frame -->
-        <div class="lg:col-span-5">
-          <ProjectCard project={featuredProjects[3]} aspectRatio="standard" photoVariant="up" />
-        </div>
-
-        <!-- Villa Residenziale: Widescreen Panoramic Frame -->
-        <div class="lg:col-span-7">
-          <ProjectCard project={featuredProjects[4]} aspectRatio="wide" photoVariant="right" />
+        <!-- Right Masonry Track: Vertical Portrait Plate (Casa JD) & Editorial Frame (Casa FP) -->
+        <div class="masonry-track masonry-track-right sm:gap-10 lg:gap-14">
+          <ProjectCard
+            project={featuredProjects[2]}
+            variant="tall"
+            photoVariant="portrait"
+            mobileOrder={1}
+            customAspectStyle="--aspect-mobile: 0.85; --aspect-tablet: 1.12; --aspect-desktop: 0.96;"
+          />
+          <ProjectCard
+            project={featuredProjects[3]}
+            photoVariant="up"
+            mobileOrder={2}
+            customAspectStyle="--aspect-mobile: 1.45; --aspect-tablet: 1.66; --aspect-desktop: 1.54;"
+          />
         </div>
       </div>
 

@@ -6,7 +6,9 @@ interface Props {
   priority?: boolean;
   variant?: 'standard' | 'featured' | 'tall' | 'wide' | 'diptych';
   aspectRatio?: 'standard' | 'wide' | 'tall' | 'portrait' | 'panoramic';
-  photoVariant?: 'center' | 'left' | 'right' | 'up' | 'soft';
+  photoVariant?: 'center' | 'left' | 'right' | 'up' | 'soft' | 'portrait' | 'landscape';
+  customAspectStyle?: string;
+  mobileOrder?: number;
 }
 
 const {
@@ -15,19 +17,30 @@ const {
   variant = 'standard',
   aspectRatio = variant === 'tall' ? 'tall' : variant === 'featured' ? 'wide' : 'wide',
   photoVariant,
+  customAspectStyle,
+  mobileOrder,
 } = Astro.props;
 
 // Aspect ratios calibrated for architectural photography
-const aspectClass = {
-  standard: 'aspect-[4/3]',
-  wide: 'aspect-[16/10]',
-  tall: 'aspect-[4/5] sm:aspect-[3/4]',
-  portrait: 'aspect-[3/4]',
-  panoramic: 'aspect-[16/9] sm:aspect-[2.2/1]',
-}[aspectRatio];
+const aspectClass = customAspectStyle
+  ? 'masonry-photo-frame'
+  : {
+      standard: 'aspect-[4/3]',
+      wide: 'aspect-[16/10]',
+      tall: 'aspect-[4/5] sm:aspect-[3/4]',
+      portrait: 'aspect-[3/4]',
+      panoramic: 'aspect-[16/9] sm:aspect-[2.2/1]',
+    }[aspectRatio];
 ---
 
-<article data-project-card class="group flex flex-col justify-between transition-colors duration-300">
+<article
+  data-project-card
+  style={mobileOrder !== undefined ? `--mobile-order: ${mobileOrder}; ${customAspectStyle || ''}` : customAspectStyle}
+  class:list={[
+    'group flex flex-col justify-between transition-colors duration-300',
+    mobileOrder !== undefined && 'masonry-card',
+  ]}
+>
   <!-- Photography Container with Soft Rounded Corners, Subtle Sand Border & Gentle Shadow -->
   <a
     href={`/progetti/${project.slug}`}

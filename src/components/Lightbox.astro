@@ -89,8 +89,18 @@
     const prev = prevBtn;
     const next = nextBtn;
 
-    const galleryButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-lightbox-trigger]'));
-    if (galleryButtons.length === 0) return;
+    const rawButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-lightbox-trigger]'));
+    if (rawButtons.length === 0) return;
+
+    const galleryButtons = rawButtons
+      .map((btn, domOrder) => ({
+        btn,
+        sortOrder: btn.hasAttribute('data-lightbox-index')
+          ? Number(btn.getAttribute('data-lightbox-index'))
+          : 1000 + domOrder,
+      }))
+      .sort((a, b) => a.sortOrder - b.sortOrder)
+      .map((entry) => entry.btn);
 
     let currentIndex = 0;
     let lastActiveElement: HTMLElement | null = null;
