@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "node tests/run-qa.mjs"
+    "test": "node tests/run-qa.mjs",
+    "test:motion": "node tests/verify-motion.mjs"
   },
   "keywords": [
     "architettura",

@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="404 — Pagina non trovata | Appuntostudio Architettura Roma"
+  description="La pagina o risorsa che stai cercando non è disponibile o è stata spostata. Esplora i progetti e la visione di Appuntostudio."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24 sm:pt-20 sm:pb-36 min-h-[65vh] flex flex-col justify-center">
+    <!-- Page Entrance Sequence -->
+    <div data-page-entrance class="max-w-3xl">
+      <!-- Breadcrumb -->
+      <div class="relative pb-6 mb-8">
+        <div data-entrance-breadcrumb class="flex items-center gap-2 font-mono text-xs text-[#77756E]">
+          <a href="/" class="hover:text-[#292925] transition-colors">Home</a>
+          <span aria-hidden="true">/</span>
+          <span class="text-[#8A8D76]">404</span>
+        </div>
+        <span data-rule-reveal class="block absolute bottom-0 inset-x-0 h-px bg-[#E2DBD0] origin-left" aria-hidden="true"></span>
+      </div>
+
+      <!-- Editorial Intro -->
+      <header class="mb-12">
+        <span data-entrance-eyebrow class="font-mono text-xs uppercase tracking-[0.2em] text-[#8A8D76] block mb-4">
+          Errore 404 — Coordinate non pervenute
+        </span>
+        <h1 data-entrance-title class="text-4xl sm:text-6xl font-light tracking-tight text-[#292925] leading-tight mb-6">
+          Lo spazio richiesto non è presente in archivio.
+        </h1>
+        <p data-entrance-copy class="text-lg sm:text-xl text-[#77756E] font-light leading-relaxed">
+          La risorsa o la pagina che stai cercando potrebbe essere stata rinominata, rimossa o temporaneamente non raggiungibile. Puoi tornare alla homepage o navigare direttamente tra le sezioni principali dello studio.
+        </p>
+      </header>
+
+      <!-- Navigation Options Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+        <a
+          href="/"
+          class="p-6 rounded-[14px] bg-[#F1EFE9] border border-[#E2DBD0]/90 hover:bg-white hover:border-[#8A8D76]/50 transition-all group"
+        >
+          <span class="font-mono text-xs text-[#8A8D76] block uppercase tracking-wider mb-2">00 — Ritorno</span>
+          <span class="text-base font-medium text-[#292925] group-hover:text-[#8A8D76] transition-colors block">Homepage</span>
+          <span class="text-xs text-[#77756E] font-light block mt-1">Torna alla vista principale</span>
+        </a>
+
+        <a
+          href="/progetti"
+          class="p-6 rounded-[14px] bg-[#F1EFE9] border border-[#E2DBD0]/90 hover:bg-white hover:border-[#8A8D76]/50 transition-all group"
+        >
+          <span class="font-mono text-xs text-[#8A8D76] block uppercase tracking-wider mb-2">01 — Opere</span>
+          <span class="text-base font-medium text-[#292925] group-hover:text-[#8A8D76] transition-colors block">I Progetti</span>
+          <span class="text-xs text-[#77756E] font-light block mt-1">Ristrutturazioni e architettura</span>
+        </a>
+
+        <a
+          href="/contatti"
+          class="p-6 rounded-[14px] bg-[#F1EFE9] border border-[#E2DBD0]/90 hover:bg-white hover:border-[#8A8D76]/50 transition-all group"
+        >
+          <span class="font-mono text-xs text-[#8A8D76] block uppercase tracking-wider mb-2">02 — Dialogo</span>
+          <span class="text-base font-medium text-[#292925] group-hover:text-[#8A8D76] transition-colors block">Contatti</span>
+          <span class="text-xs text-[#77756E] font-light block mt-1">Parla con gli architetti</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
