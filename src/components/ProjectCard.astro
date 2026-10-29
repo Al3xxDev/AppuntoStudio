@@ -31,13 +31,13 @@ const aspectClass = {
   <!-- Photography Container with Soft Rounded Corners, Subtle Sand Border & Gentle Shadow -->
   <a
     href={`/progetti/${project.slug}`}
-    class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[16px] bg-[#EAE6DF] border border-[#E2DBD0]/90 group-hover:border-[#8A8D76]/70 shadow-[0_4px_20px_-4px_rgba(41,41,37,0.05)] group-hover:shadow-[0_12px_32px_-8px_rgba(41,41,37,0.09)] transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
+    class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[16px] bg-[#F3F1EC] border border-[#E2DBD0]/90 group-hover:border-[#8A8D76]/70 shadow-[0_4px_20px_-4px_rgba(41,41,37,0.05)] group-hover:shadow-[0_12px_32px_-8px_rgba(41,41,37,0.09)] transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
     aria-label={`Esplora il progetto ${project.title} — ${project.subtitle}`}
   >
     <div
       data-scroll-photo
       data-scroll-variant={photoVariant}
-      class:list={['relative w-full overflow-hidden', aspectClass]}
+      class:list={['relative w-full overflow-hidden rounded-[inherit]', aspectClass]}
     >
       <picture>
         <source srcset={project.coverImage.webp} type="image/webp" />
@@ -49,7 +49,7 @@ const aspectClass = {
           loading={priority ? 'eager' : 'lazy'}
           decoding={priority ? 'sync' : 'async'}
           fetchpriority={priority ? 'high' : 'auto'}
-          class="scroll-photo-img w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.028]"
+          class="scroll-photo-img w-full h-full object-cover object-center"
         />
       </picture>
       <!-- Extremely subtle warm hover tint -->

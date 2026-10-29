@@ -83,10 +83,10 @@ const featuredProjects = PROJECTS;
           <a
             data-hero-photo-link
             href="/progetti/casa-mg"
-            class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[18px] bg-[#EAE6DF] border border-[#E2DBD0]/90 shadow-[0_6px_24px_-6px_rgba(41,41,37,0.07)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
+            class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[18px] bg-[#F3F1EC] border border-[#E2DBD0]/90 shadow-[0_6px_24px_-6px_rgba(41,41,37,0.07)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
             aria-label="Esplora il progetto Casa MG — Salone open space e ferro nero"
           >
-            <div data-hero-photo-mask class="relative w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden">
+            <div data-hero-photo-mask class="relative w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden rounded-[inherit]">
               <picture>
                 <source srcset="/images/appartamento-mg-soggiorno.webp" type="image/webp" />
                 <img
@@ -98,7 +98,7 @@ const featuredProjects = PROJECTS;
                   fetchpriority="high"
                   decoding="sync"
                   data-hero-photo-image
-                  class="hero-photo-image w-full h-full object-cover object-center transition-transform duration-700 ease-out"
+                  class="hero-photo-image w-full h-full object-cover object-center"
                 />
               </picture>
               <div class="absolute inset-0 bg-[#292925]/0 group-hover:bg-[#292925]/3 transition-colors duration-500" aria-hidden="true" />
@@ -242,10 +242,10 @@ const featuredProjects = PROJECTS;
           <div class="lg:col-span-7 order-1 lg:order-2">
             <a
               href={`/progetti/${featuredProjects[0].slug}`}
-              class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[18px] bg-[#EAE6DF] border border-[#E2DBD0]/90 group-hover:border-[#8A8D76]/70 shadow-[0_4px_24px_-4px_rgba(41,41,37,0.06)] group-hover:shadow-[0_14px_36px_-8px_rgba(41,41,37,0.1)] transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
+              class="block relative w-full overflow-hidden rounded-[14px] sm:rounded-[18px] bg-[#F3F1EC] border border-[#E2DBD0]/90 group-hover:border-[#8A8D76]/70 shadow-[0_4px_24px_-4px_rgba(41,41,37,0.06)] group-hover:shadow-[0_14px_36px_-8px_rgba(41,41,37,0.1)] transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#292925]"
               aria-label={`Vedi ${featuredProjects[0].title}`}
             >
-              <div data-scroll-photo data-scroll-variant="center" class="relative w-full aspect-[16/10] sm:aspect-[3/2] overflow-hidden">
+              <div data-scroll-photo data-scroll-variant="center" class="relative w-full aspect-[16/10] sm:aspect-[3/2] overflow-hidden rounded-[inherit]">
                 <picture>
                   <source srcset={featuredProjects[0].coverImage.webp} type="image/webp" />
                   <img
@@ -255,7 +255,7 @@ const featuredProjects = PROJECTS;
                     height={featuredProjects[0].coverImage.height}
                     loading="eager"
                     decoding="async"
-                    class="scroll-photo-img w-full h-full object-cover object-center group-hover:scale-[1.028] transition-transform duration-700 ease-out"
+                    class="scroll-photo-img w-full h-full object-cover object-center"
                   />
                 </picture>
                 <div class="absolute inset-0 bg-[#292925]/0 group-hover:bg-[#292925]/3 transition-colors duration-500" aria-hidden="true" />

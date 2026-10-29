@@ -56,6 +56,27 @@ const schemaData = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>
+      (function () {
+        try {
+          var root = document.documentElement;
+          if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            root.classList.remove('js-motion', 'motion-sequence-pending');
+            return;
+          }
+          root.classList.add('js-motion');
+          if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+            root.classList.add('motion-sequence-pending');
+          }
+          window.__appuntoFallbackTimer = window.setTimeout(function () {
+            root.classList.remove('js-motion', 'motion-sequence-pending');
+            root.classList.add('motion-sequence-fallback');
+          }, 2500);
+        } catch (e) {
+          document.documentElement.classList.remove('js-motion', 'motion-sequence-pending');
+        }
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
 
